@@ -1,6 +1,6 @@
 # GNU Network Science Skills
 
-GNU(경상국립대) 네트워크 사이언스 그룹용 [Agent Skill](https://code.claude.com/docs/en/skills) 모음.
+GNU(경상국립대) Network Science Lab 구성원들의 높은 작업 효율을 위한 [Agent Skill](https://code.claude.com/docs/en/skills) 모음.
 스킬은 `SKILL.md` 하나로 된 공개 표준이라 **Claude Code · Codex CLI · Gemini CLI · Cursor** 등에서
 그대로 쓸 수 있고, ChatGPT·Gemini 웹앱에도 붙여넣어 쓸 수 있습니다.
 
@@ -114,5 +114,4 @@ git push -u origin main
 
 ## 라이선스 / 고지
 
-그룹 내 연구·교육용. `ask-to-professor`는 지도 스타일을 **추상적으로 에뮬레이션**한 것으로, 실제 교수
-본인의 발언이 아니며 그의 발언으로 인용해선 안 됩니다. 원본 자료는 재배포하지 마세요.
+남용하지마세요 
