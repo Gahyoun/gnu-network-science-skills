@@ -102,19 +102,10 @@ gnu-network-science-skills/
 └── drafts/                      # 준비 중 — 자동 로드 안 됨
     └── network-science-rag/
 ```
-
-### 배포 (유지보수자용, 최초 1회)
-
-```bash
-# 로컬 커밋은 되어 있음. GitHub에 새 repo를 만든 뒤:
-cd ~/gnu-network-science-skills
-git remote add origin https://github.com/Gahyoun/gnu-network-science-skills.git
-git push -u origin main
-```
-이후 수정 → `git add -A && git commit -m "..." && git push`. 학생은 위 설치 블록을 다시 붙여넣어 갱신.
-
 ---
 
 ## 라이선스 / 고지
 
 남용하지마세요 
+도움을 주는거지 여기에 의존하지 마세요
+생각은 스스로 하는거입니다.
