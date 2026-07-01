@@ -83,10 +83,19 @@ rm -rf ~/.claude/skills/ask-to-professor ~/.codex/skills/ask-to-professor ~/.gem
 > 제시하고 지어내지 않음).
 
 ---
+## License
+
+**GNU General Public License v3** — see `LICENSE`.
+
+This skill, including all instructions, scripts, and templates, is released under GPL v3. Outputs you generate from your own papers belong to you.
+
+> * There aren't any significant restrictions; it's just that all memeber from GNU (Gyeongsang National University) and is distributing it under the GNU license :D* 🐂
+
+If GPL doesn't fit your use case (e.g., embedding in proprietary tooling), feel free to open an issue to discuss a dual-license arrangement.
 
 
-## 라이선스 / 고지
+## 고지
 
-남용하지마세요 
-도움을 주는거지 여기에 의존하지 마세요
-생각은 스스로 하는거입니다.
+이 레포의 스킬은 연구 질문 정리, 방법론 점검, 레퍼런스 탐색을 돕기 위한 비공식 교육용 도구입니다. 특정 개인, 연구실, 기관의 공식 입장이나 발언을 대변하지 않습니다.
+
+출력은 초안과 점검표로 사용하세요. 인용, 수식, 해석, 연구 주장에 대한 최종 책임은 사용자에게 있습니다. 도움을 받되, 생각은 대신 맡기지 마세요.
