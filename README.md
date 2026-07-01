@@ -82,24 +82,6 @@ rm -rf ~/.claude/skills/ask-to-professor ~/.codex/skills/ask-to-professor ~/.gem
 
 ---
 
-## 유지보수 / 기여 (그룹 내부)
-
-- 새 스킬: `skills/<이름>/SKILL.md` 생성. 폴더명 = `name:` 필드, 소문자·하이픈, 사람 이니셜 대신
-  용도 중심 이름. `description`은 트리거·용도를 구체적으로(도구 호환 위해 ~1024자 이내).
-- 작업 중인 스킬은 먼저 `drafts/<이름>/`에 둡니다 — 여기 있는 건 어떤 에이전트도 자동 로드하지 않음.
-  동작하면 `skills/`로 옮깁니다.
-- 팀 프로젝트에서 공유하려면 Codex·Gemini 공용 경로 `.agents/skills/ask-to-professor/`에 한 번만
-  넣어 커밋해도 됩니다.
-
-```
-gnu-network-science-skills/
-├── README.md
-├── skills/                      # 배포되는 스킬
-│   └── ask-to-professor/SKILL.md
-└── drafts/                      # 준비 중 — 자동 로드 안 됨
-    └── network-science-rag/
-```
----
 
 ## 라이선스 / 고지
 
