@@ -1,8 +1,8 @@
 # GNU Network Science Skills
 
 GNU(경상국립대) Network Science Lab 구성원들의 높은 작업 효율을 위한 [Agent Skill](https://code.claude.com/docs/en/skills) 모음.
-스킬은 `SKILL.md` 하나로 된 공개 표준이라 **Claude Code · Codex CLI · Gemini CLI · Cursor** 등에서
-그대로 쓸 수 있고, ChatGPT·Gemini 웹앱에도 붙여넣어 쓸 수 있습니다.
+스킬은 `SKILL.md` 기반의 가벼운 프롬프트/스킬 형식이라 **Claude Code · Codex CLI · Gemini CLI · Cursor** 등으로
+쉽게 옮겨 쓸 수 있고, ChatGPT·Gemini 웹앱에도 붙여넣어 쓸 수 있습니다.
 
 **들어있는 스킬**
 - **`ask-to-professor`** — 물리학자·연구자·교수 스타일 연구 어드바이저.
@@ -89,7 +89,7 @@ rm -rf ~/.claude/skills/ask-to-professor ~/.codex/skills/ask-to-professor ~/.gem
 
 This skill, including all instructions, scripts, and templates, is released under GPL v3. Outputs you generate from your own papers belong to you.
 
-> * There aren't any significant restrictions; it's just that all memeber from GNU (Gyeongsang National University) and is distributing it under the GNU license :D* 🐂
+> *Not that GNU, but yes, this is from GNU (Gyeongsang National University) and released under the GNU GPL :D*
 
 If GPL doesn't fit your use case (e.g., embedding in proprietary tooling), feel free to open an issue to discuss a dual-license arrangement.
 
