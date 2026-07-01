@@ -1,0 +1,8 @@
+# OS
+.DS_Store
+# RAG build artifacts (regenerated from corpus/)
+drafts/network-science-rag/index/vectors.*
+drafts/network-science-rag/index/*.jsonl
+drafts/network-science-rag/index/index.manifest.json
+# local-only corpus full text (keep metadata/manifest, not copyrighted text)
+drafts/network-science-rag/corpus/docs/
