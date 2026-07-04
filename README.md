@@ -5,6 +5,9 @@ GNU(경상국립대) Network Science Lab 구성원들의 높은 작업 효율을
 쉽게 옮겨 쓸 수 있고, ChatGPT·Gemini 웹앱에도 붙여넣어 쓸 수 있습니다.
 
 **들어있는 스킬**
+- **`network-science-kr`** — 한국어 친화 네트워크 과학 전문가. 뉴만·바라바시·『네트워크 분석』
+  한국어 교재의 표준 용어·장 구성을 기준으로 개념 설명·연구 자문·문헌 리뷰·실제 데이터 분석(코딩).
+  한국어 용어집 + 교재 장 지도 + 물리·수학·데이터과학 방법론 툴킷 내장.
 - **`network-science-rag`** — 네트워크 사이언스 RAG(검색 증강) 레퍼런스. **준비 중**(`drafts/`).
 
 관련 레포: [`stem-journal-club-deck`](https://github.com/Gahyoun/stem-journal-club-deck) (논문 → 저널클럽 덱).
@@ -26,9 +29,9 @@ git clone https://github.com/Gahyoun/gnu-network-science-skills.git ~/gnu-networ
 # 2) 쓰는 도구들 스킬 폴더에 설치
 for d in .claude .codex .gemini; do
   mkdir -p ~/$d/skills
-  cp -Rf ~/gnu-network-science-skills/skills/ask-to-professor ~/$d/skills/
+  cp -Rf ~/gnu-network-science-skills/skills/ask-to-professor ~/gnu-network-science-skills/skills/network-science-kr ~/$d/skills/
 done
-echo "설치 완료. 새 세션에서 /ask-to-professor 로 확인하세요."
+echo "설치 완료. 새 세션에서 /ask-to-professor 또는 /network-science-kr 로 확인하세요."
 ```
 
 ### Windows (PowerShell)
@@ -41,8 +44,9 @@ if (Test-Path "$HOME\gnu-network-science-skills") { git -C "$HOME\gnu-network-sc
 foreach ($d in ".claude",".codex",".gemini") {
   New-Item -ItemType Directory -Force "$HOME\$d\skills" | Out-Null
   Copy-Item -Recurse -Force "$HOME\gnu-network-science-skills\skills\ask-to-professor" "$HOME\$d\skills\"
+  Copy-Item -Recurse -Force "$HOME\gnu-network-science-skills\skills\network-science-kr" "$HOME\$d\skills\"
 }
-Write-Host "설치 완료. 새 세션에서 /ask-to-professor 로 확인하세요."
+Write-Host "설치 완료. 새 세션에서 /ask-to-professor 또는 /network-science-kr 로 확인하세요."
 ```
 
 > Windows에서 Git Bash를 쓴다면 위 **macOS/Linux 블록**을 그대로 쓰면 됩니다.
@@ -59,10 +63,12 @@ Write-Host "설치 완료. 새 세션에서 /ask-to-professor 로 확인하세�
 ```bash
 # macOS / Linux
 rm -rf ~/.claude/skills/ask-to-professor ~/.codex/skills/ask-to-professor ~/.gemini/skills/ask-to-professor
+rm -rf ~/.claude/skills/network-science-kr ~/.codex/skills/network-science-kr ~/.gemini/skills/network-science-kr
 ```
 ```powershell
 # Windows PowerShell
 ".claude",".codex",".gemini" | % { Remove-Item -Recurse -Force "$HOME\$_\skills\ask-to-professor" -ErrorAction SilentlyContinue }
+".claude",".codex",".gemini" | % { Remove-Item -Recurse -Force "$HOME\$_\skills\network-science-kr" -ErrorAction SilentlyContinue }
 ```
 
 ---
