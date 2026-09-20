@@ -1,0 +1,4 @@
+interface:
+  display_name: "연구·코딩 스킬 길잡이"
+  short_description: "물리학·데이터과학 학생에게 목적별 연구·코딩 스킬과 원문을 안내합니다"
+  default_prompt: "$research-skill-guide 내 연구 과제와 코딩 수준에 맞는 스킬을 추천하고 원문 링크와 첫 요청 예시를 알려줘."

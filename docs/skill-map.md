@@ -1,54 +1,104 @@
-# 스킬 지도 — 어떤 일에 무엇을 쓰나
+# 물리학·데이터과학 학생을 위한 스킬 지도
 
-Claude 에 스킬을 여러 개 깔아두면, 질문 내용에 따라 **알아서 맞는 스킬이 붙습니다.**
-`/스킬이름` 을 외울 필요는 없습니다. 다만 "왜 이 답이 나왔지" 를 이해하려면 지도를 한 번
-훑어두는 게 좋습니다.
+논문 찾기, 수식 확인, 데이터 분석, 코드 디버깅 중 **지금 하고 싶은 일**에서 시작하세요.
+스킬은 AI의 작업 지침입니다. Python 라이브러리나 논문 검색 서비스 자체는 아니므로,
+스킬을 설치해도 필요한 패키지·검색 도구·계정이 함께 생기지는 않습니다.
 
-## 한눈에
+## 무엇부터 써야 할지 모르겠다면
 
-| 하려는 일 | 붙는 스킬 | 어디서 |
+이 저장소의 **[`research-skill-guide`](../skills/research-skill-guide/SKILL.md)**에 목표를 말하세요.
+설치 방법은 [README](../README.md#설치--터미널에-복붙만-macos--linux--windows)에 있습니다.
+
+```text
+물리학을 공부하고 Python은 기초 수준이야. 진자 운동 데이터를 분석하려고 해.
+추가 유료 API 없이 쓸 스킬 2개와 추천 이유, 원문 링크, 시작할 요청문을 알려줘.
+```
+
+길잡이는 현재 설치된 스킬을 확인하고, 적절한 스킬로 같은 대화에서 이어가거나
+별도 설치가 필요한 원문을 안내합니다. **링크 안내는 자동 설치·자동 실행이 아닙니다.**
+추천만 요청했다면 분석이나 설치를 시작하지 않습니다.
+
+## 목적별 빠른 선택
+
+아래 난이도는 이 가이드의 추천 기준입니다. **입문**은 안내를 따라 시작할 수 있는 수준,
+**중급**은 해당 수학·통계·Python 기초, **심화**는 분야 지식과 결과 검증 능력을 뜻합니다.
+외부 스킬의 기능·도구·비용 조건과 확인 기록은 [추천 카탈로그](../skills/research-skill-guide/references/catalog.md)에 모았습니다.
+
+| 하고 싶은 일 | 추천 | 수준 | 첫 결과물 |
+|---|---|---|---|
+| 논문 검색·DOI·서지 확인 | [`paper-lookup`](../skills/research-skill-guide/references/catalog.md#paper-lookup) | 입문 | 검색식, 후보 논문, 원문 링크 |
+| 연구 주제 좁히기·반증 가능한 가설 | [`scientific-brainstorming`](../skills/research-skill-guide/references/catalog.md#scientific-brainstorming) | 입문–중급 | 질문과 작은 검증 계획 |
+| 논문의 가정·근거·해석 비판 | [`scientific-critical-thinking`](../skills/research-skill-guide/references/catalog.md#scientific-critical-thinking) | 중급 | 주장–근거–한계 정리 |
+| 미분·적분·고유값·기호식 확인 | [`sympy`](../skills/research-skill-guide/references/catalog.md#sympy) | 입문–중급 | 가정을 명시한 식과 수치 대조 |
+| 실험 단위·오차 전파 | [`uncertainty-and-units`](../skills/research-skill-guide/references/catalog.md#uncertainty-and-units) | 중급 | 단위와 불확도를 포함한 결과 |
+| 양자 상태·열린 양자계 시뮬레이션 | [`qutip`](../skills/research-skill-guide/references/catalog.md#qutip) | 심화 | 상태/연산자와 동역학 계산 |
+| 네트워크 개념·한국어 교재·모형 검증 | [`network-science-kr`](../skills/network-science-kr/SKILL.md) | 입문–심화 | 개념·가정·null model·분석 |
+| 그래프 데이터 Python 구현 | [`networkx`](../skills/research-skill-guide/references/catalog.md#networkx) | 중급 | 중심도·경로·커뮤니티 코드 |
+| 재현 가능한 실습·분석 노트북 | [`jupyter-notebook`](../skills/research-skill-guide/references/catalog.md#jupyter-notebook) | 입문 | 순서대로 실행되는 `.ipynb` |
+| 회귀·분류·군집·모델 평가 | [`scikit-learn`](../skills/research-skill-guide/references/catalog.md#scikit-learn) | 중급 | 기준 모형, 데이터 분할, 평가 |
+| 가설검정·효과크기 정리 | [`statistical-analysis`](../skills/research-skill-guide/references/catalog.md#statistical-analysis) (보조) | 중급 | 설계·가정·효과크기·구간 추정 |
+| 논문 그림·다중 패널·오차막대 | [`scientific-visualization`](../skills/research-skill-guide/references/catalog.md#scientific-visualization) | 중급 | 데이터에서 생성한 과학 그림 |
+| 코드 오류 재현·원인 추적 | [`systematic-debugging`](../skills/research-skill-guide/references/catalog.md#systematic-debugging) | 입문–중급 | 최소 재현 예제와 수정 근거 |
+| 확인된 결과로 논문 초안 작성 | [`scientific-writing`](../skills/research-skill-guide/references/catalog.md#scientific-writing) | 중급 | 출처·한계가 드러나는 초안 |
+
+## 과제별 추천 순서
+
+### 실험물리: 진자 주기와 측정 오차
+
+`jupyter-notebook` → `uncertainty-and-units` → 필요하면 `scientific-visualization`.
+
+```text
+길이와 주기 측정값으로 중력가속도를 추정하고 싶어. 먼저 단위와 반복 측정 구조를
+확인해줘. 측정 오차의 상관을 고려하고 피팅 잔차와 불확도를 볼 수 있는 노트북을 만들어줘.
+```
+
+### 통계물리·네트워크: 스미기와 유한 크기 효과
+
+네트워크 문제는 `network-science-kr` → 구현이 필요하면 `networkx` + `jupyter-notebook`.
+일반 격자 Ising 모형이나 PDE는 목적에 맞는 코딩 도구로 시작하고, 전용 스킬이 확인되지
+않으면 있다고 소개하지 않습니다.
+
+```text
+여러 크기의 무작위 네트워크에서 스미기 임계값을 비교하려고 해.
+관측량과 null model, 유한 크기 효과부터 설명하고 작은 재현 실험을 설계해줘.
+```
+
+### 데이터과학: 작은 데이터로 예측 모형 만들기
+
+`jupyter-notebook` → `scikit-learn` → 오류가 있으면 `systematic-debugging`.
+
+```text
+이 데이터의 타깃을 예측하려고 해. 데이터 누수가 없게 분할하고 단순한 기준 모형부터
+비교해줘. 전처리는 훈련 데이터에만 맞추고, 평가의 변동성과 실패 사례를 설명해줘.
+```
+
+### 첫 문헌 조사: 질문을 읽을 논문으로 바꾸기
+
+`scientific-brainstorming` → `paper-lookup` → `scientific-critical-thinking`.
+
+```text
+복잡계에서 동기화를 공부하려고 해. 범위를 좁힐 질문을 제안하고, 입문 리뷰와 대표
+원논문을 찾아줘. DOI/arXiv 링크를 확인하고 각 논문의 가정과 내가 직접 읽을 부분을 알려줘.
+```
+
+## 발표·파일·랩 도구로 연결하기
+
+| 요청 | 이동할 곳 | 조건 |
 |---|---|---|
-| 네트워크 과학 개념 설명, 한국어 용어 정리, 교재 어느 장인지 | **`network-science-kr`** | 이 레포 |
-| 실제 데이터로 커뮤니티 탐지·중심성·SBM·percolation 분석 돌리기 | `network-science-specialist` | 계정 스킬 |
-| 논문 PDF/TeX → 저널클럽 발표 덱 (PPTX + 발표 스크립트) | `stem-journal-club-deck` | 계정 스킬 |
-| 그림·차트 디자인 (색·축·범례·대시보드) | `dataviz` | Claude 기본 |
-| 엑셀·워드·PDF·파워포인트 파일 다루기 | `xlsx` `docx` `pdf` `pptx` | Claude 기본 |
-| 무거운 계산을 랩 서버에서 돌리기 | [`tools/nslab-orchestrate`](../tools/nslab-orchestrate) | 이 레포 |
-| 새 논문 훑기 (주간 digest) | [`tools/ns-feed-digest`](../tools/ns-feed-digest) | 이 레포 |
+| 익숙한 공개 논문으로 저널클럽 덱과 대본 만들기 | [`stem-journal-club-deck`](https://github.com/Gahyoun/stem-journal-club-deck) | 외부 배포. 원 제작자가 숙련자용으로 안내하며 첫 논문 읽기 학습에는 수동 구성을 권장. [상세](../skills/research-skill-guide/references/catalog.md#stem-journal-club-deck) |
+| PDF·Word·Excel·PowerPoint 파일 자체 편집 | 현재 환경의 해당 파일 형식 스킬 | 제품·계정마다 이름과 설치 여부가 다름. 목록을 확인한 뒤 사용 |
+| 랩 서버에서 계산 | [`tools/nslab-orchestrate`](../tools/nslab-orchestrate) | 이 저장소의 CLI 도구. 서버 접근·설정 필요 |
+| 학술지 RSS에서 새 논문 골라 보기 | [`tools/ns-feed-digest`](../tools/ns-feed-digest) | 이 저장소의 Python 도구. 체계적 문헌 검색을 대체하지 않음 |
 
-> 연구 자문용 어드바이저 스킬(통계물리 referee, 계산사회과학 관점 등)은 특정 연구자의
-> 사고방식을 본뜬 것이라 공개 레포에 넣지 않습니다. 필요하면 랩 안에서 공유받으세요.
+## 연결이 안 될 때
 
-## 역할이 겹칠 때
+- `network-science-specialist`, `dataviz`, 개인 어드바이저는 이 저장소의 배포 스킬이 아닙니다.
+  이름만 보고 있다고 가정하지 않습니다. 네트워크 코딩은 `network-science-kr`에서도 계속할 수 있습니다.
+- 외부 스킬은 **실제 `SKILL.md`뿐 아니라 참조·스크립트를 포함한 폴더**를 확인하세요.
+  전체 모음을 한꺼번에 설치하기보다 필요한 스킬부터 고르는 편이 사용 목적을 파악하기 쉽습니다.
+- 설치 요청 예: "이 원문 링크의 스킬을 내 도구에 설치해줘. 필요한 의존성과 비용 조건도 확인해줘."
+- 목록에 없는 작업은 "이 작업에 맞는 공개 `SKILL.md`를 찾아 원 제작자와 요구사항을 확인해줘"라고
+  요청하세요. 없으면 일반 코딩 도구나 라이브러리 공식 문서로 안내합니다.
 
-`network-science-kr` 와 `network-science-specialist` 는 둘 다 네트워크 과학이지만 결이 다릅니다.
-
-- **개념·용어·교재·"이게 무슨 뜻이죠"** → `network-science-kr`
-  한국어 표준 용어로 설명하고, 뉴만·바라바시 어느 장인지까지 짚어줍니다. 공부할 때 씁니다.
-- **데이터·코드·"돌려서 결과 보여주세요"** → `network-science-specialist`
-  edgelist 를 주면 분석을 실제로 실행합니다. 연구할 때 씁니다.
-
-둘 다 걸리는 질문이면 Claude 가 알아서 섞어 씁니다. 답이 엉뚱하면
-"개념 설명 위주로" 또는 "코드 돌려서" 라고 한 마디만 덧붙이세요.
-
-## 리디렉션
-
-`network-science-kr` 는 자기 범위가 아닌 요청을 받으면 **어느 스킬로 가야 하는지 먼저
-알려줍니다.** 예를 들어 "이 논문 발표자료 만들어줘" 라고 하면 `stem-journal-club-deck` 를
-안내합니다. 그냥 계속하라고 하면 할 수 있는 만큼은 합니다.
-
-즉 스킬 이름을 몰라도 됩니다. 그냥 하고 싶은 걸 말하면 됩니다.
-
-## 내가 뭘 갖고 있는지 확인
-
-```
-지금 쓸 수 있는 스킬 목록 보여줘
-```
-
-라고 물어보면 됩니다. 없는 게 있으면 [설치 안내](../README.md#설치--터미널에-복붙만-macos--linux--windows)
-를 보거나, 계정 스킬은 Claude 설정 → Skills 에서 켜세요.
-
-## 새 스킬이 필요하면
-
-반복해서 하는 작업이 있고 매번 같은 지시를 붙여넣고 있다면, 그건 스킬로 만들 신호입니다.
-이 레포에 이슈로 올려주시면 같이 만듭니다. 랩에서 자주 쓰는 것이 쌓일수록 다들 편해집니다.
+추천 목록은 완전한 목록이나 성능 순위가 아닙니다. 확인 날짜 이후 원본 내용·서비스 조건이
+바뀔 수 있으므로 새로 설치할 때 원문을 다시 확인하세요.
