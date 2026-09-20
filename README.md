@@ -1,19 +1,24 @@
 # GNU Network Science Skills
 
-경상국립대(GNU) Network Science Lab 사람들이 연구하면서 쓰려고 만든
+물리학·데이터과학을 공부하는 학생과 경상국립대(GNU) Network Science Lab을 위한
 [Agent Skill](https://code.claude.com/docs/en/skills) 모음입니다.
 
 AI 에게 네트워크 과학을 물어보면 용어를 영어로 섞어 쓰거나, 교재마다 다른 정의를 뒤섞어
 답하는 일이 많습니다. 이 스킬은 **뉴만·바라바시·『네트워크 분석』 한국어 교재의 표준 용어와
 장 구성을 기준으로** 답하도록 붙잡아 줍니다.
 
+> **어떤 스킬을 쓸지 찾고 있나요?** [학생용 스킬 지도](docs/skill-map.md)에서 목적별 추천과 원문 링크를 보세요.
 > **처음 오셨나요?** 아래 [설치](#설치--터미널에-복붙만-macos--linux--windows) 한 블록만 복붙하시면 됩니다.
 > 랩 서버·문헌 검색까지 붙이고 싶으시면 [랩 환경 초기 세팅](docs/claude-science-setup.md) 으로 오세요.
 
 `SKILL.md` 기반의 가벼운 형식이라 **Claude Code · Codex CLI · Gemini CLI · Cursor** 어디로든
-옮겨 쓸 수 있고, ChatGPT·Gemini 웹앱에 붙여넣어도 그대로 작동합니다.
+옮겨 쓸 수 있습니다. 설치 위치·호출법·실행 도구는 제품마다 다르며, 웹앱에 본문만
+붙여넣으면 참조 파일이나 코드 실행 환경은 함께 제공되지 않습니다.
 
 **들어있는 스킬**
+
+- **`research-skill-guide`** — 물리학·데이터과학 학생용 연구·코딩 길잡이. 목표와 수준에 맞는
+  스킬을 찾고 추천 이유·필요 도구·비용 조건·원문 링크·첫 요청문을 안내합니다.
 - **`network-science-kr`** — 한국어 친화 네트워크 과학 전문가. 뉴만·바라바시·『네트워크 분석』
   한국어 교재의 표준 용어·장 구성을 기준으로 개념 설명·연구 자문·문헌 리뷰·실제 데이터 분석(코딩).
   한국어 용어집 + 교재 장 지도 + 물리·수학·데이터과학 방법론 툴킷 내장.
@@ -24,36 +29,58 @@ AI 에게 네트워크 과학을 물어보면 용어를 영어로 섞어 쓰거�
 
 ## 설치 — 터미널에 복붙만 (macOS · Linux · Windows)
 
-먼저 [Git](https://git-scm.com/downloads)이 설치돼 있어야 합니다. 아래 **한 블록**이면 Claude Code·
-Codex CLI·Gemini CLI **세 곳 모두**에 설치됩니다(안 쓰는 도구 폴더는 그냥 무시됨). **업데이트도 같은
-블록을 다시 붙여넣으면 됩니다.**
+먼저 [Git](https://git-scm.com/downloads)이 설치돼 있어야 합니다. 아래 **한 블록**이면 이 저장소의 두 스킬을
+Claude Code·Codex·Gemini CLI 사용자 폴더에 복사합니다. 외부 추천 스킬은 포함하지 않습니다.
+**업데이트도 같은 블록을 다시 붙여넣으면 됩니다**(복사한 스킬 파일을 로컬에서 수정했다면 먼저 보관하세요).
+
+설치 위치: Claude Code는 `~/.claude/skills`, Codex는 `~/.agents/skills`, Gemini CLI는
+`~/.gemini/skills`. [Claude 공식 문서](https://code.claude.com/docs/en/skills),
+[Codex 공식 문서](https://learn.chatgpt.com/docs/build-skills),
+[Gemini 공식 문서](https://geminicli.com/docs/cli/skills/) 기준입니다.
+기존 `~/.codex/skills` 등에 같은 스킬을 두었다면 중복 목록을 확인하세요.
 
 ### macOS / Linux (Terminal)
 
 ```bash
 # 1) 레포 받기 (이미 있으면 자동 업데이트)
-git clone https://github.com/Gahyoun/gnu-network-science-skills.git ~/gnu-network-science-skills 2>/dev/null || git -C ~/gnu-network-science-skills pull
+if [ -d "$HOME/gnu-network-science-skills/.git" ]; then
+  git -C "$HOME/gnu-network-science-skills" pull --ff-only
+else
+  git clone https://github.com/Gahyoun/gnu-network-science-skills.git "$HOME/gnu-network-science-skills"
+fi && (
+  set -e
 
 # 2) 쓰는 도구들 스킬 폴더에 설치
-for d in .claude .codex .gemini; do
-  mkdir -p ~/$d/skills
-  cp -Rf ~/gnu-network-science-skills/skills/network-science-kr ~/$d/skills/
-done
-echo "설치 완료. 새 세션에서 /network-science-kr 로 확인하세요."
+  for d in .claude .agents .gemini; do
+    mkdir -p "$HOME/$d/skills"
+    for skill in network-science-kr research-skill-guide; do
+      cp -Rf "$HOME/gnu-network-science-skills/skills/$skill" "$HOME/$d/skills/"
+    done
+  done
+  echo "설치 완료. 아래 도구별 확인 방법을 보세요."
+)
 ```
 
 ### Windows (PowerShell)
 
 ```powershell
 # 1) 레포 받기 (이미 있으면 자동 업데이트)
-if (Test-Path "$HOME\gnu-network-science-skills") { git -C "$HOME\gnu-network-science-skills" pull } else { git clone https://github.com/Gahyoun/gnu-network-science-skills.git "$HOME\gnu-network-science-skills" }
+$ErrorActionPreference = "Stop"
+if (Test-Path "$HOME\gnu-network-science-skills\.git") {
+  git -C "$HOME\gnu-network-science-skills" pull --ff-only
+} else {
+  git clone https://github.com/Gahyoun/gnu-network-science-skills.git "$HOME\gnu-network-science-skills"
+}
+if ($LASTEXITCODE -ne 0) { throw "저장소 다운로드/업데이트 실패" }
 
 # 2) 쓰는 도구들 스킬 폴더에 설치
-foreach ($d in ".claude",".codex",".gemini") {
+foreach ($d in ".claude",".agents",".gemini") {
   New-Item -ItemType Directory -Force "$HOME\$d\skills" | Out-Null
-  Copy-Item -Recurse -Force "$HOME\gnu-network-science-skills\skills\network-science-kr" "$HOME\$d\skills\"
+  foreach ($skill in "network-science-kr","research-skill-guide") {
+    Copy-Item -Recurse -Force "$HOME\gnu-network-science-skills\skills\$skill" "$HOME\$d\skills\"
+  }
 }
-Write-Host "설치 완료. 새 세션에서 /network-science-kr 로 확인하세요."
+Write-Host "설치 완료. 아래 도구별 확인 방법을 보세요."
 ```
 
 > Windows에서 Git Bash를 쓴다면 위 **macOS/Linux 블록**을 그대로 쓰면 됩니다.
@@ -61,28 +88,40 @@ Write-Host "설치 완료. 새 세션에서 /network-science-kr 로 확인하세
 ### 확인
 
 **새 세션(터미널 다시 시작)** 을 연 뒤:
-- Claude Code / Codex CLI: `/network-science-kr` 입력, 또는 그냥 네트워크 과학 질문.
-- Gemini CLI: 연구 질문을 하면 동의창이 뜨며 활성화. 목록은 `/skills`.
+
+- Claude Code: `/research-skill-guide` 또는 `/network-science-kr`.
+- Codex: `$research-skill-guide` 또는 `$network-science-kr`. 목록은 `/skills`.
+- Gemini CLI: `/skills list`로 확인한 뒤 목적을 자연어로 요청하세요.
+- 예: "물리학 실험 데이터를 분석할 스킬을 추천하고 원문 링크를 알려줘."
 - 그래도 안 잡히면 도구를 완전히 재시작하세요.
 
 ### 삭제
 
 ```bash
 # macOS / Linux
-rm -rf ~/.claude/skills/network-science-kr ~/.codex/skills/network-science-kr ~/.gemini/skills/network-science-kr
+for d in .claude .agents .gemini; do
+  rm -rf "$HOME/$d/skills/network-science-kr" "$HOME/$d/skills/research-skill-guide"
+done
 ```
 ```powershell
 # Windows PowerShell
-".claude",".codex",".gemini" | % { Remove-Item -Recurse -Force "$HOME\$_\skills\network-science-kr" -ErrorAction SilentlyContinue }
+foreach ($d in ".claude",".agents",".gemini") {
+  foreach ($skill in "network-science-kr","research-skill-guide") {
+    Remove-Item -Recurse -Force "$HOME\$d\skills\$skill" -ErrorAction SilentlyContinue
+  }
+}
 ```
 
 ---
 
 ## 이렇게 물어보시면 됩니다
 
-스킬이 깔리면 `/network-science-kr` 를 굳이 안 쳐도 네트워크 과학 질문이면 알아서 붙습니다.
+설치 후에는 스킬 이름을 몰라도 목적을 말할 수 있습니다. 자동 선택 여부는 호스트 설정에
+따라 달라지므로, 원하는 스킬이 선택되지 않으면 위 도구별 호출법을 쓰세요.
 
 ```
+Python 기초 수준에서 쓸 물리학·데이터과학 연구 스킬 2개와 시작할 요청문을 추천해줘
+논문 검색 → 분석 코드 → 과학 그림 순서로 쓸 스킬과 원문 링크를 알려줘
 이 edgelist 로 커뮤니티 찾아주고, modularity 가 통계적으로 의미 있는지 null model 로 확인해줘
 degree distribution 이 power law 라고 주장하려면 뭘 보여야 해? 내 데이터로 해봐줘
 percolation threshold 를 유한 크기 효과 고려해서 추정하려면 어떻게 하지
@@ -124,16 +163,15 @@ betweenness 랑 closeness 중에 뭘 써야 하는 상황인지 모르겠어
 
 ## 터미널 없이 — ChatGPT · Gemini 웹앱
 
-파일 개념이 없으니, `skills/network-science-kr/SKILL.md`에서 맨 위 프런트매터(`--- … ---`)를 **뺀 본문**을
-그대로 붙여넣으면 됩니다.
+스킬 업로드를 지원하면 폴더 전체를 사용하세요. 프롬프트만 입력할 수 있는 환경에서는
+선택한 `SKILL.md`의 프런트매터(`--- … ---`)를 뺀 본문과 필요한 참조를 함께 제공합니다.
 
-- **ChatGPT** — *Custom GPT 만들기 → Instructions*(또는 프로젝트 지시문)에 본문 붙여넣기.
-- **Gemini** — *Gem 만들기 → 지시문*에 본문 붙여넣기.
-- **급하면** 새 채팅 첫 메시지에 본문을 붙여넣어도 그 대화 동안 동일하게 작동.
-- **Claude.ai** — 설정 → Features에서 스킬 폴더를 zip으로 업로드.
+- 네트워크 과학: [`network-science-kr`](skills/network-science-kr/SKILL.md)와 작업에 관련된 참조 파일.
+- 스킬 추천: [`research-skill-guide`](skills/research-skill-guide/SKILL.md)와
+  [추천 카탈로그](skills/research-skill-guide/references/catalog.md).
 
-> 웹앱은 검색 도구가 켜져 있어야 레퍼런스 탐색에서 실제 인용을 가져옵니다(없으면 규칙대로 방향만
-> 제시하고 지어내지 않음).
+웹앱이 로컬 파일을 읽거나 Python·검색을 실행할 수 있는지는 별도로 확인해야 합니다.
+자료 탐색 기능이 없으면 확인 날짜가 있는 추천 링크를 안내하며 최신 정보를 확인했다고 하지 않습니다.
 
 ---
 ## License

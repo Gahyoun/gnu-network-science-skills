@@ -65,8 +65,8 @@ estimator/편향/유의성 → 통합 재현)를 통과시킨다.
 - 측정량 적절성: 무엇을 재려는지 → 후보 지표 → 각각의 가정·실패 모드 → 추천 + null model. 단일 숫자로 결론 금지.
 - null model 설계: 무엇을 보존/무작위화할지 명시(링크수 분포? 상관? 시간순서?). 구조 모형·degree-preserving
   rewiring·SBM 중 선택.
-- 통계물리 유도·referee가 더 필요하면 같은 리포의 `ask-to-professor` 스킬과 상보적으로 쓴다(그쪽은 물리
-  유도 referee 페르소나, 이 스킬은 네트워크 전반 + 한국어 교재 연결).
+- 추가 연구·계산 스킬을 찾는 요청에는 `research-skill-guide`를 안내한다. 개인 어드바이저는
+  이 저장소에 포함되지 않으므로 현재 환경에서 존재를 확인한 경우에만 선택지로 제시한다.
 
 ### 모드 B — 문헌·교재 기반 리뷰
 - 개념/방법 추천에는 **근거**를 붙인다: 한국어 교재 장(`교재-지도.md`) + 원출처 논문(`핵심문헌.md`).
@@ -77,7 +77,7 @@ estimator/편향/유의성 → 통합 재현)를 통과시킨다.
 
 ### 모드 C — 실제 분석 / 코딩
 - 스택: Python `networkx`(범용), `igraph`(대규모·빠름), `graph-tool`(SBM 추론), `xgi`/`hypernetx`(하이퍼그래프),
-  `numpy`/`scipy`(스펙트럴). 필요 시 `pip install --break-system-packages`.
+  `numpy`/`scipy`(스펙트럴). 패키지가 필요하면 프로젝트의 가상환경·의존성 관리 방식을 따른다.
 - 분석 순서(기조 반영): ①데이터 위생(방향/가중/자기루프/연결성분, 노드·링크 정의) → ②기술 통계(N, L,
   ⟨k⟩, 링크수 분포 CCDF, 뭉침, 덩어리, assortativity) → ③구조(중심도·커뮤니티는 descriptive/inferential
   둘 다) → ④null model 대조(구조 모형 앙상블·rewiring, z-score) → ⑤동역학(요청 시 스미기/SIR/동기화) →
@@ -106,20 +106,26 @@ estimator/편향/유의성 → 통합 재현)를 통과시킨다.
 
 ## 다른 스킬로 넘기기 (리디렉션)
 
-아래는 이 스킬의 범위가 아니다. 억지로 떠안지 말고 **어느 스킬이 맞는지 한 줄로 먼저 알린 뒤**
-진행한다. 사용자가 그냥 계속하라고 하면 여기서 가능한 만큼만 한다.
+추천·선택이 필요하면 현재 환경에서 해당 스킬의 설치 여부를 확인하고 **맞는 이유와 원문
+링크**를 안내한다. 설치된 스킬은 읽고 같은 대화에서 이어간다. 미설치라면 설치된 것처럼
+말하지 않고, 원문과 다음 요청 예시를 제공하며 가능한 작업은 계속한다.
+
+이 스킬은 **개념과 실제 분석을 모두 지원**한다. edgelist 분석을 요청했다고 다른 곳에
+다시 질문하도록 보내지 않는다. 외부 구현 스킬은 필요할 때 보완한다.
 
 | 사용자가 원하는 것 | 넘길 곳 |
 |---|---|
-| 논문(PDF·TeX)을 저널클럽 발표 덱으로 | `stem-journal-club-deck` |
-| edgelist·인접행렬을 실제로 돌려 분석 결과까지 | `network-science-specialist` |
-| 그림·차트의 색·축·범례·레이아웃 설계 | `dataviz` |
-| 엑셀·워드·PDF·PPT 파일 자체를 다루기 | `xlsx` · `docx` · `pdf` · `pptx` |
-| 무거운 계산을 공용 랩 서버에서 실행 | `tools/nslab-orchestrate/nslab` (노드 선택·CPU 할당 준수) |
-| 특정 연구자 관점의 referee 성 자문 | 랩 내부에서 공유하는 어드바이저 스킬 |
+| 물리학·데이터과학 연구/코딩에 맞는 스킬 찾기 | `research-skill-guide` — [공개 원문](https://github.com/Gahyoun/gnu-network-science-skills/blob/main/skills/research-skill-guide/SKILL.md) |
+| edgelist·인접행렬의 실제 분석 | 여기서 모드 C로 진행. 필요하면 공개 [`networkx`](https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/skills/networkx/SKILL.md)로 구현 보완 |
+| 논문용 과학 그림 설계 | 현재 시각화 스킬 또는 공개 [`scientific-visualization`](https://github.com/K-Dense-AI/scientific-agent-skills/blob/main/skills/scientific-visualization/SKILL.md) |
+| 논문(PDF·TeX)을 저널클럽 발표 덱으로 | 현재 발표 스킬 또는 [`stem-journal-club-deck`](https://github.com/Gahyoun/stem-journal-club-deck). 후자는 숙련자용 안내·배포 조건 확인 |
+| 엑셀·워드·PDF·PPT 파일 자체 편집 | 현재 제공되는 파일 형식 스킬을 확인하여 사용 |
+| 무거운 계산을 공용 랩 서버에서 실행 | [`nslab-orchestrate`](https://github.com/Gahyoun/gnu-network-science-skills/tree/main/tools/nslab-orchestrate) — 스킬이 아닌 CLI. 서버 접근과 설정 필요 |
 
-넘길 때 문장은 짧게: "이건 `X` 가 더 잘합니다 — 거기서 다시 물어보시면 됩니다."
-스킬 이름을 모르는 사용자가 대부분이므로, **무엇을 하면 되는지**까지 한 줄로 알려준다.
+스킬 이름을 모르는 사용자에게 **다음 행동**을 함께 알려준다. 예: "그림 출력에는
+`scientific-visualization`이 맞습니다. 원문은 위 링크이며 별도 설치가 필요할 수 있습니다.
+지금은 현재 Python 환경에서 그림 생성을 이어가겠습니다."
+추천만 요청하면 추천까지만 제공한다. 외부 스킬이나 계정 연동을 자동으로 설치하지 않는다.
 
 ## 가드레일
 - 교재 원문을 인용·재수록하지 않는다. 장·주제 안내와 자기 언어의 설명만 제공한다(저작권 보호).
