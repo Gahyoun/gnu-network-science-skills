@@ -40,9 +40,9 @@ RSS 형식이 셋(RSS 2.0 · **RSS 1.0/RDF** · Atom)이라 셋 다 파싱한다
 
 ```bash
 # 노드에 올리기 (홈이 노드마다 따로라 쓸 노드에 직접 올린다)
-scp ns_feed_digest.py feeds.opml node26:~/ns-feed-digest/
+scp ns_feed_digest.py feeds.opml <노드>:~/ns-feed-digest/
 
-# 월요일 08:00 KST
+# 월요일 08:00 KST — crontab -e 로 아래 한 줄 추가
 crontab -e
 0 8 * * 1 cd ~/ns-feed-digest && python3 ns_feed_digest.py --opml feeds.opml --out out --days 7 >> log/run.log 2>&1
 ```
@@ -50,7 +50,7 @@ crontab -e
 내 노트북에서 읽기:
 
 ```bash
-ssh node26 'cat ~/ns-feed-digest/out/$(ls -t ~/ns-feed-digest/out | head -1)'
+ssh <노드> 'cat ~/ns-feed-digest/out/$(ls -t ~/ns-feed-digest/out | head -1)'
 ```
 
-> `hedgehog` 는 랩 공용 계정이라 crontab 도 공용이다. 항목을 지우거나 고칠 땐 남의 것도 같이 있는지 먼저 확인할 것.
+> 랩 서버는 공용 계정을 쓰므로 crontab 도 공용이다. 항목을 지우거나 고칠 땐 남의 것이 같이 들어 있는지 먼저 확인할 것.
