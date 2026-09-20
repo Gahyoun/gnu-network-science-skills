@@ -139,15 +139,48 @@ ssh-copy-id node0              # 노드마다 한 번씩
 스케줄러 없음 — sbatch/qsub 쓰지 말고 그냥 bash 로 실행. 긴 작업은 nohup 또는 tmux.
 홈이 노드 로컬 디스크라 다른 노드와 공유되지 않음. 파일은 이 노드 안에서만 다룰 것.
 pip/conda 설치 OK. 시스템 python 건드리지 말고 ~/venvs/<프로젝트> 에 venv 만들어서.
-여러 명이 같이 쓰는 서버 — 기본 16 코어 이하, nice 10 붙여서.
-GPU 는 nvidia-smi 로 빈 것 확인하고 CUDA_VISIBLE_DEVICES 지정.
+
+[중요] 이 노드에 할당된 CPU 는 <시작>-<끝> 번뿐이다.
+계산은 반드시 taskset -c <시작>-<끝> 으로 묶어서 실행한다. 범위 밖 CPU 를 쓰지 않는다.
+nice 10 을 붙이고, OMP_NUM_THREADS / OPENBLAS_NUM_THREADS / MKL_NUM_THREADS 를
+할당 폭 이하로 명시한다. numpy·scipy 는 안 막으면 전 코어를 잡는다.
+
+GPU 는 nvidia-smi 로 빈 것 확인 후 CUDA_VISIBLE_DEVICES 지정.
+CPU 작업이면 CUDA_VISIBLE_DEVICES= 로 비워서 GPU 를 잡지 않게 한다.
 networkx/numpy/pandas 는 있고 igraph/graph-tool 은 없음.
+```
+
+### 4-3. 노드별 CPU 할당 — 꼭 지켜주세요
+
+여러 명이 **같은 계정으로** 쓰기 때문에, 노드마다 쓸 CPU 번호를 나눠 두었습니다.
+앞 번호는 시스템·GUI 몫이고 뒷 번호는 다른 사람 몫입니다.
+
+| 노드 | 전체 CPU | 할당 범위 | 폭 |
+|---|---|---|---|
+| node0 | 0–19 | **2–17** | 16 |
+| node1 | 0–7 | **2–3** | 2 |
+| node2 | 0–19 | **2–15** | 14 |
+| node3 | 0–19 | **2–11** | 10 |
+| node26 | 0–23 | **5–19** | 15 |
+
+직접 돌릴 때:
+
+```bash
+taskset -c 5-19 nice -n 10 python3 sim.py     # node26 예시
+```
+
+매번 신경 쓰기 번거로우면 **[`tools/nslab-orchestrate`](../tools/nslab-orchestrate) 의 `nslab`**
+을 쓰세요. 지금 한가한 노드를 골라서 할당 범위·nice·스레드 수까지 알아서 붙여 줍니다.
+
+```bash
+./nslab status                           # 어디가 한가한지
+./nslab run --cores 8 -- python3 sim.py  # 골라서 공손하게 실행
 ```
 
 > 노드마다 코어 수·RAM·GPU 가 다릅니다. 어느 노드가 지금 한가한지는 `ssh <노드> uptime` 으로
 > load average 를 보고 고르세요. 20코어 노드에서 load 가 10이면 이미 반은 차 있는 겁니다.
 
-### 4-3. Jupyter 터널
+### 4-4. Jupyter 터널
 
 ```bash
 ssh -p <포트> -L <포트번호>:localhost:<포트번호> <계정>@<서버 주소>
@@ -184,6 +217,7 @@ python3 ns_feed_digest.py --opml feeds.opml --out out --days 7
 | 데이터 받다가 막힘 | 그 주소가 Allowed domains 에 없음 | 3-2 에 추가 |
 | SSH host 목록이 비어 있음 | `~/.ssh/config` 에 `Host` 별칭이 없음 | 4-1 |
 | 서버에서 `sbatch` 를 찾다 실패 | 스케줄러가 없는데 안 알려줌 | 4-2 의 안내문 붙여넣기 |
+| 내 작업이 느리다 / 남의 작업을 느리게 함 | 할당 밖 CPU 를 쓰거나 스레드를 안 막음 | 4-3, `nslab run` |
 | 서버 파일이 안 보임 | 노드마다 홈이 따로임 | 같은 노드에서 작업하거나 `scp` |
 
 그래도 막히면 랩 사람 아무나 붙잡고 물어보세요. 혼자 오래 붙들고 있지 않는 게 제일 빠릅니다.
