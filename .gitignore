@@ -6,3 +6,12 @@ drafts/network-science-rag/index/*.jsonl
 drafts/network-science-rag/index/index.manifest.json
 # local-only corpus full text (keep metadata/manifest, not copyrighted text)
 drafts/network-science-rag/corpus/docs/
+
+# python
+__pycache__/
+*.py[cod]
+
+# ns-feed-digest 실행 산출물
+tools/ns-feed-digest/out/
+tools/ns-feed-digest/state/
+tools/ns-feed-digest/log/
