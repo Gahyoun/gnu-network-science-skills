@@ -17,7 +17,6 @@ AI 에게 네트워크 과학을 물어보면 용어를 영어로 섞어 쓰거�
 - **`network-science-kr`** — 한국어 친화 네트워크 과학 전문가. 뉴만·바라바시·『네트워크 분석』
   한국어 교재의 표준 용어·장 구성을 기준으로 개념 설명·연구 자문·문헌 리뷰·실제 데이터 분석(코딩).
   한국어 용어집 + 교재 장 지도 + 물리·수학·데이터과학 방법론 툴킷 내장.
-- **`network-science-rag`** — 네트워크 사이언스 RAG(검색 증강) 레퍼런스. **준비 중**(`drafts/`).
 
 관련 레포: [`stem-journal-club-deck`](https://github.com/Gahyoun/stem-journal-club-deck) (논문 → 저널클럽 덱).
 
@@ -110,10 +109,14 @@ betweenness 랑 closeness 중에 뭘 써야 하는 상황인지 모르겠어
 | 무거운 계산을 랩 서버에서 돌리기 | [4번](docs/claude-science-setup.md#4-claude-science--랩-서버-연결-선택) |
 | 매주 새 논문 목록 받기 | [5번](docs/claude-science-setup.md#5-주간-논문-digest-선택) |
 
+**어떤 일에 어떤 스킬이 붙는지** 궁금하시면 → [스킬 지도](docs/skill-map.md)
+
 ---
 
 ## 같이 들어있는 도구
 
+- [`tools/nslab-orchestrate`](tools/nslab-orchestrate) — 공용 랩 노드 중 지금 한가한 곳을 골라,
+  정해진 CPU 할당 범위 안에서 공손하게 계산을 돌립니다. `nslab status` / `nslab run`.
 - [`tools/ns-feed-digest`](tools/ns-feed-digest) — 학술지 RSS 22개를 훑어 network science 관련
   신규 논문만 골라 주간 markdown 으로 정리합니다. 설치할 것 없이 `python3` 만 있으면 돕니다.
 
