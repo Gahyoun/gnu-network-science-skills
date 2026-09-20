@@ -46,18 +46,38 @@ FALLBACK_ISSN = {
     "Science Advances": "2375-2548",
 }
 
-# 제목·초록에 이 중 하나라도 걸리면 채택
-KEYWORDS = [
-    "network", "graph", "complex system", "percolation", "epidemic", "contagion",
-    "spreading", "diffusion", "community detection", "modularity", "centrality",
-    "degree distribution", "scale-free", "small-world", "random walk", "synchroniz",
-    "hypergraph", "simplicial", "higher-order", "temporal network", "multilayer",
-    "multiplex", "bipartite", "link prediction", "node embedding", "graph neural",
-    "mean-field", "phase transition", "critical", "scaling", "renormaliz",
-    "core-periphery", "assortativ", "motif", "cascade", "robustness", "resilience",
-    "opinion dynamics", "collective", "null model", "science of science",
-    "citation", "mobility", "self-organiz", "criticality", "clustering coefficient",
-    "shortest path", "navigability", "interdependent", "cooperation", "game theory",
+# STRONG: 하나만 걸려도 채택 (network science 고유어)
+STRONG = [
+    "network", "graph", "percolation", "centrality", "community detection",
+    "modularity", "degree distribution", "scale-free", "small-world", "hypergraph",
+    "simplicial", "higher-order interaction", "higher-order network", "multilayer", "multiplex*",
+    "link prediction", "node embedding", "core-periphery", "assortativ*", "motif",
+    "epidemic", "contagion", "spreading", "navigability", "interdependent",
+    "opinion dynamics", "science of science", "shortest path", "random graph",
+    "adjacency matrix", "clustering coefficient", "small world", "connectome",
+]
+
+# WEAK: 통계물리 전반에서 흔해서 두 개 이상 걸려야 채택
+WEAK = [
+    "mean-field", "phase transition", "critical", "criticality", "scaling",
+    "renormaliz*", "synchroniz*", "cascade", "robustness", "resilience",
+    "random walk", "diffusion", "collective", "self-organiz*", "cooperation",
+    "game theory", "null model", "citation", "mobility", "complex system",
+    "agent-based", "stochastic process", "universality",
+]
+
+# "network" 가 들어가도 network science 가 아닌 관용구 — 매칭 전에 지운다
+NOISE = [
+    "neural network", "neural-network", "generative adversarial network",
+    "convolutional network", "transformer network", "deep network",
+    "tensor network", "network architecture", "network training",
+    "quantum network", "quantum networks",
+]
+
+# 제목에 이게 있는데 network science 용어가 같이 없으면 다른 분야 논문이다
+VETO_IN_TITLE = [
+    "quantum", "photon", "qubit", "entangle", "hamiltonian", "hermitian",
+    "van hove", "superconduct", "spin glass", "kagome", "lattice qcd",
 ]
 
 # 학술지 자체가 온토픽이라 키워드 필터 없이 전부 담는 곳
@@ -65,6 +85,21 @@ ALWAYS_ON = [
     "applied network science", "epj data science", "journal of physics: complexity",
     "plos complex systems",
 ]
+
+
+def compile_kw(words: list[str]) -> list[re.Pattern]:
+    """단어 경계로 컴파일. 끝에 * 가 붙으면 어간 매칭(assortativ* -> assortativity).
+
+    단순 substring 으로 하면 graph 가 lithographic·cryptographic·biography 에,
+    network 가 networked 말고 엉뚱한 데 걸린다.
+    """
+    pats = []
+    for w in words:
+        if w.endswith("*"):
+            pats.append(re.compile(r"\b" + re.escape(w[:-1]), re.I))
+        else:
+            pats.append(re.compile(r"\b" + re.escape(w) + r"(s|es)?\b", re.I))
+    return pats
 
 
 def log(msg: str) -> None:
@@ -209,11 +244,27 @@ def entries(raw: bytes) -> list[dict]:
     return out
 
 
-def on_topic(item: dict, feed_title: str, keywords: list[str]) -> bool:
+def on_topic(item: dict, feed_title: str, strong: list[re.Pattern], weak: list[re.Pattern],
+             loose: bool = False) -> bool:
+    """기본은 STRONG 한 개 필수.
+
+    WEAK 만으로 받아주면 PRL·PRE 가 양자·응집물질 논문으로 덮인다
+    (critical + scaling 두 단어는 통계물리 논문 아무 데나 있다).
+    recall 이 더 필요하면 --loose 로 WEAK 두 개까지 허용.
+    """
     if any(v in feed_title.lower() for v in ALWAYS_ON):
         return True
+    title = item["title"].lower()
+    for n in NOISE:
+        title = title.replace(n, " ")
+    if any(v in title for v in VETO_IN_TITLE) and not any(p.search(title) for p in strong):
+        return False
     blob = f"{item['title']} {item['summary']}".lower()
-    return any(k in blob for k in keywords)
+    for n in NOISE:
+        blob = blob.replace(n, " ")
+    if any(p.search(blob) for p in strong):
+        return True
+    return loose and sum(1 for p in weak if p.search(blob)) >= 2
 
 
 def main() -> int:
@@ -221,18 +272,21 @@ def main() -> int:
     ap.add_argument("--opml", default="feeds.opml")
     ap.add_argument("--out", default="out")
     ap.add_argument("--days", type=int, default=7)
-    ap.add_argument("--keywords", help="한 줄에 하나씩 적은 키워드 파일 (기본 목록 대체)")
+    ap.add_argument("--keywords", help="한 줄에 하나씩 적은 키워드 파일 (STRONG/WEAK 기본 목록 대체)")
     ap.add_argument("--state", default="state/seen.json", help="이미 보낸 항목 기록")
     ap.add_argument("--no-state", action="store_true", help="중복 제거 기록을 쓰지 않음")
     ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--loose", action="store_true",
+                    help="WEAK 키워드 2개만 걸려도 채택 (건수는 늘고 잡음도 늘어남)")
     ap.add_argument("--mailto", default=os.environ.get("CROSSREF_MAILTO"),
                     help="Crossref polite pool 용 연락 메일 (환경변수 CROSSREF_MAILTO 로도 지정 가능)")
     ap.add_argument("--issn-map", help="{feed 제목: ISSN} JSON — RSS 가 막힌 학술지의 Crossref 대체용")
     a = ap.parse_args()
 
-    keywords = KEYWORDS
-    if a.keywords:
-        keywords = [l.strip().lower() for l in open(a.keywords, encoding="utf-8") if l.strip()]
+    strong, weak = compile_kw(STRONG), compile_kw(WEAK)
+    if a.keywords:  # 직접 준 목록은 전부 STRONG 취급
+        strong = compile_kw([l.strip() for l in open(a.keywords, encoding="utf-8") if l.strip()])
+        weak = []
 
     issn_map = dict(FALLBACK_ISSN)
     if a.issn_map:
@@ -281,7 +335,7 @@ def main() -> int:
                     continue
                 if it["link"] in seen:
                     continue
-                if not on_topic(it, title, keywords):
+                if not on_topic(it, title, strong, weak, a.loose):
                     continue
                 keep.append(it)
                 seen.add(it["link"])
