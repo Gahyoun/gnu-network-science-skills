@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+    <head>
+        <title>GNU NS-lab research feeds</title>
+    </head>
+    <body>
+        <outline text="research" title="research">
+            <outline type="rss" text="Phys. Rev. Lett." title="Phys. Rev. Lett." xmlUrl="http://feeds.aps.org/rss/recent/prl.xml"/>
+            <outline type="rss" text="Phys. Rev. X" title="Phys. Rev. X" xmlUrl="http://feeds.aps.org/rss/recent/prx.xml"/>
+            <outline type="rss" text="Phys. Rev. E" title="Phys. Rev. E" xmlUrl="http://feeds.aps.org/rss/recent/pre.xml"/>
+            <outline type="rss" text="Phys. Rev. Research" title="Phys. Rev. Research" xmlUrl="http://feeds.aps.org/rss/recent/prresearch.xml"/>
+            <outline type="rss" text="Rev. Mod. Phys." title="Rev. Mod. Phys." xmlUrl="http://feeds.aps.org/rss/recent/rmp.xml"/>
+            <outline type="rss" text="Nature" title="Nature" xmlUrl="http://feeds.nature.com/nature/rss/current"/>
+            <outline type="rss" text="Nature Physics" title="Nature Physics" xmlUrl="http://feeds.nature.com/nphys/rss/current"/>
+            <outline type="rss" text="Nature Communications" title="Nature Communications" xmlUrl="http://feeds.nature.com/ncomms/rss/current"/>
+            <outline type="rss" text="Communications Physics" title="Communications Physics" xmlUrl="http://feeds.nature.com/commsphys/rss/current"/>
+            <outline type="rss" text="Nature Computational Science" title="Nature Computational Science" xmlUrl="http://feeds.nature.com/natcomputsci/rss/current"/>
+            <outline type="rss" text="Nature Human Behaviour" title="Nature Human Behaviour" xmlUrl="http://feeds.nature.com/nathumbehav/rss/current"/>
+            <outline type="rss" text="Nature Machine Intelligence" title="Nature Machine Intelligence" xmlUrl="http://feeds.nature.com/natmachintell/rss/current"/>
+            <outline type="rss" text="Scientific Data" title="Scientific Data" xmlUrl="http://feeds.nature.com/sdata/rss/current"/>
+            <outline type="rss" text="Science" title="Science" xmlUrl="http://www.sciencemag.org/rss/current.xml"/>
+            <outline type="rss" text="Science Advances" title="Science Advances" xmlUrl="http://advances.sciencemag.org/rss/current.xml"/>
+            <outline type="rss" text="PNAS" title="PNAS" xmlUrl="http://www.pnas.org/rss/current.xml"/>
+            <outline type="rss" text="EPJ Data Science" title="EPJ Data Science" xmlUrl="http://www.epjdatascience.com/latest/rss"/>
+            <outline type="rss" text="Applied Network Science" title="Applied Network Science" xmlUrl="https://appliednetsci.springeropen.com/articles/most-recent/rss.xml"/>
+            <outline type="rss" text="Journal of Physics: Complexity" title="Journal of Physics: Complexity" xmlUrl="https://iopscience.iop.org/journal/rss/2632-072X"/>
+            <outline type="rss" text="PLOS Complex Systems" title="PLOS Complex Systems" xmlUrl="https://journals.plos.org/complexsystems/feed/atom"/>
+            <outline type="rss" text="PLOS Comput. Biol." title="PLOS Comput. Biol." xmlUrl="http://www.ploscompbiol.org/article/feed"/>
+            <outline type="rss" text="Quantum Chaotic Thoughts" title="Quantum Chaotic Thoughts" xmlUrl="http://masonporter.blogspot.com/feeds/posts/default"/>
+        </outline>
+    </body>
+</opml>
