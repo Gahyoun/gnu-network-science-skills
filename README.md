@@ -29,9 +29,9 @@ git clone https://github.com/Gahyoun/gnu-network-science-skills.git ~/gnu-networ
 # 2) 쓰는 도구들 스킬 폴더에 설치
 for d in .claude .codex .gemini; do
   mkdir -p ~/$d/skills
-  cp -Rf ~/gnu-network-science-skills/skills/ask-to-professor ~/gnu-network-science-skills/skills/network-science-kr ~/$d/skills/
+  cp -Rf ~/gnu-network-science-skills/skills/network-science-kr ~/$d/skills/
 done
-echo "설치 완료. 새 세션에서 /ask-to-professor 또는 /network-science-kr 로 확인하세요."
+echo "설치 완료. 새 세션에서 /network-science-kr 로 확인하세요."
 ```
 
 ### Windows (PowerShell)
@@ -43,10 +43,9 @@ if (Test-Path "$HOME\gnu-network-science-skills") { git -C "$HOME\gnu-network-sc
 # 2) 쓰는 도구들 스킬 폴더에 설치
 foreach ($d in ".claude",".codex",".gemini") {
   New-Item -ItemType Directory -Force "$HOME\$d\skills" | Out-Null
-  Copy-Item -Recurse -Force "$HOME\gnu-network-science-skills\skills\ask-to-professor" "$HOME\$d\skills\"
   Copy-Item -Recurse -Force "$HOME\gnu-network-science-skills\skills\network-science-kr" "$HOME\$d\skills\"
 }
-Write-Host "설치 완료. 새 세션에서 /ask-to-professor 또는 /network-science-kr 로 확인하세요."
+Write-Host "설치 완료. 새 세션에서 /network-science-kr 로 확인하세요."
 ```
 
 > Windows에서 Git Bash를 쓴다면 위 **macOS/Linux 블록**을 그대로 쓰면 됩니다.
@@ -54,7 +53,7 @@ Write-Host "설치 완료. 새 세션에서 /ask-to-professor 또는 /network-sc
 ### 확인
 
 **새 세션(터미널 다시 시작)** 을 연 뒤:
-- Claude Code / Codex CLI: `/ask-to-professor` 입력, 또는 그냥 연구 질문.
+- Claude Code / Codex CLI: `/network-science-kr` 입력, 또는 그냥 네트워크 과학 질문.
 - Gemini CLI: 연구 질문을 하면 동의창이 뜨며 활성화. 목록은 `/skills`.
 - 그래도 안 잡히면 도구를 완전히 재시작하세요.
 
@@ -62,12 +61,10 @@ Write-Host "설치 완료. 새 세션에서 /ask-to-professor 또는 /network-sc
 
 ```bash
 # macOS / Linux
-rm -rf ~/.claude/skills/ask-to-professor ~/.codex/skills/ask-to-professor ~/.gemini/skills/ask-to-professor
 rm -rf ~/.claude/skills/network-science-kr ~/.codex/skills/network-science-kr ~/.gemini/skills/network-science-kr
 ```
 ```powershell
 # Windows PowerShell
-".claude",".codex",".gemini" | % { Remove-Item -Recurse -Force "$HOME\$_\skills\ask-to-professor" -ErrorAction SilentlyContinue }
 ".claude",".codex",".gemini" | % { Remove-Item -Recurse -Force "$HOME\$_\skills\network-science-kr" -ErrorAction SilentlyContinue }
 ```
 
@@ -75,7 +72,7 @@ rm -rf ~/.claude/skills/network-science-kr ~/.codex/skills/network-science-kr ~/
 
 ## 터미널 없이 — ChatGPT · Gemini 웹앱
 
-파일 개념이 없으니, `skills/ask-to-professor/SKILL.md`에서 맨 위 프런트매터(`--- … ---`)를 **뺀 본문**을
+파일 개념이 없으니, `skills/network-science-kr/SKILL.md`에서 맨 위 프런트매터(`--- … ---`)를 **뺀 본문**을
 그대로 붙여넣으면 됩니다.
 
 - **ChatGPT** — *Custom GPT 만들기 → Instructions*(또는 프로젝트 지시문)에 본문 붙여넣기.
