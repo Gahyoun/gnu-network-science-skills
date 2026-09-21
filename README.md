@@ -22,6 +22,11 @@ AI 에게 네트워크 과학을 물어보면 용어를 영어로 섞어 쓰거�
 - **`network-science-kr`** — 한국어 친화 네트워크 과학 전문가. 뉴만·바라바시·『네트워크 분석』
   한국어 교재의 표준 용어·장 구성을 기준으로 개념 설명·연구 자문·문헌 리뷰·실제 데이터 분석(코딩).
   한국어 용어집 + 교재 장 지도 + 물리·수학·데이터과학 방법론 툴킷 내장.
+- **`statphys-pre`** — Physical Review E 기준의 통계물리·복잡계 물리 전문가. 상전이·임계지수·
+  유한 크기 스케일링, 비평형 확률과정, 네트워크 위 전염·동기화·percolation·집단동역학을
+  이론 유도 → 수치 시뮬레이션 → 오차 산정 → 원고·저널 선택까지 끌고 갑니다.
+  Monte Carlo 자기상관·jackknife·data collapse 헬퍼(`kernel.py`)와 저널 지형도 내장.
+  구조 측정은 `network-science-kr`, 구조 위의 과정과 상전이는 이 스킬입니다.
 
 관련 레포: [`stem-journal-club-deck`](https://github.com/Gahyoun/stem-journal-club-deck) (논문 → 저널클럽 덱).
 
@@ -29,7 +34,7 @@ AI 에게 네트워크 과학을 물어보면 용어를 영어로 섞어 쓰거�
 
 ## 설치 — 터미널에 복붙만 (macOS · Linux · Windows)
 
-먼저 [Git](https://git-scm.com/downloads)이 설치돼 있어야 합니다. 아래 **한 블록**이면 이 저장소의 두 스킬을
+먼저 [Git](https://git-scm.com/downloads)이 설치돼 있어야 합니다. 아래 **한 블록**이면 이 저장소의 세 스킬을
 Claude Code·Codex·Gemini CLI 사용자 폴더에 복사합니다. 외부 추천 스킬은 포함하지 않습니다.
 **업데이트도 같은 블록을 다시 붙여넣으면 됩니다**(복사한 스킬 파일을 로컬에서 수정했다면 먼저 보관하세요).
 
@@ -53,7 +58,7 @@ fi && (
 # 2) 쓰는 도구들 스킬 폴더에 설치
   for d in .claude .agents .gemini; do
     mkdir -p "$HOME/$d/skills"
-    for skill in network-science-kr research-skill-guide; do
+    for skill in network-science-kr statphys-pre research-skill-guide; do
       cp -Rf "$HOME/gnu-network-science-skills/skills/$skill" "$HOME/$d/skills/"
     done
   done
@@ -76,7 +81,7 @@ if ($LASTEXITCODE -ne 0) { throw "저장소 다운로드/업데이트 실패" }
 # 2) 쓰는 도구들 스킬 폴더에 설치
 foreach ($d in ".claude",".agents",".gemini") {
   New-Item -ItemType Directory -Force "$HOME\$d\skills" | Out-Null
-  foreach ($skill in "network-science-kr","research-skill-guide") {
+  foreach ($skill in "network-science-kr","statphys-pre","research-skill-guide") {
     Copy-Item -Recurse -Force "$HOME\gnu-network-science-skills\skills\$skill" "$HOME\$d\skills\"
   }
 }
@@ -89,8 +94,8 @@ Write-Host "설치 완료. 아래 도구별 확인 방법을 보세요."
 
 **새 세션(터미널 다시 시작)** 을 연 뒤:
 
-- Claude Code: `/research-skill-guide` 또는 `/network-science-kr`.
-- Codex: `$research-skill-guide` 또는 `$network-science-kr`. 목록은 `/skills`.
+- Claude Code: `/research-skill-guide` · `/network-science-kr` · `/statphys-pre`.
+- Codex: `$research-skill-guide` · `$network-science-kr` · `$statphys-pre`. 목록은 `/skills`.
 - Gemini CLI: `/skills list`로 확인한 뒤 목적을 자연어로 요청하세요.
 - 예: "물리학 실험 데이터를 분석할 스킬을 추천하고 원문 링크를 알려줘."
 - 그래도 안 잡히면 도구를 완전히 재시작하세요.
@@ -100,13 +105,13 @@ Write-Host "설치 완료. 아래 도구별 확인 방법을 보세요."
 ```bash
 # macOS / Linux
 for d in .claude .agents .gemini; do
-  rm -rf "$HOME/$d/skills/network-science-kr" "$HOME/$d/skills/research-skill-guide"
+  rm -rf "$HOME/$d/skills/network-science-kr" "$HOME/$d/skills/statphys-pre" "$HOME/$d/skills/research-skill-guide"
 done
 ```
 ```powershell
 # Windows PowerShell
 foreach ($d in ".claude",".agents",".gemini") {
-  foreach ($skill in "network-science-kr","research-skill-guide") {
+  foreach ($skill in "network-science-kr","statphys-pre","research-skill-guide") {
     Remove-Item -Recurse -Force "$HOME\$d\skills\$skill" -ErrorAction SilentlyContinue
   }
 }
@@ -126,6 +131,9 @@ Python 기초 수준에서 쓸 물리학·데이터과학 연구 스킬 2개와 
 degree distribution 이 power law 라고 주장하려면 뭘 보여야 해? 내 데이터로 해봐줘
 percolation threshold 를 유한 크기 효과 고려해서 추정하려면 어떻게 하지
 betweenness 랑 closeness 중에 뭘 써야 하는 상황인지 모르겠어
+여러 크기 L 에서 잰 Ising 시계열로 T_c 랑 임계지수 뽑고 data collapse 까지 보여줘
+단일 크기에서 hysteresis 만 보고 1차 전이라고 써도 되는지 referee 처럼 반박해줘
+이 결과를 PRE 로 낼지 PRL 로 낼지, 초록은 어떻게 쓸지 정리해줘
 이 논문에서 쓴 측정량이 내 데이터에도 말이 되는지 봐줘
 ```
 
@@ -167,6 +175,8 @@ betweenness 랑 closeness 중에 뭘 써야 하는 상황인지 모르겠어
 선택한 `SKILL.md`의 프런트매터(`--- … ---`)를 뺀 본문과 필요한 참조를 함께 제공합니다.
 
 - 네트워크 과학: [`network-science-kr`](skills/network-science-kr/SKILL.md)와 작업에 관련된 참조 파일.
+- 통계물리·복잡계: [`statphys-pre`](skills/statphys-pre/SKILL.md)와 작업에 관련된 참조 파일
+  (수치 작업이면 `kernel.py`도 함께 — 자동 로드가 없는 환경에서는 직접 실행해야 합니다).
 - 스킬 추천: [`research-skill-guide`](skills/research-skill-guide/SKILL.md)와
   [추천 카탈로그](skills/research-skill-guide/references/catalog.md).
 

@@ -33,6 +33,9 @@
 | 실험 단위·오차 전파 | [`uncertainty-and-units`](../skills/research-skill-guide/references/catalog.md#uncertainty-and-units) | 중급 | 단위와 불확도를 포함한 결과 |
 | 양자 상태·열린 양자계 시뮬레이션 | [`qutip`](../skills/research-skill-guide/references/catalog.md#qutip) | 심화 | 상태/연산자와 동역학 계산 |
 | 네트워크 개념·한국어 교재·모형 검증 | [`network-science-kr`](../skills/network-science-kr/SKILL.md) | 입문–심화 | 개념·가정·null model·분석 |
+| 상전이·임계지수·유한 크기 스케일링 | [`statphys-pre`](../skills/statphys-pre/SKILL.md) | 중급–심화 | T_c·지수 추정, data collapse, 오차 |
+| 네트워크 위 전염·동기화·집단동역학 | [`statphys-pre`](../skills/statphys-pre/SKILL.md) | 중급–심화 | 임계점 유도, 시뮬레이션, 전이 차수 판정 |
+| 투고 전 자기 점검·저널 선택 | [`statphys-pre`](../skills/statphys-pre/SKILL.md) | 중급–심화 | referee 관점 지적, 저널 지형도, 초록 골격 |
 | 그래프 데이터 Python 구현 | [`networkx`](../skills/research-skill-guide/references/catalog.md#networkx) | 중급 | 중심도·경로·커뮤니티 코드 |
 | 재현 가능한 실습·분석 노트북 | [`jupyter-notebook`](../skills/research-skill-guide/references/catalog.md#jupyter-notebook) | 입문 | 순서대로 실행되는 `.ipynb` |
 | 회귀·분류·군집·모델 평가 | [`scikit-learn`](../skills/research-skill-guide/references/catalog.md#scikit-learn) | 중급 | 기준 모형, 데이터 분할, 평가 |
@@ -54,13 +57,19 @@
 
 ### 통계물리·네트워크: 스미기와 유한 크기 효과
 
-네트워크 문제는 `network-science-kr` → 구현이 필요하면 `networkx` + `jupyter-notebook`.
-일반 격자 Ising 모형이나 PDE는 목적에 맞는 코딩 도구로 시작하고, 전용 스킬이 확인되지
-않으면 있다고 소개하지 않습니다.
+네트워크 **구조**를 재는 문제는 `network-science-kr` → 구현이 필요하면 `networkx` +
+`jupyter-notebook`. 구조 위의 **과정과 상전이**(스미기 임계값, 전염·동기화, 격자 Ising의
+임계지수, 유한 크기 스케일링, Monte Carlo 오차)는 `statphys-pre` 로 갑니다. 두 스킬은
+같은 대화에서 함께 쓸 수 있습니다.
 
 ```text
 여러 크기의 무작위 네트워크에서 스미기 임계값을 비교하려고 해.
 관측량과 null model, 유한 크기 효과부터 설명하고 작은 재현 실험을 설계해줘.
+```
+
+```text
+L = 16, 24, 32, 48 에서 잰 Ising 시계열이 있어. 자기상관 고려해서 오차 내고
+Binder 교차로 T_c, 그다음 nu 와 beta/nu 를 data collapse 로 확인해줘.
 ```
 
 ### 데이터과학: 작은 데이터로 예측 모형 만들기
