@@ -8,5 +8,8 @@
   "venue": "[캠퍼스·건물·강의실]",
   "audience": "[참여 대상]",
   "participation": "[신청 방법 또는 자유 참석]",
-  "body": "[행사 목적과 참여 안내를 입력하세요.]\n\n[추가 안내가 있으면 이 문단에 입력하세요.]"
+  "body": "[행사 목적과 참여 안내를 입력하세요.]\n\n[추가 안내가 있으면 이 문단에 입력하세요.]",
+  "fly_with_gnu": true,
+  "decoration_image": null,
+  "decoration_alt": ""
 }

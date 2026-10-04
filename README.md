@@ -135,6 +135,8 @@ HTML·PDF·PNG로 모두 저장해줘.
 
 학술포스터·16:9 프레젠테이션·간단한 웹페이지도 같은 방식으로 요청합니다.
 세미나 플라이어는 ‘A4 가로(297 × 210mm)’를 지정하면 [가로 예시](templates/gnu-template/examples/seminar-landscape.html)를 적용합니다.
+세로·가로 플라이어에는 공식 **FLY WITH G.N.U** 도안을 기본으로 넣습니다. 학교 이미지·꽃 모티프는 장식을 요청한 경우에만 여백에 추가합니다.
+웹 기본형은 GNU VI 페이지의 흰 헤더·짙은 현재 위치 띠·직사각형 메뉴·항목별 본문 구성을 따르며 캠퍼스 항공사진은 넣지 않습니다.
 **HTML로 제작하고 PDF로 export하는 방법을 권장**하며 PNG도 기본으로 저장합니다.
 Claude Code·Codex의 스킬 설치와 웹앱에 문서를 첨부하는 방법, 출력 예시는
 [GNU template README](templates/gnu-template/README.md)에 정리했습니다.

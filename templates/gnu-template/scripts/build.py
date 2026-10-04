@@ -4,6 +4,7 @@ import argparse
 import base64
 import html
 import json
+import mimetypes
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,6 +16,16 @@ def text(value):
 
 def paragraphs(value):
     return ''.join('<p>' + text(s) + '</p>' for s in str(value).split('\n\n') if s.strip())
+
+
+def image_uri(value):
+    """Embed a supplied local image; relative paths use the template folder."""
+    source = Path(value).expanduser()
+    if not source.is_absolute():source = ROOT / source
+    mime = mimetypes.guess_type(str(source))[0]
+    if mime not in ('image/png','image/jpeg','image/webp','image/svg+xml'):
+        raise ValueError('로컬 PNG·JPG·WebP·SVG 이미지를 지정하세요: ' + str(source))
+    return 'data:' + mime + ';base64,' + base64.b64encode(source.read_bytes()).decode('ascii')
 
 
 def make_document(kind, data, no_logo=False, orientation='portrait'):
@@ -31,7 +42,10 @@ def make_document(kind, data, no_logo=False, orientation='portrait'):
     else:
         logo = '<strong class="institution">경상국립대학교</strong>'
     field = lambda name, default='': text(data.get(name, default))
-    footer = '<footer class="paper-footer"><div><div class="organization">' + field('organization') + '</div><div class="small">' + field('contact') + '</div></div>' + logo + '</footer>'
+    slogan = ''
+    if kind in ('flyer', 'seminar') and not no_logo and data.get('fly_with_gnu', True):
+        slogan = '<img class="fly-slogan" alt="FLY WITH G.N.U" src="' + image_uri('assets/derived/fly-with-gnu.svg') + '">'
+    footer = '<footer class="paper-footer"><div class="paper-brand-row">' + slogan + logo + '</div><div class="paper-footer-info"><div class="organization">' + field('organization') + '</div><div class="small">' + field('contact') + '</div></div></footer>'
     size = 'A4 ' + orientation
     if kind in ('flyer', 'seminar'):
         meta = '<div class="meta"><span>' + field('date') + '</span><span>' + field('organization') + '</span></div>' if kind == 'seminar' else ''
@@ -39,7 +53,8 @@ def make_document(kind, data, no_logo=False, orientation='portrait'):
         if kind == 'seminar':
             title += '<div class="speaker">' + field('speaker') + '</div>'
         title += '</header>'
-        body = '<div class="paper-body">'
+        decoration = data.get('decoration_image')
+        body = '<div class="paper-body' + (' has-decoration' if decoration else '') + '">'
         if kind == 'flyer':
             body += '<dl class="details">'
             for label, name in [('주제','subject'),('연사','speaker'),('일시','date'),('장소','venue'),('대상','audience'),('참여','participation')]:
@@ -56,6 +71,8 @@ def make_document(kind, data, no_logo=False, orientation='portrait'):
             body += paragraphs(data.get('body',''))
             if data.get('references'):body += '<p class="references">' + field('references') + '</p>'
             body += '<div class="notice"><strong>일시·장소</strong><p>' + field('date') + '<br>' + field('venue') + '</p></div>'
+        if decoration:
+            body += '<div class="paper-decoration"><img alt="' + field('decoration_alt') + '" src="' + image_uri(decoration) + '"></div>'
         body += '</div>'
         paper_class = 'paper a4' + (' landscape' if orientation == 'landscape' else '')
         content = '<main class="' + paper_class + '" data-export-page><div class="paper-frame">' + title + body + footer + '</div></main>'
@@ -93,7 +110,22 @@ def make_document(kind, data, no_logo=False, orientation='portrait'):
     else:
         rows=''.join('<tr><td>'+text(r['date'])+'</td><td>'+text(r['title'])+'</td><td>'+text(r['venue'])+'</td></tr>' for r in data.get('events',[]))
         resources=''.join('<li><a href="'+text(r['url'])+'">'+text(r['label'])+'</a></li>' for r in data.get('resources',[]) if r['url'].startswith(('https://','http://')))
-        content='<div class="site"><a class="skip" href="#main">본문으로 바로가기</a><header class="site-header"><div class="site-wrap header-row">'+logo+'<nav aria-label="주 메뉴"><a href="#intro">소개</a><a href="#events">일정</a><a href="#resources">자료</a><a href="#contact">문의</a></nav></div></header><main id="main" class="site-wrap"><p class="breadcrumb">'+field('organization')+'</p><h1>'+field('title')+'</h1><section id="intro"><h2>소개</h2>'+paragraphs(data.get('body',''))+'</section><section id="events"><h2>일정</h2><div class="table-scroll"><table><caption class="small">'+field('table_caption','학술 행사 일정')+'</caption><thead><tr><th scope="col">일시</th><th scope="col">행사</th><th scope="col">장소</th></tr></thead><tbody>'+rows+'</tbody></table></div></section><section id="resources"><h2>자료</h2><ul>'+resources+'</ul></section><section id="contact"><h2>문의</h2><p>'+field('contact')+'</p></section></main><footer class="site-footer"><div class="site-wrap">'+field('organization')+'<br>'+field('updated')+'</div></footer></div>'
+        if not no_logo:
+            logo = '<img class="logo web-logo" alt="경상국립대학교" src="'+image_uri('assets/official/gnu-web-logo.png')+'">'
+        banner = data.get('banner_image')
+        banner_style = ' style="background-image:url(\''+image_uri(banner)+'\')"' if banner else ''
+        banner_class = 'site-banner' + (' no-photo' if not banner else '')
+        content = '<div class="site"><a class="skip" href="#main">본문으로 바로가기</a>'
+        content += '<header class="site-header"><div class="site-wrap header-row"><a class="site-identity" href="#main">'+logo+'</a><button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav">메뉴</button><nav id="site-nav" class="site-nav" aria-label="주 메뉴"><a href="#intro">소개</a><a href="#events">일정</a><a href="#resources">자료</a><a href="#contact">문의</a></nav></div></header>'
+        content += '<div class="'+banner_class+'"'+banner_style+'><nav class="breadcrumb-bar" aria-label="현재 위치"><ol class="site-wrap"><li><a href="#main">홈</a></li><li><a href="#intro">'+field('organization')+'</a></li><li aria-current="page">'+field('title')+'</li></ol></nav></div>'
+        content += '<main id="main" class="site-wrap" tabindex="-1"><div class="page-heading"><h1>'+field('title')+'</h1><div class="page-tools"><button type="button" id="print-page">인쇄</button></div></div>'
+        content += '<nav class="section-menu" aria-label="본문 메뉴"><a href="#intro" aria-current="location">소개</a><a href="#events">일정</a><a href="#resources">자료</a></nav>'
+        content += '<section id="intro" class="content-row"><h2>소개</h2><div class="row-body">'+paragraphs(data.get('body',''))+'</div></section>'
+        content += '<section id="events" class="content-row"><h2>일정</h2><div class="row-body"><div class="table-scroll" role="region" aria-label="행사 일정표" tabindex="0"><table><caption class="small">'+field('table_caption','학술 행사 일정')+'</caption><thead><tr><th scope="col">일시</th><th scope="col">행사</th><th scope="col">장소</th></tr></thead><tbody>'+rows+'</tbody></table></div></div></section>'
+        content += '<section id="resources" class="content-row"><h2>자료</h2><div class="row-body"><ul>'+resources+'</ul></div></section>'
+        content += '<section id="contact" class="content-row"><h2>문의</h2><div class="row-body"><p>'+field('contact')+'</p></div></section></main>'
+        content += '<footer class="site-footer"><div class="site-wrap">'+field('organization')+'<br>'+field('updated')+'</div></footer></div>'
+        content += """<script>(()=>{const toggle=document.querySelector('.menu-toggle');const nav=document.querySelector('#site-nav');function closeMenu(){toggle.setAttribute('aria-expanded','false');nav.removeAttribute('data-open');}toggle.onclick=()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));if(open)nav.setAttribute('data-open','true');else nav.removeAttribute('data-open');};nav.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true'){closeMenu();toggle.focus();}});document.querySelector('#print-page').onclick=()=>window.print();const links=[...document.querySelectorAll('.section-menu a')];function selected(){const target=location.hash||'#intro';links.forEach(a=>{if(a.getAttribute('href')===target)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}window.addEventListener('hashchange',selected);selected();})();</script>"""
     page_css = '@page{size:'+size+';margin:0}' if kind!='web' else '@page{size:A4;margin:12mm}'
     return '<!doctype html>\n<html lang="'+text(data.get('lang','ko'))+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="gnu-template-kind" content="'+kind+'"><title>'+field('title','GNU 학교테마 템플릿')+'</title><style>'+css+page_css+'</style></head><body>'+content+'</body></html>\n'
 

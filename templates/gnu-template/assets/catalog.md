@@ -45,8 +45,18 @@
 | BS23 그래픽 모티프E-교화.pdf | [열기](official/BS23%20%EA%B7%B8%EB%9E%98%ED%94%BD%20%EB%AA%A8%ED%8B%B0%ED%94%84E-%EA%B5%90%ED%99%94.pdf) | [공식 내려받기](https://www.gnu.ac.kr/images/web/main/sub_cnt/BS23%20%EA%B7%B8%EB%9E%98%ED%94%BD%20%EB%AA%A8%ED%8B%B0%ED%94%84E-%EA%B5%90%ED%99%94.pdf) |
 | BS23 그래픽 모티프E-교화.jpg | [열기](official/BS23%20%EA%B7%B8%EB%9E%98%ED%94%BD%20%EB%AA%A8%ED%8B%B0%ED%94%84E-%EA%B5%90%ED%99%94.jpg) | [공식 내려받기](https://www.gnu.ac.kr/images/web/main/sub_cnt/BS23%20%EA%B7%B8%EB%9E%98%ED%94%BD%20%EB%AA%A8%ED%8B%B0%ED%94%84E-%EA%B5%90%ED%99%94.jpg) |
 
+## 웹 참고 자산
+
+| 원본 | 파일 | 출처 |
+|---|---|---|
+| logo.png | [열기](official/gnu-web-logo.png) | [공식 원본](https://www.gnu.ac.kr/images/web/main/layout/logo.png) |
+
+학교 웹 헤더의 원본 로고다. 웹 기본형에는 캠퍼스 항공사진을 넣지 않는다.
+
 ## 예시에 포함된 선택 도안
 
 [gnu-signature.svg](derived/gnu-signature.svg)는 BS08 PDF의 국영문 가로형 시그니처를 선택해 출력한 벡터다. 원본의 벡터 경로·비례를 유지하고 견본 안내문·작도선만 제외했다. [변환 기록](../references/brand-variants.md)을 함께 확인한다.
+
+[fly-with-gnu.svg](derived/fly-with-gnu.svg)는 `design system guidelines_fly with gnu_3.ai`에서 청색 로고타이프를 선택한 벡터다. PDF 호환 AI 원본 1쪽의 좌표 `(307, 364, 685, 460)` 영역을 SVG로 출력해 원본 경로·색상·비례를 보존했다. 세로·가로 플라이어 하단에서 사용한다.
 
 공식 자산의 권리와 이용조건은 대학 등 원 권리자에게 있다. 이 저장소의 코드 라이선스를 로고·모티프의 재사용 허가로 해석하지 않는다.

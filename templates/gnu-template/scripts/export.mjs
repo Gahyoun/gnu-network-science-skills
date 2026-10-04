@@ -43,7 +43,10 @@ try {
   const issues=await node.evaluate(el=>{const box=el.getBoundingClientRect();const min=Number.parseFloat(getComputedStyle(el).minHeight);const bad=[...el.querySelectorAll('h1,h2,p,dd,figcaption')].filter(n=>n.scrollWidth>n.clientWidth+2||n.getBoundingClientRect().bottom>box.bottom+2).map(n=>n.textContent.slice(0,70));if(el.classList.contains('paper')&&min>0&&box.height>min+2)bad.push('지정된 종이 높이 초과: 내용을 줄이거나 페이지를 나누세요.');return bad;});
   if(issues.length)throw new Error('페이지·텍스트 넘침: '+issues.join(', '));
   const png=path.join(output,stem+(count>1?'-'+String(i+1).padStart(2,'0'):'')+'.png');
-  await node.screenshot({path:png});sizes.push({file:path.basename(png),width:Math.round(bounds.width*scale),height:Math.round(bounds.height*scale)});
+  await node.screenshot({path:png});
+  // Chromium rounds screenshot edges independently; report the actual PNG dimensions.
+  const pngBytes=await fs.readFile(png);
+  sizes.push({file:path.basename(png),width:pngBytes.readUInt32BE(16),height:pngBytes.readUInt32BE(20)});
  }
  const pdf=path.join(output,stem+'.pdf');
  await page.emulateMedia({media:'print'});
