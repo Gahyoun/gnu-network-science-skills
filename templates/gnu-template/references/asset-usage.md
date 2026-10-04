@@ -10,10 +10,16 @@
 |---|---|---|
 | `gnu-signature.svg` | BS08 국영문 가로조합 | 안내문 하단, 포스터·표지 테두리, 웹 머리글 |
 | `gnu-symbol.svg` | BS08 심벌 | 슬라이드 바닥글 |
-| `fly-with-gnu.svg` | 공식 안내문 서식 | 서식형 상단, 세미나 안내 하단 왼쪽 |
+| `fly-with-gnu.svg` | 슬로건 BI 가이드 AI(`design system guidelines_fly with gnu_3.ai`) | A4 홍보문·세미나 하단 왼쪽(기본), 서식형 상단 |
 | `emblem-signature-white.svg` | 공식 안내문 서식 | 그라데이션 띠 위 |
 
+웹 머리글에는 홈페이지 헤더 원본 `assets/official/gnu-web-logo.png`를 그대로 쓴다(출처·해시는 manifest.json).
+
 다시 만들기: `python3 scripts/derive_svg.py gnu-signature` (나머지도 같은 방식). Poppler `pdftocairo`와 `pip install svgelements`가 필요하다.
+
+## 장식 이미지
+
+학교 이미지·꽃 모티프는 사용자가 장식을 요청했을 때만 A4 본문 오른쪽 아래 여백에 넣는다. 원본 시트에서 완성 도안 하나를 SVG·PNG로 출력하고 JSON의 `decoration_image`에 경로, `decoration_alt`에 대체텍스트(장식이면 빈 값)를 넣는다. 지누는 이 자리가 아니라 `--character`로 넣는다(DESIGN.md 6장).
 
 ## 새 도안이 필요할 때
 

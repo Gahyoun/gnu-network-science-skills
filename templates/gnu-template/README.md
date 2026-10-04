@@ -1,6 +1,6 @@
 # GNU template
 
-경상국립대학교 학교테마로 A4 홍보문·세미나 안내문, A0 학술포스터, 16:9 HTML 발표자료, 대학 홈페이지형 웹페이지를 만드는 도구입니다. 결과는 **HTML·PDF·PNG**로 저장합니다. 교내 구성원의 학술·공익 목적 제작을 돕는 비공식 자료입니다.
+경상국립대학교 학교테마로 A4 세로·가로 홍보문과 세미나 안내문, A0 학술포스터, 16:9 HTML 발표자료, 대학 홈페이지형 웹페이지를 만드는 도구입니다. 결과는 **HTML·PDF·PNG**로 저장합니다. 교내 구성원의 학술·공익 목적 제작을 돕는 비공식 자료입니다.
 
 [디자인 지침 DESIGN.md](DESIGN.md) · [요청문 예시](references/prompts.md) · [공식 자산 목록](assets/catalog.md) · [캐릭터 지누](assets/character/README.md) · [검증 기록](references/validation.md)
 
@@ -8,16 +8,16 @@
 |---|---|---|
 | ![세미나 안내](examples/seminar.png) | ![홍보문](examples/flyer.png) | ![서식형](examples/notice-form.png) |
 
-| 16:9 발표 표지 | 16:9 본문 |
+| A4 가로 세미나 안내 | 16:9 발표 표지 |
 |---|---|
-| ![발표 표지](examples/slides-01.png) | ![발표 본문](examples/slides-03.png) |
+| ![가로 세미나](examples/seminar-landscape.png) | ![발표 표지](examples/slides-01.png) |
 
-A0 포스터와 웹페이지 미리보기: [poster.png](examples/poster.png) · [web.png](examples/web.png)
+A0 포스터·발표 본문·웹페이지 미리보기: [poster.png](examples/poster.png) · [slides-03.png](examples/slides-03.png) · [web.png](examples/web.png)
 
 ## 무엇이 들어 있나
 
-- **학교 양식**: 학과 세미나 안내문의 청색 제목 띠와 하단 시그니처+학과명, 공식 안내문 서식(FLY WITH GNU·그라데이션 띠), 테두리 선이 GNU 심벌로 이어지는 발표·포스터 표지, 홈페이지 하위 페이지의 제목·경로·직사각형 탭·표.
-- **공식 자산**: 대학 공개 VI 원본(AI·PDF·PNG)과 그중 필요한 로고를 원본 벡터 그대로 잘라 낸 SVG 4종.
+- **학교 양식**: 학과 세미나 안내문의 청색 제목 띠와 하단 FLY WITH G.N.U·시그니처+학과명(세로·가로), 공식 안내문 서식(그라데이션 테두리·띠), 테두리 선이 GNU 심벌로 이어지는 발표·포스터 표지, 대학 VI 하위 페이지형 웹(흰 헤더·짙은 현재 위치 띠·직사각형 하위 메뉴·항목별 행).
+- **공식 자산**: 대학 공개 VI 원본(AI·PDF·PNG), 홈페이지 헤더 로고, 그중 필요한 로고를 원본 벡터 그대로 잘라 낸 SVG 4종.
 - **서체**: Noto Sans KR(국문 지정서체), SUIT(영문 지정서체), SUITE(홈페이지 메뉴·제목). 모두 OFL이며 HTML에 포함되어 어느 PC에서나 같은 모양으로 출력됩니다.
 - **캐릭터 지누·누누**: 공식 페이지에서 원본을 받아 오는 명령과 배치 자리, 사용 규칙. [아래 참고](#지누-캐릭터)
 - **AI 티 줄이기**: 후크 문구·말풍선·둥근 카드·그라데이션 장식을 쓰지 않는 규칙과, 글자 넘침·그림 겹침을 잡는 출력 검사.
@@ -75,6 +75,7 @@ node scripts/export.mjs out/seminar.html out/  # seminar.html · seminar.pdf · 
 | A4 홍보문 | `flyer` | [data/flyer.json](data/flyer.json) |
 | A4 공식 서식형 안내문 | `flyer` | [data/notice-form.json](data/notice-form.json) |
 | A4 세미나 안내 | `seminar` | [data/seminar.json](data/seminar.json) |
+| A4 가로 세미나 안내 | `seminar --orientation landscape` | [data/seminar.json](data/seminar.json) |
 | A0 학술포스터 | `poster` | [data/poster.json](data/poster.json) |
 | 16:9 발표자료 | `slides` | [data/slides.json](data/slides.json) |
 | 웹페이지 | `web` | [data/web.json](data/web.json) |
@@ -83,7 +84,11 @@ node scripts/export.mjs out/seminar.html out/  # seminar.html · seminar.pdf · 
 
 - 굵게 `**핵심어**`, 줄바꿈 `\n`, 문단 나눔 `\n\n`. 다른 HTML은 글자 그대로 표시됩니다.
 - 홍보문의 `items`는 원하는 만큼 `{"label": "주제", "value": "…"}`를 추가·삭제합니다.
-- 세미나 안내의 `style`은 `band`(기본, 대비 확보 청색 띠), `brand`(GNU Blue 띠, 띠 안 글자는 18pt 이상), `form`(공식 서식형).
+- A4는 `--orientation landscape`(또는 JSON `"orientation": "landscape"`)로 가로 297×210mm가 됩니다. 세미나 가로형은 오른쪽에 ‘참석 안내’ 칸(일시·장소·대상·참여)이 생깁니다.
+- A4 하단의 FLY WITH G.N.U는 기본으로 들어갑니다. 빼려면 `"fly_with_gnu": false`.
+- 학교 이미지·꽃 모티프 장식은 요청받았을 때만 `"decoration_image": "경로.svg"`, `"decoration_alt": ""`(장식이면 빈 값). 본문 오른쪽 아래 여백에 들어갑니다.
+- 웹은 `sections` 배열이 항목 행이 됩니다. `in_menu: false`는 하위 메뉴에서만 뺍니다. 사진 배너는 요청받고 파일이 있을 때만 `banner_image`를 씁니다.
+- A4의 `style`은 `band`(기본, 대비 확보 청색 띠), `brand`(GNU Blue 띠, 띠 안 글자는 18pt 이상), `form`(공식 서식형).
 - 포스터 `columns`의 개수가 단 수입니다. 그림은 `"figures": [{"src": "fig1.png", "caption": "Fig. 1. …"}]`, 빈자리 표시는 `"label"`. 남는 공간을 채울 섹션에 `"grow": true`.
 - 저자는 `{"name": "…", "mark": "1", "presenter": true}`. 발표자는 청색 굵게 표시됩니다.
 - QR은 실제 QR 이미지를 `"qr": {"src": "qr.png", "label": "발표자 연락처"}`로 넣습니다.
@@ -104,7 +109,7 @@ python3 scripts/assets.py --fetch-character --dry-run   # 목록 확인
 python3 scripts/assets.py --fetch-character
 ```
 
-AI 원본에서 한 자세를 SVG로 잘라 넣는 방법과 규칙은 [assets/character/README.md](assets/character/README.md), [DESIGN.md 6장](DESIGN.md#6-캐릭터-지누누누)에 있습니다. 한 쪽에 한 자세, 오른쪽 아래, 말풍선·대사·재작화·반전·색 변경 없이 씁니다.
+AI 원본에서 한 자세를 SVG로 잘라 넣는 방법과 규칙은 [assets/character/README.md](assets/character/README.md), [DESIGN.md 6장](DESIGN.md#6-캐릭터-지누누누)에 있습니다. 한 쪽에 한 자세, 오른쪽 아래, 말풍선·대사·재작화·반전·색 변경 없이 씁니다. 웹페이지에는 넣지 않습니다.
 
 ## 권리와 범위
 

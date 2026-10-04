@@ -381,6 +381,16 @@
       "sha256": "72c344fa7d7dbd35d591bdd51c1f2ed4837ea62976b94925203a630e6ebba4ec",
       "bytes": 58719,
       "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/gnu-web-logo.png",
+      "url": "https://www.gnu.ac.kr/images/web/main/layout/logo.png",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "web-reference",
+      "original_filename": "logo.png",
+      "sha256": "2d52eb0d0680af24d95ff07eb5778e52a31c030d743caa0d5be4da181afad354",
+      "bytes": 9275,
+      "downloaded_date": "2026-10-04"
     }
   ]
 }

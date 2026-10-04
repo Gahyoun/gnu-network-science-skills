@@ -3,16 +3,33 @@
   "style": "band",
   "title": "[행사명]",
   "items": [
-    {"label": "주제", "value": "[강연 주제 또는 발표 제목]"},
-    {"label": "연사", "value": "[소속 · 이름 직함]"},
-    {"label": "일시", "value": "[2026. 0. 0.(요일) 00시]"},
-    {"label": "장소", "value": "[건물 번호·호실·강의실명]"},
-    {"label": "대상", "value": "[참여 대상]"}
+    {
+      "label": "주제",
+      "value": "[강연 주제 또는 발표 제목]"
+    },
+    {
+      "label": "연사",
+      "value": "[소속 · 이름 직함]"
+    },
+    {
+      "label": "일시",
+      "value": "[2026. 0. 0.(요일) 00시]"
+    },
+    {
+      "label": "장소",
+      "value": "[건물 번호·호실·강의실명]"
+    },
+    {
+      "label": "대상",
+      "value": "[참여 대상]"
+    }
   ],
   "note": "[신청 방법, 행사 뒤 일정 등 추가 안내가 있을 때만 입력하세요. 없으면 이 항목을 지웁니다.]",
   "organization": "[주최 학과·연구실]",
   "contact": "[문의: 담당자 · 전화 또는 이메일]",
   "unit": "[학과명]",
-  "slogan": false,
+  "fly_with_gnu": true,
+  "decoration_image": null,
+  "decoration_alt": "",
   "character": null
 }

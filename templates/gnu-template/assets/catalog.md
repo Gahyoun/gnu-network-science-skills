@@ -45,6 +45,14 @@
 | BS23 그래픽 모티프E-교화.pdf | [열기](official/BS23%20%EA%B7%B8%EB%9E%98%ED%94%BD%20%EB%AA%A8%ED%8B%B0%ED%94%84E-%EA%B5%90%ED%99%94.pdf) | [공식 내려받기](https://www.gnu.ac.kr/images/web/main/sub_cnt/BS23%20%EA%B7%B8%EB%9E%98%ED%94%BD%20%EB%AA%A8%ED%8B%B0%ED%94%84E-%EA%B5%90%ED%99%94.pdf) |
 | BS23 그래픽 모티프E-교화.jpg | [열기](official/BS23%20%EA%B7%B8%EB%9E%98%ED%94%BD%20%EB%AA%A8%ED%8B%B0%ED%94%84E-%EA%B5%90%ED%99%94.jpg) | [공식 내려받기](https://www.gnu.ac.kr/images/web/main/sub_cnt/BS23%20%EA%B7%B8%EB%9E%98%ED%94%BD%20%EB%AA%A8%ED%8B%B0%ED%94%84E-%EA%B5%90%ED%99%94.jpg) |
 
+## 웹 참고 자산
+
+| 원본 | 파일 | 출처 |
+|---|---|---|
+| logo.png | [열기](official/gnu-web-logo.png) | [공식 원본](https://www.gnu.ac.kr/images/web/main/layout/logo.png) |
+
+학교 웹 헤더의 원본 로고다. 웹 기본형에는 캠퍼스 항공사진을 넣지 않는다.
+
 ## HTML용 출력 사본
 
 `derived/`의 SVG는 원본 PDF의 벡터 경로를 그대로 잘라 낸 것이다. 견본 안내문·다른 변형·작도선만 뺐다. 만드는 방법과 색 처리는 [자산 사용](../references/asset-usage.md)에 있다.
@@ -53,7 +61,7 @@
 |---|---|
 | [gnu-signature.svg](derived/gnu-signature.svg) | BS08 국영문 가로조합 |
 | [gnu-symbol.svg](derived/gnu-symbol.svg) | BS08 심벌 |
-| [fly-with-gnu.svg](derived/fly-with-gnu.svg) | (원형)GNU 엠블럼_서식(안내문) 상단 |
+| [fly-with-gnu.svg](derived/fly-with-gnu.svg) | design system guidelines_fly with gnu_3.ai 흰 바탕용 청색 로고타입 |
 | [emblem-signature-white.svg](derived/emblem-signature-white.svg) | (원형)GNU 엠블럼_서식(안내문) 하단 |
 
 공식 자산의 권리와 이용조건은 대학 등 원 권리자에게 있다. 이 저장소의 코드 라이선스를 로고·모티프의 재사용 허가로 해석하지 않는다.

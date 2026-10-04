@@ -2,16 +2,67 @@
   "lang": "ko",
   "title": "[페이지 제목]",
   "organization": "[운영 학과·연구실]",
-  "location": ["홈", "[상위 메뉴]"],
+  "location": [
+    "홈",
+    "[상위 메뉴]"
+  ],
   "sections": [
-    {"id": "intro", "menu": "소개", "heading": "[소개]", "body": "[연구실 또는 행사의 소개를 입력하세요.]\n\n[연구 분야, 운영 주체, 참여 대상 등 확인된 정보만 입력합니다.]"},
-    {"id": "schedule", "menu": "일정", "heading": "[일정]",
-     "table": {"caption": "[표 제목]", "columns": ["일시", "내용", "장소"], "rows": [["[일시]", "[행사명]", "[장소]"], ["[일시]", "[행사명]", "[장소]"]]}},
-    {"id": "files", "menu": "자료", "heading": "[자료]",
-     "links": [{"label": "경상국립대학교", "url": "https://www.gnu.ac.kr/"}, {"label": "[자료 이름]", "url": "#files"}]},
-    {"id": "contact", "menu": "문의", "heading": "[문의]", "body": "[담당자 · 전화 · 이메일]"}
+    {
+      "id": "intro",
+      "menu": "소개",
+      "heading": "[소개]",
+      "body": "[연구실 또는 행사의 소개를 입력하세요.]\n\n[연구 분야, 운영 주체, 참여 대상 등 확인된 정보만 입력합니다.]"
+    },
+    {
+      "id": "schedule",
+      "menu": "일정",
+      "heading": "[일정]",
+      "table": {
+        "caption": "[표 제목]",
+        "columns": [
+          "일시",
+          "내용",
+          "장소"
+        ],
+        "rows": [
+          [
+            "[일시]",
+            "[행사명]",
+            "[장소]"
+          ],
+          [
+            "[일시]",
+            "[행사명]",
+            "[장소]"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "files",
+      "menu": "자료",
+      "heading": "[자료]",
+      "links": [
+        {
+          "label": "경상국립대학교",
+          "url": "https://www.gnu.ac.kr/"
+        },
+        {
+          "label": "[자료 이름]",
+          "url": "#files"
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "menu": "문의",
+      "heading": "[문의]",
+      "body": "[담당자 · 전화 · 이메일]",
+      "in_menu": false
+    }
   ],
   "address": "[주소]",
   "contact": "[대표 연락처]",
-  "updated": "[최종 수정일]"
+  "updated": "[최종 수정일]",
+  "banner_image": null
 }

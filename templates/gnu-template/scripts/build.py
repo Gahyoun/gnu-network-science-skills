@@ -7,9 +7,9 @@ import argparse
 import base64
 import html
 import json
-import mimetypes
 import os
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,19 +21,25 @@ FONTS = {
     'SUITE': ('SUITE-Variable.woff2', 'web'),
 }
 LOGOS = {
-    'signature': ('gnu-signature.svg', '경상국립대학교'),
-    'symbol': ('gnu-symbol.svg', '경상국립대학교'),
-    'slogan': ('fly-with-gnu.svg', 'FLY WITH GNU'),
-    'signature-white': ('emblem-signature-white.svg', '경상국립대학교'),
+    'signature': ('assets/derived/gnu-signature.svg', '경상국립대학교'),
+    'symbol': ('assets/derived/gnu-symbol.svg', '경상국립대학교'),
+    'slogan': ('assets/derived/fly-with-gnu.svg', 'FLY WITH G.N.U'),
+    'signature-white': ('assets/derived/emblem-signature-white.svg', '경상국립대학교'),
+    'web': ('assets/official/gnu-web-logo.png', '경상국립대학교'),  # 홈페이지 헤더 원본
 }
 IMAGE_TYPES = {'.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
                '.svg': 'image/svg+xml', '.webp': 'image/webp'}
 
 
 class Builder:
-    def __init__(self, kind, data, base, fonts='embed', output=None, no_logo=False):
+    def __init__(self, kind, data, base, fonts='embed', output=None, no_logo=False, orientation=None):
         self.kind, self.data, self.base = kind, data, base
         self.fonts, self.output, self.no_logo = fonts, output, no_logo
+        self.orientation = orientation or data.get('orientation', 'portrait')
+        if self.orientation not in ('portrait', 'landscape'):
+            raise SystemExit('A4 방향은 portrait 또는 landscape입니다.')
+        if self.orientation == 'landscape' and kind not in ('flyer', 'seminar'):
+            raise SystemExit('가로 방향은 A4 홍보문(flyer)·세미나 안내(seminar)에만 씁니다.')
 
     # ── text helpers ──────────────────────────────────────────
     @staticmethod
@@ -84,7 +90,7 @@ class Builder:
 
     def logo(self, name='signature', cls='logo'):
         file, alt = LOGOS[name]
-        path = ROOT / 'assets/derived' / file
+        path = ROOT / file
         if self.no_logo or not path.exists():
             if name in ('slogan',):
                 return ''
@@ -189,26 +195,56 @@ class Builder:
         return f'<div class="identity">{self.logo("signature")}{unit_html}</div>'
 
     # ── kinds ─────────────────────────────────────────────────
+    def wants_slogan(self):
+        """FLY WITH GNU sits in A4 footers by default (fly_with_gnu, alias slogan)."""
+        d = self.data
+        value = d.get('fly_with_gnu', d.get('slogan', True))
+        return bool(value) and not self.no_logo
+
+    def decoration(self):
+        """Opt-in approved school image or motif in the body margin (not a character)."""
+        src = self.data.get('decoration_image')
+        if not src:
+            return ''
+        img = self.picture({'src': src, 'alt': self.data.get('decoration_alt', '')}, 'decoration-image')
+        return f'<div class="paper-decoration">{img}</div>'
+
+    def facts(self, pairs, cls='facts'):
+        rows = ''.join(f'<dt>{self.inline(label)}</dt><dd>{self.inline(value)}</dd>'
+                       for label, value in pairs if value)
+        return f'<dl class="{cls}">{rows}</dl>' if rows else ''
+
     def a4(self):
         d, kind = self.data, self.kind
         style = d.get('style', 'band')
+        landscape = self.orientation == 'landscape'
         if kind == 'flyer':
-            facts = ''.join(f'<dt>{self.inline(i["label"])}</dt><dd>{self.inline(i["value"])}</dd>'
-                            for i in d.get('items', []) if i.get('value'))
-            body = (f'<dl class="facts">{facts}</dl>' if facts else '')
+            body = self.facts([(i['label'], i.get('value')) for i in d.get('items', [])])
             if d.get('note'):
                 body += f'<div class="note">{self.paragraphs(d["note"])}</div>'
         else:
-            body = f'<div class="abstract">{self.paragraphs(d.get("abstract", ""))}</div>'
-            body += self.references()
+            text = f'<div class="abstract">{self.paragraphs(d.get("abstract", ""))}</div>'
+            text += self.references()
             if d.get('acknowledgment'):
-                body += f'<p class="ack">{self.inline(d["acknowledgment"])}</p>'
+                text += f'<p class="ack">{self.inline(d["acknowledgment"])}</p>'
             if d.get('contact'):
-                body += f'<p class="contact">{self.inline(d["contact"])}</p>'
+                text += f'<p class="contact">{self.inline(d["contact"])}</p>'
+            extra = [f'{label}: {self.inline(d[key])}' for label, key in (('대상', 'audience'), ('참여', 'participation'))
+                     if d.get(key)]
+            if extra and not (landscape and style != 'form'):
+                text += f'<p class="contact">{" · ".join(extra)}</p>'
+            if landscape and style != 'form':
+                pairs = [('일시', d.get('date')), ('장소', d.get('venue')),
+                         ('대상', d.get('audience')), ('참여', d.get('participation'))]
+                aside = (f'<aside class="seminar-facts" aria-label="참석 안내"><h2>참석 안내</h2>'
+                         f'{self.facts(pairs, "facts-list")}</aside>')
+                body = f'<div class="seminar-layout"><div>{text}</div>{aside}</div>'
+            else:
+                body = text
+        body += self.decoration()
         foot_text = ''
         if kind == 'flyer' and (d.get('organization') or d.get('contact')):
             foot_text = f'<strong>{self.field("organization")}</strong>{self.field("contact")}'
-        slogan = self.logo('slogan', 'slogan') if d.get('slogan') and style != 'form' else ''
         if style == 'form':
             title = f'<h1 class="form-title">{self.title(d.get("title"))}</h1>'
             if kind == 'seminar':
@@ -217,17 +253,20 @@ class Builder:
                          f'<p class="form-speaker">{self.field("speaker")}</p>'
                          f'<p class="form-meta">{meta}</p>')
             text = f'<div class="foot-text">{foot_text}</div>' if foot_text else '<span></span>'
-            return (f'<div class="form-frame"><div class="slogan-gap">{self.logo("slogan")}</div>'
+            gap = f'<div class="slogan-gap">{self.logo("slogan")}</div>' if not self.no_logo else ''
+            return (f'<div class="form-frame">{gap}'
                     f'<div class="sheet-body">{title}{body}</div>{self.character("form-mascot")}</div>'
                     f'<div class="form-band">{text}{self.logo("signature-white")}</div>')
         band_cls = 'band brand' if style == 'brand' else 'band'
         if kind == 'seminar':
-            left = ', '.join(x for x in (self.field('date'), self.field('venue')) if x)
+            when = [self.field('date')] if landscape else [self.field('date'), self.field('venue')]
+            left = ', '.join(x for x in when if x)
             head = (f'<header class="{band_cls}"><div class="band-meta"><strong>{left}</strong>'
                     f'<span>{self.field("series")}</span></div><h1>{self.title(d.get("title"))}</h1>'
                     f'<p class="band-speaker">{self.field("speaker")}</p></header>')
         else:
             head = f'<header class="{band_cls}"><h1>{self.title(d.get("title"))}</h1></header>'
+        slogan = self.logo('slogan', 'slogan') if self.wants_slogan() else ''
         foot = (f'<footer class="sheet-foot"><div class="foot-text">{slogan}{foot_text}</div>'
                 f'{self.identity()}{self.character("mascot")}</footer>')
         return f'<div class="frame">{head}<div class="sheet-body">{body}</div>{foot}</div>'
@@ -297,18 +336,20 @@ class Builder:
         return controls + '<main class="deck">' + ''.join(out) + '</main>' + script
 
     def web(self):
+        """대학 VI 하위 페이지형: 흰 헤더, 짙은 현재 위치 띠, 왼쪽 제목, 직사각형 하위 메뉴, 항목·본문 행."""
         d = self.data
         sections = d.get('sections', [])
-        nav = ''.join(f'<li><a href="#{self.esc(s["id"])}">{self.inline(s.get("menu", s["heading"]))}</a></li>'
-                      for s in sections)
-        current = ' aria-current="true"'
-        tabs = ''.join(f'<li><a href="#{self.esc(s["id"])}"{current if n == 0 else ""}>'
-                       f'{self.inline(s.get("menu", s["heading"]))}</a></li>' for n, s in enumerate(sections))
+        menu = [s for s in sections if s.get('in_menu', True)]
+        nav = ''.join(f'<a href="#{self.esc(s["id"])}">{self.inline(s.get("menu", s["heading"]))}</a>' for s in sections)
+        tabs = ''.join(f'<a href="#{self.esc(s["id"])}">{self.inline(s.get("menu", s["heading"]))}</a>' for s in menu)
         crumbs = ''.join(f'<li>{self.inline(c)}</li>' for c in d.get('location', []))
         crumbs += f'<li aria-current="page">{self.field("title")}</li>'
+        banner = d.get('banner_image')  # 사용자가 사진 배너를 명시적으로 요청하고 파일을 줄 때만
+        banner_style = f' style="background-image:url(\'{self.image_uri(banner)}\')"' if banner else ''
+        banner_cls = 'site-banner' if banner else 'site-banner no-photo'
         body = ''
         for s in sections:
-            inner = f'<h2>{self.inline(s["heading"])}</h2>' + self.paragraphs(s.get('body', ''))
+            inner = self.paragraphs(s.get('body', ''))
             if s.get('table'):
                 t = s['table']
                 cap = f'<caption>{self.inline(t.get("caption", ""))}</caption>' if t.get('caption') else ''
@@ -320,24 +361,29 @@ class Builder:
             if s.get('links'):
                 items = ''.join(f'<li><a href="{self.esc(l["url"])}">{self.inline(l["label"])}</a></li>'
                                 for l in s['links'] if str(l.get('url', '')).startswith(('https://', 'http://', 'mailto:', '#')))
-                inner += f'<ul class="plain">{items}</ul>'
-            body += f'<section id="{self.esc(s["id"])}">{inner}</section>'
-        footer = (f'<footer class="site-footer"><div class="site-wrap foot-row"><div>'
+                inner += f'<ul>{items}</ul>'
+            body += (f'<section id="{self.esc(s["id"])}" class="content-row"><h2>{self.inline(s["heading"])}</h2>'
+                     f'<div class="row-body">{inner}</div></section>')
+        cols = max(1, min(len(menu), 4))
+        footer = (f'<footer class="site-footer"><div class="site-wrap">'
                   f'<p><strong>{self.field("organization")}</strong></p><p>{self.field("address")}</p>'
-                  f'<p>{self.field("contact")}</p><p>{self.field("updated")}</p></div>'
-                  f'<div class="identity">{self.logo("signature")}{self.character("site-mascot")}</div></div></footer>')
+                  f'<p>{self.field("contact")}</p><p>{self.field("updated")}</p></div></footer>')
+        script = """<script>(()=>{const t=document.querySelector('.menu-toggle'),n=document.querySelector('#site-nav');function close(){t.setAttribute('aria-expanded','false');n.removeAttribute('data-open');}t.onclick=()=>{const o=t.getAttribute('aria-expanded')!=='true';t.setAttribute('aria-expanded',String(o));if(o)n.setAttribute('data-open','true');else n.removeAttribute('data-open');};n.addEventListener('click',e=>{if(e.target.closest('a'))close();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&t.getAttribute('aria-expanded')==='true'){close();t.focus();}});const p=document.querySelector('#print-page');if(p)p.onclick=()=>window.print();const links=[...document.querySelectorAll('.section-menu a')];function mark(){const h=location.hash||(links[0]&&links[0].getAttribute('href'));links.forEach(a=>{if(a.getAttribute('href')===h)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}window.addEventListener('hashchange',mark);mark();})();</script>"""
         return ('<div class="site"><a class="skip" href="#main">본문 바로가기</a>'
-                f'<header class="site-header"><div class="site-wrap header-row"><a class="home" href="{self.esc(d.get("home", "#"))}">'
-                f'{self.logo("signature")}<span class="sr-only"> {self.field("organization")} 첫 화면</span></a>'
-                f'<nav class="gnb" aria-label="주 메뉴"><ul>{nav}</ul></nav></div></header>'
-                f'<main id="main" class="site-wrap"><div class="title-area"><h1 class="page-title">{self.field("title")}</h1>'
-                f'<nav class="location" aria-label="현재 위치"><ol>{crumbs}</ol></nav></div>'
-                f'<nav class="tab-st1" aria-label="이 페이지의 하위 메뉴"><ul>{tabs}</ul></nav>{body}</main>{footer}</div>')
+                f'<header class="site-header"><div class="site-wrap header-row"><a class="site-identity" href="{self.esc(d.get("home", "#"))}">'
+                f'{self.logo("web", "logo web-logo")}<span class="sr-only"> {self.field("organization")} 첫 화면</span></a>'
+                '<button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav">메뉴</button>'
+                f'<nav id="site-nav" class="site-nav" aria-label="주 메뉴">{nav}</nav></div></header>'
+                f'<div class="{banner_cls}"{banner_style}><nav class="breadcrumb-bar" aria-label="현재 위치"><ol class="site-wrap">{crumbs}</ol></nav></div>'
+                f'<main id="main" class="site-wrap" tabindex="-1"><div class="page-heading"><h1>{self.field("title")}</h1>'
+                '<div class="page-tools"><button type="button" id="print-page">인쇄</button></div></div>'
+                f'<nav class="section-menu" aria-label="본문 메뉴" style="--cols:{cols}">{tabs}</nav>{body}</main>{footer}</div>{script}')
 
     def build(self):
         kind = self.kind
         if kind in ('flyer', 'seminar'):
-            content, page = f'<main class="sheet a4" data-export-page>{self.a4()}</main>', 'A4 portrait'
+            cls = 'sheet a4 landscape' if self.orientation == 'landscape' else 'sheet a4'
+            content, page = f'<main class="{cls}" data-export-page>{self.a4()}</main>', f'A4 {self.orientation}'
         elif kind == 'poster':
             content, page = f'<main class="sheet poster" data-export-page>{self.poster()}</main>', '841mm 1189mm'
         elif kind == 'slides':
@@ -362,15 +408,21 @@ def main():
     p.add_argument('--fonts', choices=('embed', 'link', 'system'), default='embed',
                    help='embed: HTML 한 파일에 폰트 포함(기본), link: assets/fonts 상대경로, system: 설치된 폰트만')
     p.add_argument('--character', help='지누 등 캐릭터 PNG·SVG 경로. JSON의 character 값보다 우선')
-    p.add_argument('--no-logo', action='store_true', help='로고 그림 대신 대학명 텍스트')
+    p.add_argument('--no-logo', action='store_true', help='로고 그림 대신 대학명 텍스트(FLY WITH GNU도 생략)')
+    p.add_argument('--orientation', choices=('portrait', 'landscape'),
+                   help='A4 방향(flyer·seminar). 기본은 JSON의 orientation, 없으면 portrait')
     a = p.parse_args()
     source = a.data or ROOT / 'data' / f'{a.kind}.json'
     data = json.loads(source.read_text(encoding='utf-8'))
     if a.character:
         data['character'] = {'src': str(Path(a.character).resolve())}
-    out = a.output or ROOT / 'out' / f'{a.kind}.html'
+    suffix = '-landscape' if (a.orientation or data.get('orientation')) == 'landscape' else ''
+    out = a.output or ROOT / 'out' / f'{a.kind}{suffix}.html'
+    if data.get('character') and data.get('decoration_image'):
+        print('주의: 캐릭터와 장식 이미지를 한 쪽에 함께 넣었습니다. DESIGN.md 6장은 하나만 쓰도록 권합니다.',
+              file=sys.stderr)
     out.parent.mkdir(parents=True, exist_ok=True)
-    builder = Builder(a.kind, data, source.resolve().parent, a.fonts, out, a.no_logo)
+    builder = Builder(a.kind, data, source.resolve().parent, a.fonts, out, a.no_logo, a.orientation)
     out.write_text(builder.build(), encoding='utf-8')
     print(out)
 

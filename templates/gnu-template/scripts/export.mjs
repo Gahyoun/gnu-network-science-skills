@@ -78,7 +78,8 @@ try {
     const x = Math.round(box.x), y = Math.round(box.y);
     await page.screenshot({path: png, fullPage: true,
       clip: {x, y, width: Math.round(box.x + box.width) - x, height: Math.round(box.y + box.height) - y}});
-    sizes.push({file: path.basename(png), width: Math.round(bounds.width * scale), height: Math.round(bounds.height * scale)});
+    const head = await fs.readFile(png);  // report the PNG's real size, not the CSS box
+    sizes.push({file: path.basename(png), width: head.readUInt32BE(16), height: head.readUInt32BE(20)});
   }
   const pdf = path.join(output, stem + '.pdf');
   await page.emulateMedia({media: 'print'});

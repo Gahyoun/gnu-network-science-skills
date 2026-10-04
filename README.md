@@ -28,7 +28,7 @@ AI 에게 네트워크 과학을 물어보면 용어를 영어로 섞어 쓰거�
   Monte Carlo 자기상관·jackknife·data collapse 헬퍼(`kernel.py`)와 저널 지형도 내장.
   구조 측정은 `network-science-kr`, 구조 위의 과정과 상전이는 이 스킬입니다.
 
-- **`gnu-template`** — 경상국립대 학교테마의 A4 홍보문·세미나 안내문, A0 학술포스터, 16:9 HTML 발표자료, 대학 홈페이지형 웹페이지. 학교 로고·지정서체(포함)·학과 안내문 양식을 따르고 지누 캐릭터를 규칙에 맞게 넣을 수 있습니다. 출력은 **HTML·PDF·PNG**. [사용법·미리보기](templates/gnu-template/README.md) · [독립 DESIGN.md](templates/gnu-template/DESIGN.md) · [공식 로고·AI 자산](templates/gnu-template/assets/catalog.md).
+- **`gnu-template`** — 경상국립대 학교테마의 A4 세로·가로 홍보문과 세미나 안내문, A0 학술포스터, 16:9 HTML 발표자료, 대학 홈페이지형 웹페이지. 학교 로고·지정서체(포함)·학과 안내문 양식을 따르고 지누 캐릭터를 규칙에 맞게 넣을 수 있습니다. 출력은 **HTML·PDF·PNG**. [사용법·미리보기](templates/gnu-template/README.md) · [독립 DESIGN.md](templates/gnu-template/DESIGN.md) · [공식 로고·AI 자산](templates/gnu-template/assets/catalog.md).
 
 관련 레포: [`stem-journal-club-deck`](https://github.com/Gahyoun/stem-journal-club-deck) (논문 → 저널클럽 덱).
 
@@ -134,6 +134,9 @@ HTML·PDF·PNG로 모두 저장해줘.
 ```
 
 학술포스터·16:9 프레젠테이션·간단한 웹페이지도 같은 방식으로 요청합니다.
+세미나 플라이어는 ‘A4 가로(297 × 210mm)’를 지정하면 [가로 예시](templates/gnu-template/examples/seminar-landscape.html)를 적용합니다.
+세로·가로 플라이어에는 공식 **FLY WITH G.N.U** 도안을 기본으로 넣습니다. 학교 이미지·꽃 모티프는 장식을 요청한 경우에만, 지누는 규칙에 맞춰 인쇄물에만 넣습니다.
+웹 기본형은 GNU VI 페이지의 흰 헤더·짙은 현재 위치 띠·직사각형 메뉴·항목별 본문 구성을 따르며 캠퍼스 항공사진과 캐릭터는 넣지 않습니다.
 **HTML로 제작하고 PDF로 export하는 방법을 권장**하며 PNG도 기본으로 저장합니다.
 Claude Code·Codex의 스킬 설치와 웹앱에 문서를 첨부하는 방법, 출력 예시는
 [GNU template README](templates/gnu-template/README.md)에 정리했습니다.

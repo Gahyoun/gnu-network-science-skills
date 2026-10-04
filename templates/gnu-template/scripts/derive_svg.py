@@ -27,8 +27,8 @@ ET.register_namespace('xlink', XLINK)
 
 # name: (source PDF, crop x, y, width, height in PDF points, note)
 PRESETS = {
-    'fly-with-gnu': ('assets/official/(원형)GNU 엠블럼_서식(안내문).pdf',
-                     75, 10, 230, 55, '공식 안내문 서식 상단의 FLY WITH GNU 로고타이프'),
+    'fly-with-gnu': ('assets/official/design system guidelines_fly with gnu_3.ai',
+                     300, 130, 395, 95, '슬로건 BI 로고타입(흰 바탕용 청색)'),
     'gnu-signature': ('assets/official/BS08-signature-sheet.pdf',
                       105, 605, 400, 75, 'BS08 국영문 가로조합 시그니처'),
     'gnu-symbol': ('assets/official/BS08-signature-sheet.pdf',
@@ -90,7 +90,9 @@ def bbox_of(element, defs, ancestors=()):
 
 
 def painted(shape):
-    # Official marks are filled shapes; stroke-only paths on sheets are guides.
+    # Official marks are filled shapes (solid or gradient); stroke-only paths on sheets are guides.
+    if str(shape.values.get('fill', '')).startswith('url('):
+        return True
     return shape.fill is not None and shape.fill.value is not None and shape.fill.alpha > 0
 
 
