@@ -1,0 +1,4 @@
+interface:
+  display_name: "GNU template"
+  short_description: "경상국립대 학교테마 홍보문·포스터·발표·웹페이지와 HTML/PDF/PNG 출력"
+  default_prompt: "$gnu-template으로 제공한 내용을 학교테마에 맞춰 제작하고 HTML·PDF·PNG로 저장해 주세요."

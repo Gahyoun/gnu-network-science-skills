@@ -1,0 +1,9 @@
+{
+  "name": "gnu-template",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portable GNU university-theme HTML templates and PDF/PNG export",
+  "type": "module",
+  "scripts": {"export": "node scripts/export.mjs"},
+  "devDependencies": {"playwright": "1.62.1"}
+}

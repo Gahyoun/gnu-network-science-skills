@@ -1,0 +1,25 @@
+{
+  "organization": "[주최 학과·연구실]",
+  "contact": "[문의 담당자·연락처]",
+  "title": "[연구실·학술 행사명]",
+  "body": "[연구실 또는 학술 행사의 소개를 입력하세요.]\n\n[연구 분야, 운영 주체, 참여 대상 등 실제 정보를 입력하세요.]",
+  "events": [
+    {
+      "date": "[일시]",
+      "title": "[행사명]",
+      "venue": "[장소]"
+    }
+  ],
+  "resources": [
+    {
+      "label": "경상국립대학교",
+      "url": "https://www.gnu.ac.kr/"
+    },
+    {
+      "label": "KRDS 디자인 자료",
+      "url": "https://www.krds.go.kr/html/site/index.html"
+    }
+  ],
+  "updated": "[최종 갱신일]",
+  "table_caption": "학술 행사 일정"
+}

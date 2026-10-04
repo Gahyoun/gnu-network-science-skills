@@ -1,0 +1,386 @@
+{
+  "checked_date": "2026-10-04",
+  "asset_rights": "Gyeongsang National University; redistribution permission not verified",
+  "items": [
+    {
+      "path": "assets/official/(원형)GNU 엠블럼.ai",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/(원형)GNU 엠블럼.ai",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "(원형)GNU 엠블럼.ai",
+      "sha256": "ea5cda6869f1ee2cbd6ebec9567e924c668c61ac748032d2ef554fba1a3d46c6",
+      "bytes": 1195207,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/(원형)GNU 엠블럼.pdf",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/(원형)GNU 엠블럼.pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "(원형)GNU 엠블럼.pdf",
+      "sha256": "da7153bf7bfac83b76112485ebfe39341b4433811e3fa488beec878a73c24c0d",
+      "bytes": 392324,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/(원형)GNU 엠블럼.png",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/(원형)GNU 엠블럼.png",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "(원형)GNU 엠블럼.png",
+      "sha256": "81917ccba3b2e86157de6e6d519dc96db663bed2303656a75a1a8fb22ab30afe",
+      "bytes": 139663,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/(원형)GNU 엠블럼_국문조합.ai",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/(원형)GNU 엠블럼_국문조합.ai",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "(원형)GNU 엠블럼_국문조합.ai",
+      "sha256": "46e1004065369fcc3c23e07e5cb7e2312cda86d4eb4b94dceecb9f291f11483a",
+      "bytes": 1279899,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/(원형)GNU 엠블럼_국문조합.pdf",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/(원형)GNU 엠블럼_국문조합.pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "(원형)GNU 엠블럼_국문조합.pdf",
+      "sha256": "085ad7dd454ebb0adfe31bff0cedef4bbaa78187bfb6359681d57b2894b69956",
+      "bytes": 461389,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/(원형)GNU 엠블럼_국문조합.png",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/(원형)GNU 엠블럼_국문조합.png",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "(원형)GNU 엠블럼_국문조합.png",
+      "sha256": "f9f6fcceb368fbce299cbcdd9724ee3293f8dc581baba32d0da7bf5aa531c850",
+      "bytes": 145956,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/(원형)GNU 엠블럼_영문조합.ai",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/(원형)GNU 엠블럼_영문조합.ai",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "(원형)GNU 엠블럼_영문조합.ai",
+      "sha256": "2ace149f2ff220373fd528148597ba083be1d7786b0028381466d8e4295b1260",
+      "bytes": 1268446,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/(원형)GNU 엠블럼_영문조합.pdf",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/(원형)GNU 엠블럼_영문조합.pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "(원형)GNU 엠블럼_영문조합.pdf",
+      "sha256": "3ecc90308f6964d9fd28d758708f16eab1e9165941f96bf6ff582b4076a94e0d",
+      "bytes": 484366,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/(원형)GNU 엠블럼_영문조합.png",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/(원형)GNU 엠블럼_영문조합.png",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "(원형)GNU 엠블럼_영문조합.png",
+      "sha256": "868c951076f150cada56d2519fca5fdd4c8a72d36a198a2cd0a37ddbfcf37d3e",
+      "bytes": 156371,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS07 시그니처(세로형).ai",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS07 시그니처(세로형).ai",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS07 시그니처(세로형).ai",
+      "sha256": "044b07f11bf9fa9e3f376525225b18f5838424ebece45374f3a533df47fa9370",
+      "bytes": 254802,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS08 시그니처(가로형).ai",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS08 시그니처(가로형).ai",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS08 시그니처(가로형).ai",
+      "sha256": "1b85f38b86c8945919d4e12e86c876d3b777c9e1b4515f946153b40ff78b1fb5",
+      "bytes": 244394,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS13 전용색상.ai",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS13 전용색상.ai",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS13 전용색상.ai",
+      "sha256": "409464db64efbd96ad64fd7a4b60add45891c1390e379d677e977edc721e6349",
+      "bytes": 264992,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS13 전용색상.pdf",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS13 전용색상.pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS13 전용색상.pdf",
+      "sha256": "f771845becd9491b312f93abb7856e7c2363edddc8244d14aa1eb5dfa9850952",
+      "bytes": 259020,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS13 전용색상.jpg",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS13 전용색상.jpg",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS13 전용색상.jpg",
+      "sha256": "48378e56f4da12c84758c9f6db08e4a16a0a60549865a54f3ed922aec8b9c3f6",
+      "bytes": 41422,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS14 색상활용.ai",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS14 색상활용.ai",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS14 색상활용.ai",
+      "sha256": "a6308f7a23f72e502586f77dc1cc23f6efe68c38bb7c9d49d6655c8097b13c01",
+      "bytes": 384581,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS14 색상활용.pdf",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS14 색상활용.pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS14 색상활용.pdf",
+      "sha256": "a40943773dad313a823ea6227cffb30ad48ba7ce4c53d2b694487ff135278198",
+      "bytes": 378642,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS14 색상활용.jpg",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS14 색상활용.jpg",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS14 색상활용.jpg",
+      "sha256": "e0c014be4597e7c192babf4f7ee9bd46b1ba8384a3852339a968abf386d53b9d",
+      "bytes": 78033,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS16 지정서체-국문.pdf",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS16 지정서체-국문.pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS16 지정서체-국문.pdf",
+      "sha256": "c7e111a8e5c2d3a6260f2711fe6a4841f7e8c0005c8d59132c6f2e68776437c0",
+      "bytes": 394049,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS17 지정서체-영문.pdf",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS17 지정서체-영문.pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS17 지정서체-영문.pdf",
+      "sha256": "8e18055d41103eb3629dfe7ee7f22664533252a44440e990bccae4ad9b61efec",
+      "bytes": 336868,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS21 그래픽 모티프C.ai",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS21 그래픽 모티프C.ai",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS21 그래픽 모티프C.ai",
+      "sha256": "004ba01e8c56ba2c77a4ba2041b44683565841ec7b6797668d94ae22f738388b",
+      "bytes": 227523,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS21 그래픽 모티프C.pdf",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS21 그래픽 모티프C.pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS21 그래픽 모티프C.pdf",
+      "sha256": "eb213bf69792bd54297900e7e45b773373befdc05b026c41e62c7c9e7d5343cd",
+      "bytes": 221662,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS21 그래픽 모티프C.jpg",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS21 그래픽 모티프C.jpg",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS21 그래픽 모티프C.jpg",
+      "sha256": "80348b32904fa5cb9de2db42712009b7231781b05b63278323c26dc3d07b0b15",
+      "bytes": 59804,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/design system guidelines_fly with gnu_3.ai",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/design system guidelines_fly with gnu_3.ai",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?mi=17993&cntntsId=8192",
+      "kind": "brand",
+      "original_filename": "design system guidelines_fly with gnu_3.ai",
+      "sha256": "6d623b87a99c9e625b02e31a29feda15930bc103c5d9426ab59ae6f26346b275",
+      "bytes": 357336,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/design system guidelines_fly with gnu_3.pdf",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/design system guidelines_fly with gnu_3.pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?mi=17993&cntntsId=8192",
+      "kind": "brand",
+      "original_filename": "design system guidelines_fly with gnu_3.pdf",
+      "sha256": "ae4efc413371dd030889d0132b25bba63ad24dd774b4b81d38597353e98da8bd",
+      "bytes": 879527,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/design system guidelines_fly with gnu_3.jpg",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/design system guidelines_fly with gnu_3.jpg",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?mi=17993&cntntsId=8192",
+      "kind": "brand",
+      "original_filename": "design system guidelines_fly with gnu_3.jpg",
+      "sha256": "81462acb31c33309c5807abd42fdc991d92e35a487d44a27a0b76c6b937bfaad",
+      "bytes": 1161902,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/design system guidelines_fly with gnu_5.ai",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/design system guidelines_fly with gnu_5.ai",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?mi=17993&cntntsId=8192",
+      "kind": "brand",
+      "original_filename": "design system guidelines_fly with gnu_5.ai",
+      "sha256": "4402a6286a63c5b6a34b4de1ac33e39cf6974396b2f2501a8614bf4d1c9cb574",
+      "bytes": 298450,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/design system guidelines_fly with gnu_5.pdf",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/design system guidelines_fly with gnu_5.pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?mi=17993&cntntsId=8192",
+      "kind": "brand",
+      "original_filename": "design system guidelines_fly with gnu_5.pdf",
+      "sha256": "74d634055ae7030f1bbe44320bc9e1c0a16d737be8f105f9e908cb3435ec5aab",
+      "bytes": 782025,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/design system guidelines_fly with gnu_5.jpg",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/design system guidelines_fly with gnu_5.jpg",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?mi=17993&cntntsId=8192",
+      "kind": "brand",
+      "original_filename": "design system guidelines_fly with gnu_5.jpg",
+      "sha256": "9ef0081d952997b8b9b149b55032625225d2cb88df2a64650b7b10a4633b5ec4",
+      "bytes": 1072703,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/(원형)GNU 엠블럼_서식(안내문).ai",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/(원형)GNU 엠블럼_서식(안내문).ai",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?mi=1370&cntntsId=1199",
+      "kind": "brand",
+      "original_filename": "(원형)GNU 엠블럼_서식(안내문).ai",
+      "sha256": "0a0ee8cbd5e53477c4b1d474a2ef5f65bbca9a092a1847b0653eb141ba737d5c",
+      "bytes": 1160192,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/(원형)GNU 엠블럼_서식(안내문).pdf",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/(원형)GNU 엠블럼_서식(안내문).pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?mi=1370&cntntsId=1199",
+      "kind": "brand",
+      "original_filename": "(원형)GNU 엠블럼_서식(안내문).pdf",
+      "sha256": "6a49bf65c135b3d1fbf5cb29be5fdf010cf03ae9e3b9399763d051964c710ba6",
+      "bytes": 68500,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/(원형)GNU 엠블럼_서식(안내문).png",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/(원형)GNU 엠블럼_서식(안내문).png",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?mi=1370&cntntsId=1199",
+      "kind": "brand",
+      "original_filename": "(원형)GNU 엠블럼_서식(안내문).png",
+      "sha256": "d6a8827d0287b2189d3cdf19ae15928f632b94058d4251685bfff0200fc33914",
+      "bytes": 50756,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS07-signature-sheet.pdf",
+      "url": "https://www.gnu.ac.kr/upload/cntntsFile/main/doc_eb2eb377-0a2a-4b97-9ff3-fe7d196d76f51751508364913.pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "doc_eb2eb377-0a2a-4b97-9ff3-fe7d196d76f51751508364913.pdf",
+      "sha256": "ed01ae30e53e9b33ad72689e52b738ca39800f796ae30c6e90dbc8e60cd45752",
+      "bytes": 249020,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS07-signature-sheet.png",
+      "url": "https://www.gnu.ac.kr/upload/cntntsFile/main/img_93c5e489-4c0d-4bf5-a344-6619383c29231751508364913.png",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "img_93c5e489-4c0d-4bf5-a344-6619383c29231751508364913.png",
+      "sha256": "47201c6bc8152437533a3b51ce7fd06fe4eb6e00b0eba6fcab5061592c960d92",
+      "bytes": 55378,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS08-signature-sheet.pdf",
+      "url": "https://www.gnu.ac.kr/upload/cntntsFile/main/doc_d79ea04e-6f4f-4e66-8811-ea4f7e7873a71751508025546.pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "doc_d79ea04e-6f4f-4e66-8811-ea4f7e7873a71751508025546.pdf",
+      "sha256": "38ea070986939367de34d1a6444e0d0aadbd10e3b72d9d5b9ecf91e8a5fd03aa",
+      "bytes": 75567,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS08-signature-sheet.png",
+      "url": "https://www.gnu.ac.kr/upload/cntntsFile/main/img_5c3be225-c2f3-4559-aebc-0ad41e72c22a1751508025546.png",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "img_5c3be225-c2f3-4559-aebc-0ad41e72c22a1751508025546.png",
+      "sha256": "a87302dc5db245e497de02c2ca441a20fed4036101e15a3431989bf9591345ac",
+      "bytes": 60028,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS23 그래픽 모티프E-교화.ai",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS23 그래픽 모티프E-교화.ai",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS23 그래픽 모티프E-교화.ai",
+      "sha256": "8f0056e451b6ef235a8fefb819f7d1484abb9057c2f09e281053fe2f01708d14",
+      "bytes": 287624,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS23 그래픽 모티프E-교화.pdf",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS23 그래픽 모티프E-교화.pdf",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS23 그래픽 모티프E-교화.pdf",
+      "sha256": "33387786ab3556cafa8e77333571b8f8aee754d736ab6c7bf534c4df4b4acea1",
+      "bytes": 281182,
+      "downloaded_date": "2026-10-04"
+    },
+    {
+      "path": "assets/official/BS23 그래픽 모티프E-교화.jpg",
+      "url": "https://www.gnu.ac.kr/images/web/main/sub_cnt/BS23 그래픽 모티프E-교화.jpg",
+      "source_page": "https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369",
+      "kind": "brand",
+      "original_filename": "BS23 그래픽 모티프E-교화.jpg",
+      "sha256": "72c344fa7d7dbd35d591bdd51c1f2ed4837ea62976b94925203a630e6ebba4ec",
+      "bytes": 58719,
+      "downloaded_date": "2026-10-04"
+    }
+  ]
+}
