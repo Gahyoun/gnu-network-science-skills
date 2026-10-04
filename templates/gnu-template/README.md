@@ -91,7 +91,7 @@ node scripts/export.mjs out/seminar.html out/  # seminar.html · seminar.pdf · 
 - A4의 `style`은 `band`(기본, 대비 확보 청색 띠), `brand`(GNU Blue 띠, 띠 안 글자는 18pt 이상), `form`(공식 서식형).
 - 포스터 `columns`의 개수가 단 수입니다. 그림은 `"figures": [{"src": "fig1.png", "caption": "Fig. 1. …"}]`, 빈자리 표시는 `"label"`. 남는 공간을 채울 섹션에 `"grow": true`.
 - 저자는 `{"name": "…", "mark": "1", "presenter": true}`. 발표자는 청색 굵게 표시됩니다.
-- QR은 실제 QR 이미지를 `"qr": {"src": "qr.png", "label": "발표자 연락처"}`로 넣습니다.
+- QR은 실제 QR 이미지를 `"qr": {"src": "qr.png", "label": "발표자 연락처"}`로 넣습니다(포스터·발표 표지·A4 공통, A4는 이미지가 있을 때만 표시).
 - 발표자료 `slides`의 `layout`은 `cover`, 일반(생략), `closing`. 그림이 있으면 오른쪽 단에 들어갑니다.
 
 `--fonts link`는 폰트를 넣지 않고 `assets/fonts`를 가리키는 가벼운 HTML을 만듭니다(예시 파일이 이 방식). `export.mjs`가 저장하는 HTML에는 폰트가 다시 포함됩니다. `--no-logo`는 로고 대신 대학명 텍스트를 씁니다.

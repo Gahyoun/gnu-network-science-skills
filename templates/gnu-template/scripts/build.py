@@ -241,6 +241,8 @@ class Builder:
                 body = f'<div class="seminar-layout"><div>{text}</div>{aside}</div>'
             else:
                 body = text
+        if (d.get('qr') or {}).get('src'):  # A4에는 실제 QR 이미지가 있을 때만
+            body += self.qr()
         body += self.decoration()
         foot_text = ''
         if kind == 'flyer' and (d.get('organization') or d.get('contact')):
