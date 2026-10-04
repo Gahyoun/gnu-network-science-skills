@@ -10,7 +10,7 @@ from fontTools.ttLib import TTFont
 
 root = Path(__file__).resolve().parents[1]
 template = root.parent.parent / 'templates/gnu-template/assets/fonts'
-text = ''.join(p.read_text() for p in [*root.glob('*.html'), root/'src/content.mjs', root/'assets/app.mjs', root/'tools/build.mjs', root/'tools/navigation-build.mjs', root/'assets/navigation.mjs', root/'src/catalog.json'])
+text = ''.join(p.read_text() for p in [*root.glob('*.html'), root/'src/content.mjs', root/'assets/app.mjs', root/'tools/build.mjs', root/'tools/navigation-build.mjs', root/'assets/navigation.mjs', root/'src/catalog.json', root/'tools/publications-build.mjs', root/'src/publications.json', root/'assets/network.mjs', root/'tools/network-build.mjs', root/'tools/about-guide.mjs'])
 chars = set(map(ord, text)) | set(range(32, 127))
 report = {'tool': 'fontTools 4.50.0 + Brotli 1.1.0', 'fonts': [],
           'hangulCodepoints': sorted(c for c in chars if 0xAC00 <= c <= 0xD7A3)}

@@ -1,0 +1,10 @@
+{
+  "surveyDate": "2026-10-05",
+  "pages": 566,
+  "failedPages": [],
+  "nodes": 2180,
+  "edges": 5844,
+  "density": 0.0012302588090656855,
+  "reciprocity": 0.007529089664613279,
+  "weakComponents": 886
+}

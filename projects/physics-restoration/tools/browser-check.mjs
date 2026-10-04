@@ -20,7 +20,7 @@ try{
     }
     return route.continue();
   });
-  for(const file of ['index.html',...pages.map(p=>p.file),'about.html','materials.html','search.html','headwords.html','browse.html','lesson.html']){
+  for(const file of ['index.html',...pages.map(p=>p.file),'about.html','materials.html','search.html','headwords.html','browse.html','lesson.html','network.html','concept.html']){
     await page.goto(new URL(file,base).href,{waitUntil:'networkidle'});
     await page.evaluate(()=>document.fonts.ready);
     const data=await page.evaluate(()=>{
@@ -36,7 +36,7 @@ try{
     assert.equal(await page.locator('.identity img').getAttribute('alt'),'물리의 이해');
     assert.ok(await page.locator('.identity img').evaluate(im=>im.complete&&im.naturalWidth>0),'Wordmark loads');
     assert.ok((await page.locator('.source-credit').innerText()).includes('정기수 경상국립대 명예교수님 작'));
-    assert.ok((await page.locator('.site-footer').innerText()).includes('(곧 받아올게요)'));
+    assert.ok((await page.locator('.site-footer').innerText()).includes('(공식이 될 수 있도록 곧 허락 받아올게요)'));
     assert.ok(!(await page.locator('.site-header').innerText()).includes('정기수 교수님의 웹교재 · 동문 복원'));assert.deepEqual(data.duplicates,[],file);
     assert.deepEqual(data.badHashes,[],file);assert.equal(data.brokenMath,0,file);
     for(const width of report.widths){
@@ -94,8 +94,81 @@ try{
       await play.click();const b=await page.locator('#mode-1d svg').innerHTML();await page.waitForTimeout(100);
       assert.equal(await page.locator('#mode-1d svg').innerHTML(),b,'Animation pauses');report.interactionChecks+=2;
     }
+    if(['quantum-statistics.html','quantum-distributions.html'].includes(file)){
+      for(const id of file==='quantum-statistics.html'?['mb-states']:['be-states','fd-states']){
+        const widget=page.locator('#'+id),play=widget.locator('[data-action=play]'),input=widget.locator('[data-key=configuration]');
+        await widget.scrollIntoViewIfNeeded();await play.click();const before=await input.inputValue();
+        await page.waitForTimeout(1500);assert.notEqual(await input.inputValue(),before,'Occupancy playback advances '+id);
+        await play.click();const paused=await input.inputValue();await page.waitForTimeout(1400);
+        assert.equal(await input.inputValue(),paused,'Occupancy playback pauses '+id);
+        await widget.locator('[data-action=reset]').click();assert.equal(await input.inputValue(),'0');report.interactionChecks+=3;
+      }
+    }
+    if(file==='neutron-stars.html'){
+      for(const mass of ['0.5','2.5']){
+        await page.locator('#neutron-star [data-key=mass]').evaluate((el,v)=>{el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));},mass);
+        const matched=await page.locator('#neutron-star svg').evaluate(svg=>{
+          const circles=[...svg.querySelectorAll('circle')].slice(0,4),swatches=[...svg.querySelectorAll('[data-layer-swatch]')];
+          return swatches.length===4&&swatches.every((s,i)=>getComputedStyle(s).fill===getComputedStyle(circles[i]).fill)&&Number(circles[0].getAttribute('cx'))+Number(circles[0].getAttribute('r'))<Number(swatches[0].getAttribute('x'));
+        });assert.ok(matched,'Layer legend agrees and stays clear at mass '+mass);report.interactionChecks++;
+      }
+      await page.locator('#neutron-star').screenshot({path:fileURLToPath(new URL('neutron-star-legend.png',output))});
+    }
+    if(file==='about.html'){
+      assert.equal(await page.locator('.research-station').count(),73);
+      assert.equal(await page.locator('.research-links a[href^="https://doi.org/"]').count(),71);
+      const dates=await page.locator('.research-meta time').allTextContents();assert.deepEqual(dates,[...dates].sort().reverse());
+      await page.locator('[data-research-field=nuclear]').click();assert.equal(await page.locator('.research-station:visible').count(),11);
+      assert.equal(await page.locator('.research-station:visible>.diamond').count(),11);
+      await page.locator('.research-station:visible details').first().locator('summary').click();
+      assert.ok((await page.locator('.research-station:visible details[open]').first().innerText()).includes('Chung'));
+      await page.locator('[data-research-field=all]').click();
+      await page.locator('[data-research-query]').fill('10.3390/polym14040700');await page.waitForTimeout(200);
+      assert.equal(await page.locator('.research-station:visible').count(),1);
+      await page.locator('[data-research-year]').selectOption('1994');assert.equal(await page.locator('.research-station:visible').count(),0);
+      assert.ok(await page.locator('[data-research-empty]').isVisible());
+      await page.locator('[data-research-query]').fill('');await page.waitForTimeout(200);assert.equal(await page.locator('.research-station:visible').count(),9);
+      await page.locator('[data-research-year]').selectOption('all');
+      await page.locator('#publications').scrollIntoViewIfNeeded();await page.screenshot({path:fileURLToPath(new URL('publications-desktop.png',output))});
+      report.interactionChecks+=8;
+    }
     report.pages.push({file,...data});
   }
+  // Related concepts, directed exploration, analysis, downloads and shared ego links.
+  await page.goto(new URL('quantum-statistics.html',base).href,{waitUntil:'networkidle'});
+  assert.ok(await page.locator('.concept-term').count()>0);
+  assert.ok(await page.locator('.related-group').count()>=2);
+  assert.equal(await page.locator('math .concept-term').count(),0);
+  assert.equal(await page.locator('.concept-term').first().evaluate(e=>getComputedStyle(e).color),'rgb(45, 121, 83)');
+  await page.locator('.ego-link').first().click();
+  await page.waitForFunction(()=>Number(document.querySelector('canvas').dataset.nodeCount)>0);
+  const firstCount=Number(await page.locator('canvas').getAttribute('data-node-count'));
+  await page.locator('[data-network-direction]').selectOption('out');
+  assert.ok(Number(await page.locator('canvas').getAttribute('data-node-count'))<=firstCount);
+  const firstHop=Number(await page.locator('canvas').getAttribute('data-node-count'));
+  await page.locator('[data-network-hops]').selectOption('2');
+  assert.ok(Number(await page.locator('canvas').getAttribute('data-node-count'))>=firstHop);
+  await page.locator('[data-network-mode]').selectOption('all');
+  assert.ok(Number(await page.locator('canvas').getAttribute('data-node-count'))>1800);
+  assert.ok(await page.locator('[data-network-direction]').isDisabled());
+  assert.equal(await page.locator('[data-network-ranking] tr').count(),50);
+  await page.locator('[data-network-section]').selectOption('핵물리');
+  assert.ok((await page.locator('[data-network-ranking] tr').allInnerTexts()).every(t=>t.includes('핵물리')));
+  const downloadPromise=page.waitForEvent('download');await page.locator('[data-network-export]').click();
+  const downloaded=await downloadPromise;const exportPath=await downloaded.path();const exported=JSON.parse(await fs.readFile(exportPath,'utf8'));
+  assert.ok(exported.nodes.length>0);assert.ok(exported.nodes.every(n=>n.section==='핵물리'));
+  await page.locator('[data-network-mode]').selectOption('ego');await page.locator('[data-network-section]').selectOption('all');
+  await page.locator('[data-ego-query]').fill('양자통계');await page.getByRole('button',{name:'관계 보기',exact:true}).click();
+  await page.locator('[data-network-hops]').selectOption('1');await page.locator('[data-network-direction]').selectOption('both');
+  await page.locator('canvas').scrollIntoViewIfNeeded();await page.waitForTimeout(1800);
+  await page.screenshot({path:fileURLToPath(new URL('concept-network-desktop.png',output))});
+  const shared=page.url();await page.reload({waitUntil:'networkidle'});await page.waitForFunction(()=>Number(document.querySelector('canvas').dataset.nodeCount)>0);
+  assert.equal(await page.locator('[data-ego-query]').inputValue(),'양자통계');assert.equal(page.url(),shared);
+  await page.locator('[data-network-detail] a').first().click();assert.ok((await page.locator('h1').innerText()).length>0);
+  await page.goto(new URL('headwords.html',base).href,{waitUntil:'networkidle'});
+  await page.locator('[data-filter]').fill('양자역학');await page.waitForTimeout(200);
+  assert.ok(await page.locator('[data-catalog-row]:visible a[aria-label$="개념 관계"]').count()>0);
+  report.interactionChecks+=16;
   // Whole-book structure, local navigation, search and persisted reading themes.
   await page.goto(new URL('index.html',base).href,{waitUntil:'networkidle'});
   assert.equal(await page.locator('.toc-chapter').count(),7);

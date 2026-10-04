@@ -84,3 +84,19 @@ if(lessonContainer){
   const nav=document.createElement('nav');nav.className='section-menu';nav.setAttribute('aria-label',lesson.title+' 페이지');siblings.forEach(l=>{const a=link(l.page+'p',l.href);if(l.id===id)a.setAttribute('aria-current','page');nav.append(a);});body.append(nav,link('전체 목차로 돌아가기 →','index.html'));
  }).catch(()=>{lessonContainer.querySelector('.row-body p').textContent='페이지 안내를 불러오지 못했습니다. 전체 목차에서 다시 선택해 주세요.';});
 }
+
+const research=document.querySelector('[data-publications]');
+if(research){
+ const stations=[...research.querySelectorAll('[data-paper-field]')];
+ const texts=stations.map(row=>normalize(row.textContent));
+ const input=research.querySelector('[data-research-query]'),year=research.querySelector('[data-research-year]'),buttons=[...research.querySelectorAll('[data-research-field]')];
+ let field='all',timer;
+ function filter(){
+  const query=words(input.value);let shown=0;
+  stations.forEach((row,i)=>{row.hidden=!(includes(texts[i],query)&&(field==='all'||row.dataset.paperField===field)&&(year.value==='all'||row.dataset.paperYear===year.value));if(!row.hidden)shown++;});
+  research.querySelector('[data-research-count]').textContent=`${shown}편`;
+  research.querySelector('[data-research-empty]').hidden=shown>0;
+ }
+ buttons.forEach(button=>button.addEventListener('click',()=>{field=button.dataset.researchField;buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));filter();}));
+ input.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(filter,120);});year.addEventListener('change',filter);filter();
+}

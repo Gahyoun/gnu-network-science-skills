@@ -33,7 +33,7 @@ jobs:
         run: node tools/build.mjs
       - name: Verify numerical models
         working-directory: projects/physics-restoration
-        run: node --test tools/physics.test.mjs
+        run: node --test tools/*.test.mjs
       - name: Stage website
         working-directory: projects/physics-restoration
         run: node tools/stage.mjs

@@ -95,10 +95,14 @@ function mount(el,state,controls,draw,{animate=false,actions=[]}={}) {
 }
 
 function stateWidget(el,kind) {
+ let previousStep=0;
  const state={N:2,configuration:0};
  const controls=select('N','입자수',[[2,'2개'],[3,'3개']],2)+slider('configuration','점유 배열',0,9,1,0);
- mount(el,state,controls,s=>{
+ mount(el,state,controls,(s,t)=>{
   const N=Number(s.N),configs=P.stateConfigurations(kind,N,4).sort((a,b)=>a.reduce((v,n,i)=>v+n*(i+1),0)-b.reduce((v,n,i)=>v+n*(i+1),0));
+  const step=Math.floor(t/1.2);
+  if(step<previousStep)previousStep=step;
+  if(step>previousStep){s.configuration=(s.configuration+step-previousStep)%configs.length;previousStep=step;}
   s.configuration=Math.min(s.configuration,configs.length-1);el.querySelector('input[data-key="configuration"]').max=configs.length-1;
   const counts=configs[s.configuration],energy=counts.reduce((v,n,i)=>v+n*(i+1),0);
   let particle=0;
@@ -120,7 +124,9 @@ function stateWidget(el,kind) {
   const total=kind==='MB'?4**N:configs.length;
   const table=`<details class="questions"><summary>가능한 배열 ${configs.length}개 보기</summary><table class="state-table"><caption>εᵢ=i인 예제 · 에너지는 같은 임의 단위</caption><thead><tr><th scope="col">번호</th><th scope="col">(n₁,n₂,n₃,n₄)</th><th scope="col">에너지</th>${kind==='MB'?'<th scope="col">교환 중복도</th>':''}</tr></thead><tbody>${rows}</tbody></table></details>`;
   return {svg:svg(`${kind} 입자의 점유수와 계상태`,body,270)+table,readouts:readout('통계',kind)+readout('입자수',N)+readout('미시상태수',total)+readout('선택 에너지',energy),note:kind==='MB'?'입자는 A·B·C로 구별한다. 하나의 점유 배열에 N!/∏nᵢ!개의 미시상태가 대응한다.':'네 단일입자 상태의 에너지를 1·2·3·4로 둔 도식이다. 동일 입자의 교환은 새 상태로 세지 않는다.'};
- });
+ },{animate:true});
+ const note=el.querySelector('[data-note]');
+ const description=document.createElement('p');description.className='figure-note';description.textContent='재생은 가능한 점유 배열을 차례로 살펴보는 시각화입니다. 실제 입자계의 시간 진화를 뜻하지 않습니다.';note.after(description);
 }
 function distributionWidget(el,scaled=false) {
  const state={alpha:0,kt:5};
@@ -247,10 +253,11 @@ function metalWidget(el) {
 }
 function starWidget(el) {
  mount(el,{mass:1.5},slider('mass','질량 / 태양질량',.5,2.5,.05,1.5),s=>{
-  const model=P.neutronStar(s.mass),radius=100*Math.min(1.4,model.R/P.neutronStar(1.5).R);
+  const model=P.neutronStar(s.mass),radius=90*Math.min(1.4,model.R/P.neutronStar(1.5).R);
   let body=text(180,24,'내부 층 · 개념도 (축척 아님)','text-anchor="middle"');
-  body+=circle(170,178,radius,'#d5eaf5')+circle(170,178,radius*.9,CYAN)+circle(170,178,radius*.67,BLUE)+circle(170,178,radius*.3,GREY);
-  for(const [y,l] of [[70,'바깥층'],[117,'안쪽 껍질'],[167,'핵물질'],[214,'중심부']])body+=text(285,y,l)+line(228,y,275,y,GREY);
+  const layers=[['바깥층','var(--star-outer)'],['안쪽 껍질',CYAN],['핵물질',BLUE],['중심부',GREY]];
+  body+=circle(145,178,radius,layers[0][1])+circle(145,178,radius*.9,CYAN)+circle(145,178,radius*.67,BLUE)+circle(145,178,radius*.3,GREY);
+  for(const [i,[label,color]] of layers.entries()){const y=80+i*49;body+=`<rect data-layer-swatch="${i}" x="285" y="${y-12}" width="16" height="16" fill="${color}"/>`+text(312,y+2,label);}
   body+=text(565,25,'원본 교육 모형 · R ∝ M⁻¹ᐟ³','text-anchor="middle"');
   let path='';for(let i=0;i<=100;i++){const mass=.5+i*.02,R=P.neutronStar(mass).R/1000;path+=`${i?'L':'M'}${425+i*2.5},${277-(R-8)*23}`;}
   body+=line(425,60,425,277)+line(425,277,690,277)+`<path d="${path}" fill="none" stroke="${BLUE}" stroke-width="3"/>`+circle(425+(s.mass-.5)/2*250,277-(model.R/1000-8)*23,5,BLUE);
