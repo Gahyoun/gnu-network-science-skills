@@ -1,6 +1,6 @@
 # GNU template
 
-경상국립대학교 학교테마로 A4 홍보문·세미나 안내문, 학술포스터, 프레젠테이션, 간단한 웹페이지를 만드는 비공식 제작 도구입니다. 기본 결과는 **HTML·PDF·PNG 세 형식**입니다. 지누와 캐릭터는 포함하지 않습니다.
+경상국립대학교 학교테마로 A4 세로·가로 홍보문과 세미나 안내문, 학술포스터, 프레젠테이션, 간단한 웹페이지를 만드는 비공식 제작 도구입니다. 기본 결과는 **HTML·PDF·PNG 세 형식**입니다. 지누와 캐릭터는 포함하지 않습니다.
 
 [디자인 지침](DESIGN.md) · [매체별 요청문](references/prompts.md) · [공식 자산 목록](assets/catalog.md) · [검증 기록](references/validation.md) · [색상·꽃 모티프 적용](references/brand-variants.md)
 
@@ -12,6 +12,13 @@
 GNU template을 적용해 아래 내용으로 A4 홍보문을 HTML로 만들어 주세요.
 [행사 제목, 일시, 장소, 연사, 참여 방법, 문의처를 입력]
 HTML, PDF, PNG로 모두 저장하고 글자와 로고가 잘리지 않는지 확인해 주세요.
+```
+
+```text
+GNU template으로 아래 세미나 내용을 A4 가로 플라이어로 만들어 주세요.
+[강연 제목, 연사·소속, 일시, 장소, 초록, 주최, 문의처를 입력]
+297 × 210mm 규격으로 HTML, PDF, PNG를 모두 저장해 주세요.
+청색 제목 띠와 흰 본문, 직사각형 테두리, 하단 학교 로고를 사용하세요.
 ```
 
 ```text
@@ -39,8 +46,9 @@ HTML, 전체 화면 PNG, 읽기용 PDF로 저장해 주세요.
 
 | 제작물 | 수정할 HTML | PDF | PNG | 내용만 바꾸기 |
 |---|---|---|---|---|
-| A4 홍보문 | [flyer.html](examples/flyer.html) | [PDF](examples/flyer.pdf) | [PNG](examples/flyer.png) | [JSON](data/flyer.json) |
-| A4 세미나 안내 | [seminar.html](examples/seminar.html) | [PDF](examples/seminar.pdf) | [PNG](examples/seminar.png) | [JSON](data/seminar.json) |
+| A4 세로 홍보문 | [flyer.html](examples/flyer.html) | [PDF](examples/flyer.pdf) | [PNG](examples/flyer.png) | [JSON](data/flyer.json) |
+| A4 세로 세미나 안내 | [seminar.html](examples/seminar.html) | [PDF](examples/seminar.pdf) | [PNG](examples/seminar.png) | [JSON](data/seminar.json) |
+| A4 가로 세미나 플라이어 | [seminar-landscape.html](examples/seminar-landscape.html) | [PDF](examples/seminar-landscape.pdf) | [PNG](examples/seminar-landscape.png) | [JSON](data/seminar.json) |
 | A0 학술포스터 | [poster.html](examples/poster.html) | [PDF](examples/poster.pdf) | [PNG](examples/poster.png) | [JSON](data/poster.json) |
 | 16:9 발표자료 | [slides.html](examples/slides.html) | [5쪽 PDF](examples/slides.pdf) | [표지](examples/slides-01.png) · [본문](examples/slides-03.png) | [JSON](data/slides.json) |
 | 반응형 웹페이지 | [web.html](examples/web.html) | [PDF](examples/web.pdf) | [전체 PNG](examples/web.png) | [JSON](data/web.json) |
@@ -72,6 +80,12 @@ python3 scripts/build.py flyer --data data/flyer.json --output out/flyer.html
 
 `flyer`를 `seminar`, `poster`, `slides`, `web`으로 바꾸고 같은 이름의 JSON을 선택하면 됩니다. 원본 예시는 보관하고 JSON 사본을 편집하는 것을 권장합니다. `--no-logo`를 추가하면 로고 그림 대신 대학명을 텍스트로 표시합니다.
 
+홍보문과 세미나 안내문의 기본 방향은 A4 세로입니다. **가로 버전은 `--orientation landscape`**를 지정하세요. 같은 세미나 JSON을 두 방향에 사용할 수 있습니다.
+
+```bash
+python3 scripts/build.py seminar --orientation landscape --data data/seminar.json --output out/seminar-landscape.html
+```
+
 JSON 빌더는 텍스트와 그림 자리부터 만드는 시작 도구입니다. 실제 그림·수식·표는 생성된 HTML을 편집해서 넣습니다. 그림을 `data:` URI로 포함하거나 로컬 파일로 연결할 수 있으며, 공유할 때는 이미지가 함께 전달되는지 확인합니다. 다시 빌드하면 HTML의 직접 수정 내용은 덮어쓰므로 수정본을 따로 보관하세요.
 
 ## HTML · PDF · PNG로 저장하기
@@ -87,6 +101,12 @@ npx playwright install chromium
 
 ```bash
 node scripts/export.mjs out/flyer.html out/flyer
+```
+
+가로 세미나 플라이어도 같은 방법으로 세 형식을 저장합니다. HTML에 지정한 A4 가로 규격이 PDF에 적용됩니다.
+
+```bash
+node scripts/export.mjs out/seminar-landscape.html out/seminar-landscape
 ```
 
 기본적으로 같은 폴더에 HTML·PDF·PNG가 생깁니다. 슬라이드는 `slides.pdf` 한 파일과 `slides-01.png`, `slides-02.png` …로 저장합니다. `--scale=2`로 PNG를 두 배 크기로 만들 수 있습니다.
@@ -115,4 +135,4 @@ PNG 기본값은 약 96dpi의 미리보기입니다. **대형 포스터 인쇄�
 
 ## 확인한 범위
 
-2026-10-04에 다섯 예시의 HTML·PDF·PNG를 실제 생성하고 화면과 PDF를 확인했습니다. A4 안내문 1쪽씩, A0 포스터 1쪽, 16:9 발표자료 5쪽과 페이지별 PNG를 점검했습니다. 웹페이지는 320·768·1360px 폭·200% 확대·키보드 이동을 확인했습니다. 실제 문장을 넣은 결과는 길이가 달라지므로 다시 확인해야 합니다. 다른 운영체제·Claude 환경에서 동일한 서체 출력까지 검증했다는 뜻은 아닙니다.
+2026-10-04에 여섯 예시의 HTML·PDF·PNG를 실제 생성하고 화면과 PDF를 확인했습니다. A4 세로 안내문 1쪽씩, A4 가로 세미나 플라이어 1쪽, A0 포스터 1쪽, 16:9 발표자료 5쪽과 페이지별 PNG를 점검했습니다. 웹페이지는 320·768·1360px 폭·200% 확대·키보드 이동을 확인했습니다. 실제 문장을 넣은 결과는 길이가 달라지므로 다시 확인해야 합니다. 다른 운영체제·Claude 환경에서 동일한 서체 출력까지 검증했다는 뜻은 아닙니다.

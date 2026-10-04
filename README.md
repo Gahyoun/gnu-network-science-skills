@@ -28,7 +28,7 @@ AI 에게 네트워크 과학을 물어보면 용어를 영어로 섞어 쓰거�
   Monte Carlo 자기상관·jackknife·data collapse 헬퍼(`kernel.py`)와 저널 지형도 내장.
   구조 측정은 `network-science-kr`, 구조 위의 과정과 상전이는 이 스킬입니다.
 
-- **`gnu-template`** — 경상국립대 학교테마의 A4 홍보문·세미나 안내문, 학술포스터, HTML 발표자료와 간단한 웹페이지. 기본 출력은 **HTML·PDF·PNG**입니다. [사용법·미리보기](templates/gnu-template/README.md) · [독립 DESIGN.md](templates/gnu-template/DESIGN.md) · [공식 로고·AI 자산](templates/gnu-template/assets/catalog.md). 지누·캐릭터는 제외합니다.
+- **`gnu-template`** — 경상국립대 학교테마의 A4 세로·가로 홍보문과 세미나 안내문, 학술포스터, HTML 발표자료와 간단한 웹페이지. 기본 출력은 **HTML·PDF·PNG**입니다. [사용법·미리보기](templates/gnu-template/README.md) · [독립 DESIGN.md](templates/gnu-template/DESIGN.md) · [공식 로고·AI 자산](templates/gnu-template/assets/catalog.md). 지누·캐릭터는 제외합니다.
 
 관련 레포: [`stem-journal-club-deck`](https://github.com/Gahyoun/stem-journal-club-deck) (논문 → 저널클럽 덱).
 
@@ -134,6 +134,7 @@ HTML·PDF·PNG로 모두 저장해줘.
 ```
 
 학술포스터·16:9 프레젠테이션·간단한 웹페이지도 같은 방식으로 요청합니다.
+세미나 플라이어는 ‘A4 가로(297 × 210mm)’를 지정하면 [가로 예시](templates/gnu-template/examples/seminar-landscape.html)를 적용합니다.
 **HTML로 제작하고 PDF로 export하는 방법을 권장**하며 PNG도 기본으로 저장합니다.
 Claude Code·Codex의 스킬 설치와 웹앱에 문서를 첨부하는 방법, 출력 예시는
 [GNU template README](templates/gnu-template/README.md)에 정리했습니다.

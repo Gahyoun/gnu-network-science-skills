@@ -17,7 +17,11 @@ def paragraphs(value):
     return ''.join('<p>' + text(s) + '</p>' for s in str(value).split('\n\n') if s.strip())
 
 
-def make_document(kind, data, no_logo=False):
+def make_document(kind, data, no_logo=False, orientation='portrait'):
+    if orientation not in ('portrait', 'landscape'):
+        raise ValueError('A4 방향은 portrait 또는 landscape여야 합니다.')
+    if orientation == 'landscape' and kind not in ('flyer', 'seminar'):
+        raise ValueError('가로 방향은 A4 홍보문·세미나 안내에만 적용합니다.')
     css = (ROOT / 'assets/theme.css').read_text(encoding='utf-8')
     # Data URI preserves the selected vector logo and makes each output portable.
     logo_path = ROOT / 'assets/derived/gnu-signature.svg'
@@ -28,7 +32,7 @@ def make_document(kind, data, no_logo=False):
         logo = '<strong class="institution">경상국립대학교</strong>'
     field = lambda name, default='': text(data.get(name, default))
     footer = '<footer class="paper-footer"><div><div class="organization">' + field('organization') + '</div><div class="small">' + field('contact') + '</div></div>' + logo + '</footer>'
-    size = 'A4 portrait'
+    size = 'A4 ' + orientation
     if kind in ('flyer', 'seminar'):
         meta = '<div class="meta"><span>' + field('date') + '</span><span>' + field('organization') + '</span></div>' if kind == 'seminar' else ''
         title = '<header class="band">' + meta + '<h1>' + field('title') + '</h1>'
@@ -41,12 +45,20 @@ def make_document(kind, data, no_logo=False):
             for label, name in [('주제','subject'),('연사','speaker'),('일시','date'),('장소','venue'),('대상','audience'),('참여','participation')]:
                 if data.get(name):body += '<dt>' + label + '</dt><dd>' + field(name) + '</dd>'
             body += '</dl><div class="notice">' + paragraphs(data.get('body','')) + '</div>'
+        elif orientation == 'landscape':
+            body += '<div class="seminar-layout"><div class="seminar-abstract">' + paragraphs(data.get('body',''))
+            if data.get('references'):body += '<p class="references">' + field('references') + '</p>'
+            body += '</div><aside class="seminar-facts" aria-label="참석 안내"><h2>참석 안내</h2><dl>'
+            for label, name in [('일시','date'),('장소','venue'),('대상','audience'),('참여','participation')]:
+                if data.get(name):body += '<dt>' + label + '</dt><dd>' + field(name) + '</dd>'
+            body += '</dl></aside></div>'
         else:
             body += paragraphs(data.get('body',''))
             if data.get('references'):body += '<p class="references">' + field('references') + '</p>'
             body += '<div class="notice"><strong>일시·장소</strong><p>' + field('date') + '<br>' + field('venue') + '</p></div>'
         body += '</div>'
-        content = '<main class="paper a4" data-export-page><div class="paper-frame">' + title + body + footer + '</div></main>'
+        paper_class = 'paper a4' + (' landscape' if orientation == 'landscape' else '')
+        content = '<main class="' + paper_class + '" data-export-page><div class="paper-frame">' + title + body + footer + '</div></main>'
     elif kind == 'poster':
         size = '841mm 1189mm'
         head = '<header class="poster-head">' + logo + '<div class="event">' + field('event') + '</div><h1>' + field('title') + '</h1><p class="authors">' + field('authors') + '</p><p class="affiliation">' + field('affiliation') + '</p></header>'
@@ -92,11 +104,16 @@ def main():
     p.add_argument('--data', type=Path)
     p.add_argument('--output', type=Path)
     p.add_argument('--no-logo', action='store_true', help='Use text institution identity')
+    p.add_argument('--orientation', choices=['portrait','landscape'], default='portrait',
+                   help='A4 flyer/seminar direction (default: portrait)')
     a=p.parse_args()
+    if a.orientation == 'landscape' and a.kind not in ('flyer','seminar'):
+        p.error('--orientation landscape는 flyer 또는 seminar에서 사용하세요.')
     data=json.loads((a.data or ROOT/'data'/f'{a.kind}.json').read_text(encoding='utf-8'))
-    out=a.output or ROOT/'examples'/f'{a.kind}.html'
+    suffix = '-landscape' if a.orientation == 'landscape' else ''
+    out=a.output or ROOT/'examples'/f'{a.kind}{suffix}.html'
     out.parent.mkdir(parents=True,exist_ok=True)
-    out.write_text(make_document(a.kind,data,a.no_logo),encoding='utf-8')
+    out.write_text(make_document(a.kind,data,a.no_logo,a.orientation),encoding='utf-8')
     print(out)
 
 

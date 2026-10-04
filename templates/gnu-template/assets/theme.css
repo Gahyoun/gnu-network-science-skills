@@ -7,3 +7,27 @@
 /* Local presentation viewer; all pages remain available for print/export. */
 .deck-controls{display:flex;gap:12px;align-items:center}.deck-controls button{font:inherit;border:1px solid #aaa;background:#fff;color:#222;padding:8px 14px;cursor:pointer;border-radius:2px}.deck-controls button:disabled{color:#666;cursor:default}.present-controls{display:none}.presenting{background:#222;overflow:hidden}.presenting .deck{height:100vh;padding:0;display:flex;align-items:center}.presenting .slide{width:min(100vw,calc(100vh * 16 / 9));padding:4.6cqw 5cqw;margin:0 auto}.presenting .slide.cover{padding:9cqw 9.7cqw}.presenting .slide:not(.current){display:none}.presenting .deck-controls{position:fixed;z-index:10;bottom:0;left:50%;transform:translateX(-50%);padding:8px;background:#fff;margin:0;opacity:.25;white-space:nowrap}.presenting .deck-controls:hover,.presenting .deck-controls:focus-within{opacity:1}.presenting #present{display:none}.presenting .present-controls{display:flex;gap:8px;align-items:center}
 @media print{.deck-controls{display:none!important}.presenting{overflow:visible}.presenting .deck{height:auto;display:block}.presenting .slide{display:flex!important;width:1280px;height:720px;padding:59px 64px;margin:0}.presenting .slide.cover{padding:115px 124px}.site{min-height:0;font-size:15px}.site .header-row{min-height:72px}.site h1{font-size:28px;margin-bottom:20px}.site h2{font-size:21px;margin:24px 0 12px}.site th,.site td{padding:12px}.site-footer{margin-top:28px;padding:16px 0}.site .breadcrumb{margin:16px 0}}
+
+/* A4 landscape flyer: shared university identity, wide abstract and event details. */
+.paper.a4.landscape{width:297mm;min-height:210mm;padding:10mm}
+.landscape .band{padding:6mm 8mm}
+.landscape .band .meta{font-size:10pt;margin-bottom:3mm}
+.landscape .band h1{font-size:25pt;line-height:1.25;overflow-wrap:anywhere}
+.landscape .band .speaker{font-size:13pt;margin-top:3mm}
+.landscape .paper-body{padding:7mm 8mm}
+.seminar-layout{display:grid;grid-template-columns:minmax(0,1fr) 61mm;gap:9mm;align-items:start}
+.seminar-abstract p{font-size:12pt;line-height:1.75}
+.seminar-abstract p:last-child{margin-bottom:0}
+.seminar-facts{border-left:1px solid var(--gnu-line);padding-left:7mm}
+.seminar-facts h2{font-size:13pt;margin-bottom:5mm}
+.seminar-facts dl{margin:0;font-size:11pt;line-height:1.6}
+.seminar-facts dt{font-weight:700;color:var(--gnu-action);margin-top:4mm}
+.seminar-facts dt:first-child{margin-top:0}
+.seminar-facts dd{margin:1mm 0 0;overflow-wrap:anywhere}
+.landscape .references{font-size:9pt!important;margin-top:5mm}
+.landscape .paper-footer{padding:4mm 8mm;align-items:center}
+.landscape .paper-footer .organization{font-size:10pt}
+.landscape .paper-footer .small{font-size:9pt}
+.landscape .paper-footer .logo{width:52mm}
+.landscape .details{grid-template-columns:18mm 1fr 18mm 1fr;font-size:13pt;gap:4mm}
+.landscape .notice{margin-top:6mm;padding-top:4mm}
