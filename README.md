@@ -30,6 +30,8 @@ AI 에게 네트워크 과학을 물어보면 용어를 영어로 섞어 쓰거�
 
 - **`gnu-template`** — 경상국립대 학교테마의 A4 세로·가로 홍보문과 세미나 안내문, A0 학술포스터, 16:9 HTML 발표자료, 대학 홈페이지형 웹페이지. 학교 로고·지정서체(포함)·학과 안내문 양식을 따르고 지누 캐릭터를 규칙에 맞게 넣을 수 있습니다. 출력은 **HTML·PDF·PNG**. [사용법·미리보기](templates/gnu-template/README.md) · [독립 DESIGN.md](templates/gnu-template/DESIGN.md) · [공식 로고·AI 자산](templates/gnu-template/assets/catalog.md).
 
+**복원 웹교재** — 정기수 교수님의 「물리의 이해」 [양자통계·응용 8쪽](projects/physics-restoration/README.md)을 GNU 홈페이지형 디자인, 사전 컴파일 LaTeX, HTML 인터랙션으로 복원했습니다. 원저자·원본 출처와 SWF 분석 근거를 기록했습니다.
+
 관련 레포: [`stem-journal-club-deck`](https://github.com/Gahyoun/stem-journal-club-deck) (논문 → 저널클럽 덱).
 
 ---
