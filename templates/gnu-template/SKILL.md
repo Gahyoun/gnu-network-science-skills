@@ -1,34 +1,43 @@
 ---
 name: gnu-template
-description: 경상국립대학교 학교테마로 A4 세로·가로 홍보문과 세미나 안내문, 학술포스터, HTML 프레젠테이션, 간단한 웹페이지를 제작한다. GNU 테마·학교테마 요청이나 제공된 HTML 템플릿 수정에 사용하며 기본 결과는 HTML·PDF·PNG다.
+description: 경상국립대학교 학교테마(로고·GNU Blue·Noto Sans KR/SUIT·학과 안내문 양식·지누 캐릭터)로 A4 세로·가로 홍보문·세미나 안내문, A0 학술포스터, 16:9 HTML 발표자료, 대학 홈페이지형 웹페이지를 만들고 HTML·PDF·PNG로 저장한다. "GNU 테마", "학교테마", "경상국립대 양식", "학과 세미나 포스터", "학회 포스터 학교 로고로", "지누 넣어서" 같은 요청이나 이 폴더의 예시 HTML을 고칠 때 사용한다.
 ---
 
 # GNU template
 
-이 폴더의 `DESIGN.md`를 읽고 사용자의 콘텐츠와 매체에 적용한다. 표준 Markdown·HTML·CSS·JSON으로 구성된 스킬이며 특정 AI 제품의 API나 전용 도구에 의존하지 않는다. 설치·호출 방법은 호스트에 따라 다르다.
+`DESIGN.md`가 디자인 기준이다. 작업 전에 읽고, 매체에 해당하는 7장과 2장(쓰지 않는 표현)을 지킨다. 표준 Markdown·HTML·CSS·JSON·Python·Node 파일만 쓰며 특정 AI 제품이나 유료 API에 의존하지 않는다.
 
-## 작업 흐름
+## 작업 순서
 
-1. 사용자 요청에서 홍보문, 세미나 안내, 연구 포스터, 발표자료, 웹페이지를 고른다. A4는 방향이 없으면 세로 210 × 297mm, 가로 요청이면 297 × 210mm로 구성한다. 크기·내용이 충분하면 바로 작업한다. 미정인 필수 정보는 확인하고, 예시 파일의 대괄호 항목을 실제 사실로 채우기 전 외부 공개하지 않는다.
-2. `examples/flyer.html`, `seminar.html`, `seminar-landscape.html`, `poster.html`, `slides.html`, `web.html` 중 가장 가까운 파일을 복사해서 편집한다. 가로 세미나에는 `seminar-landscape.html`을 선택하며 JSON 빌더의 `flyer`·`seminar`에는 `--orientation landscape`를 사용할 수 있다. A4 홍보문·세미나 안내의 세로·가로형에는 공식 FLY WITH G.N.U 도안과 학교 로고를 하단에 배치한다. 웹 제작은 먼저 `references/web-reference.md`를 읽고 대학 VI 하위 페이지의 흰 헤더, 짙은 현재 위치 띠, 좌측 제목, 넓은 직사각형 하위 메뉴, 항목명·본문 행 구성을 적용한다. 웹 기본형에는 사진을 넣지 않는다. 실제 원문 콘텐츠만 사용한다. 디자인을 새로 생성하기보다 서체·청색 구분·정렬·표·여백의 연속성을 유지한다.
-3. 후크 메시지, 말풍선, 장식 버블, 둥근 카드 반복을 추가하지 않는다. 지누와 다른 캐릭터는 사용하지 않는다. 연구 결론·수치·소속·연락처를 만들어 넣지 않는다.
-4. 학교 로고·공식 그래픽 모티프가 필요하면 `assets/catalog.md`와 `references/brand-variants.md`에서 도안을 선택한다. `assets/official/`의 원본 비례·색상·조합을 유지한다. A4 기본 FLY WITH G.N.U 도안은 `assets/derived/fly-with-gnu.svg`를 사용한다. 사용자가 장식을 요청하면 실제 제공되었거나 패키지에 있는 승인된 학교 이미지·공식 모티프를 필요한 여백에만 배치할 수 있다. A4 JSON의 `decoration_image`와 `decoration_alt`를 사용하거나 HTML을 직접 편집한다. 여백을 모두 채우거나 연구 그림을 밀어내지 않는다. 새로운 로고를 그리거나 CSS 필터로 변형하지 않는다.
-5. 기본 결과는 수정 가능한 `.html`, 같은 내용을 담은 `.pdf`, `.png`다. 프레젠테이션은 하나의 다쪽 PDF와 슬라이드별 PNG로 저장한다. 웹페이지는 전체 화면 PNG와 읽기용 PDF를 함께 저장한다. PNG는 미리보기 기본값이며 인쇄용 고해상도가 필요하면 실제 규격·해상도를 별도로 정한다.
-6. 먼저 HTML을 확인하고 export한다. `node scripts/export.mjs input.html output-dir`를 사용할 수 있다. 실행 도구가 없으면 호스트의 로컬 브라우저·PDF 도구를 이용한다. `python3 scripts/assets.py`로 공식 원본 해시를 확인할 수 있다. 내보내기에 실패했다면 HTML을 보존하고 실패한 형식과 이유를 명확히 알린다. 존재하지 않는 파일을 완성했다고 주장하지 않는다.
-7. 본문 넘침·잘림·폰트·로고·이미지, PDF 페이지 수·규격, PNG를 확인한다. 웹은 좁은 화면·키보드·색대비를 추가로 확인한다.
+1. **매체 고르기.** 홍보문(`flyer`), 공식 서식형 안내문(`flyer` + `style: "form"`), 세미나 안내(`seminar`), 학술포스터(`poster`), 발표자료(`slides`), 웹페이지(`web`). A4는 방향 지정이 없으면 세로, ‘가로’면 `--orientation landscape`(297×210mm). 웹은 먼저 `references/web-reference.md`를 읽는다.
+2. **사실 확인.** 제목·일시·장소·연사·저자·소속·연락처·연구 내용은 사용자가 준 것만 쓴다. 빠진 항목은 `[입력 항목]`으로 남기고 마지막에 목록으로 알린다. 묻지 않고 지어내지 않는다.
+3. **내용 파일 만들기.** `data/<매체>.json`을 복사해 내용을 채운다. 굵게는 `**핵심어**`, 줄바꿈은 `\n`, 문단은 `\n\n`. 실제 그림·QR은 `"src": "경로"`로 넣는다.
+4. **빌드.** `python3 scripts/build.py <매체> --data <json> --output out/<이름>.html`. 폰트·로고·그림이 들어간 HTML 한 파일이 생긴다. A4에는 FLY WITH G.N.U가 하단 왼쪽에 기본으로 들어간다(`fly_with_gnu: false`로 끔). 지누는 `--character <PNG·SVG>`(인쇄물만, 규칙: DESIGN.md 6장). 학교 이미지·꽃 모티프 장식은 요청받았을 때만 `decoration_image`.
+5. **세부 수정.** 표·수식·그림 배치처럼 JSON으로 안 되는 부분만 생성된 HTML을 직접 고친다. `theme.css`의 클래스와 토큰을 재사용하고 새 장식을 만들지 않는다.
+6. **출력.** `node scripts/export.mjs out/<이름>.html out/` → HTML·PDF·PNG. 실패 메시지(글자 넘침, 종이 밖, 그림이 글자를 가림, 외부 리소스)를 고친 뒤 다시 실행한다. 실행 도구가 없으면 HTML만 전달하고 그 사실을 알린다.
+7. **확인과 보고.** PNG를 직접 열어 본다. 실제 만든 파일 경로, 비워 둔 항목, 대체한 폰트나 실패한 형식을 짧게 보고한다. 만들지 않은 파일을 만들었다고 말하지 않는다.
+
+## 지킬 것
+
+- 로고·모티프·캐릭터는 `assets/` 원본에서 고른다. 늘이기·재채색·필터·생성형 재작화 금지. 견본 시트 전체를 붙이지 않는다. 새 도안이 필요하면 `scripts/derive_svg.py`로 원본 벡터를 잘라 낸다.
+- 캐릭터 원본이 `assets/character/official/`에 없으면 `python3 scripts/assets.py --fetch-character`(학교 사이트 접속 필요)를 안내한다. 화면 캡처나 비슷하게 그린 그림으로 대신하지 않는다.
+- 작은 글자에 GNU Blue를 쓰지 않는다(대비 3.04:1). 흰 글자 띠는 `--ui-banner`, 링크·선택은 `--ui-action`.
+- 외부 CDN 폰트·이미지에 의존하지 않는다. 빌드 결과는 오프라인에서 열려야 한다.
 
 ## 자료
 
-- `DESIGN.md`: 다른 AI에도 첨부할 수 있는 독립 디자인 프롬프트.
-- `README.md`: 어떻게 사용하는지, 설치·요청문·내보내기.
-- `references/prompts.md`: 매체별 복사 가능한 요청문.
-- `references/web-reference.md`: 대학 VI 하위 페이지를 기준으로 한 웹 구성·반응형 적용 지침.
-- `references/source-notes.md`: 공식 규정·웹 관찰값·자체 제안의 구분.
-- `references/brand-variants.md`: 색상활용·모티프C·장미·철쭉 도안의 적용.
-- `references/asset-usage.md`: 로고·AI 원본의 선택과 출력.
-- `assets/theme.css`: 재사용 가능한 스타일. 학교 공식 CSS 전체를 복제한 파일이 아니다.
-- `assets/manifest.json`: 공식 자산의 출처·다운로드 주소·SHA-256.
-- `data/*.json`, `scripts/build.py`: 내용만 바꾸어 독립 HTML을 만드는 선택 도구.
-- `scripts/export.mjs`: 로컬 Chromium을 이용한 HTML·PDF·PNG 출력.
+| 경로 | 내용 |
+|---|---|
+| `DESIGN.md` | 디자인 지침 전문. 다른 AI에 단독으로 첨부 가능 |
+| `README.md` | 사람용 사용법·설치·요청문 |
+| `examples/` | 매체별 예시 7종 HTML·PDF·PNG(가로 세미나 포함, 폰트는 `../assets/fonts` 연결) |
+| `data/*.json` | 매체별 내용 틀 |
+| `assets/theme.css` | 토큰과 레이아웃 클래스 |
+| `assets/derived/` | HTML용 로고 SVG 4종 (웹 머리글은 `assets/official/gnu-web-logo.png`) |
+| `assets/official/` | 대학 공개 VI 원본(AI·PDF·PNG·JPG), 출처·SHA-256은 `manifest.json` |
+| `assets/character/` | 지누·누누 원본 자리와 사용법 |
+| `assets/fonts/` | Noto Sans KR·SUIT·SUITE (OFL) |
+| `references/` | 요청문 예시, 웹 기본형(`web-reference.md`), 근거 기록, 자산 사용, 색·꽃 모티프, 검증 기록 |
+| `scripts/` | `build.py` 빌드, `export.mjs` 출력·검사, `assets.py` 원본 검증·수집, `derive_svg.py` 도안 추출, `package.py` 배포 ZIP |
 
-폰트 파일과 첨부된 개인 연구자료는 배포하지 않는다. 폰트가 없으면 사용 가능한 한글 산세리프로 대체하고 대체 사실을 설명한다. 로고·교화·모티프에 대한 권리는 원 권리자에게 있으며 이 스킬의 라이선스가 자산 이용조건을 변경하지 않는다. 기존 프로젝트·도구·사용자 조건을 유지하고 사용자 요청 범위에서 작업한다.
+로고·캐릭터·교화의 권리는 경상국립대학교에 있다. 이 스킬의 라이선스는 그 이용 허락이 아니다. 대학 명의 공식 홍보물은 담당 부서 확인을 거친다고 안내한다.

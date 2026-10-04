@@ -1,147 +1,118 @@
 # GNU template
 
-경상국립대학교 학교테마로 A4 세로·가로 홍보문과 세미나 안내문, 학술포스터, 프레젠테이션, 간단한 웹페이지를 만드는 비공식 제작 도구입니다. 기본 결과는 **HTML·PDF·PNG 세 형식**입니다. 지누와 캐릭터는 포함하지 않습니다.
+경상국립대학교 학교테마로 A4 세로·가로 홍보문과 세미나 안내문, A0 학술포스터, 16:9 HTML 발표자료, 대학 홈페이지형 웹페이지를 만드는 도구입니다. 결과는 **HTML·PDF·PNG**로 저장합니다. 교내 구성원의 학술·공익 목적 제작을 돕는 비공식 자료입니다.
 
-[디자인 지침](DESIGN.md) · [매체별 요청문](references/prompts.md) · [GNU 웹 디자인 참고](references/web-reference.md) · [공식 자산 목록](assets/catalog.md) · [검증 기록](references/validation.md) · [색상·꽃 모티프 적용](references/brand-variants.md)
+[디자인 지침 DESIGN.md](DESIGN.md) · [요청문 예시](references/prompts.md) · [공식 자산 목록](assets/catalog.md) · [캐릭터 지누](assets/character/README.md) · [검증 기록](references/validation.md)
 
-## 어떻게 사용하나요
+| A4 세미나 안내 | A4 홍보문 | 공식 서식형 안내문 |
+|---|---|---|
+| ![세미나 안내](examples/seminar.png) | ![홍보문](examples/flyer.png) | ![서식형](examples/notice-form.png) |
 
-이 폴더를 사용할 수 있는 AI에게 실제 내용과 함께 아래처럼 요청하세요. **HTML로 제작하고 PDF로 export하는 방법을 권장합니다.** PNG도 함께 저장합니다.
+| A4 가로 세미나 안내 | 16:9 발표 표지 |
+|---|---|
+| ![가로 세미나](examples/seminar-landscape.png) | ![발표 표지](examples/slides-01.png) |
+
+A0 포스터·발표 본문·웹페이지 미리보기: [poster.png](examples/poster.png) · [slides-03.png](examples/slides-03.png) · [web.png](examples/web.png)
+
+## 무엇이 들어 있나
+
+- **학교 양식**: 학과 세미나 안내문의 청색 제목 띠와 하단 FLY WITH G.N.U·시그니처+학과명(세로·가로), 공식 안내문 서식(그라데이션 테두리·띠), 테두리 선이 GNU 심벌로 이어지는 발표·포스터 표지, 대학 VI 하위 페이지형 웹(흰 헤더·짙은 현재 위치 띠·직사각형 하위 메뉴·항목별 행).
+- **공식 자산**: 대학 공개 VI 원본(AI·PDF·PNG), 홈페이지 헤더 로고, 그중 필요한 로고를 원본 벡터 그대로 잘라 낸 SVG 4종.
+- **서체**: Noto Sans KR(국문 지정서체), SUIT(영문 지정서체), SUITE(홈페이지 메뉴·제목). 모두 OFL이며 HTML에 포함되어 어느 PC에서나 같은 모양으로 출력됩니다.
+- **캐릭터 지누·누누**: 공식 페이지에서 원본을 받아 오는 명령과 배치 자리, 사용 규칙. [아래 참고](#지누-캐릭터)
+- **AI 티 줄이기**: 후크 문구·말풍선·둥근 카드·그라데이션 장식을 쓰지 않는 규칙과, 글자 넘침·그림 겹침을 잡는 출력 검사.
+
+## AI에게 맡기기
+
+### Claude Code · Codex · Gemini CLI
+
+저장소 [루트 README](../../README.md)의 설치 블록을 실행하면 이 폴더가 각 도구의 스킬 폴더로 복사됩니다. 새 세션에서 호출합니다.
+
+- Claude Code: `/gnu-template`
+- Codex: `$gnu-template`
+- Gemini CLI: 자연어로 “GNU template으로 …”
 
 ```text
-GNU template을 적용해 아래 내용으로 A4 홍보문을 HTML로 만들어 주세요.
-[행사 제목, 일시, 장소, 연사, 참여 방법, 문의처를 입력]
-HTML, PDF, PNG로 모두 저장하고 글자와 로고가 잘리지 않는지 확인해 주세요.
+/gnu-template 아래 내용으로 물리학과 세미나 A4 안내문을 만들어 줘. HTML·PDF·PNG로 저장해 줘.
+일시·장소: [연월일(요일) 시각, 건물-호실]
+제목: [강연 제목]
+연사: [소속 · 이름]
+초록: [원문 붙여넣기]
+문의: [담당자 · 이메일]
 ```
 
-```text
-GNU template으로 아래 세미나 내용을 A4 가로 플라이어로 만들어 주세요.
-[강연 제목, 연사·소속, 일시, 장소, 초록, 주최, 문의처를 입력]
-297 × 210mm 규격으로 HTML, PDF, PNG를 모두 저장해 주세요.
-청색 제목 띠와 흰 본문, 직사각형 테두리, 하단 학교 로고를 사용하세요.
-```
+### Claude 웹앱(claude.ai)
 
-```text
-GNU template으로 첨부 연구 내용을 A0 세로 학술포스터로 만들어 주세요.
-제공된 제목·저자·그림·수치를 사용하고 HTML, PDF, PNG로 저장해 주세요.
-```
-
-```text
-GNU template으로 첨부 원고의 16:9 HTML 프레젠테이션을 만들어 주세요.
-편집 가능한 HTML, 하나의 다쪽 PDF, 슬라이드별 PNG로 저장해 주세요.
-```
-
-```text
-GNU template으로 우리 연구실의 간단한 웹페이지를 만들어 주세요.
-[소개, 일정, 자료 링크, 문의처를 입력]
-대학 시각 이미지(VI) 하위 페이지를 참고해 흰 헤더, 짙은 현재 위치 띠,
-좌측 제목, 직사각형 하위 메뉴, 항목명·본문 행으로 구성해 주세요.
-실제 페이지 메뉴를 사용하고 인쇄·섹션 이동이 동작하도록 해 주세요.
-모바일에서도 확인해 주세요.
-HTML, 전체 화면 PNG, 읽기용 PDF로 저장해 주세요.
-```
-
-웹페이지는 제공된 GNU VI 화면의 넓은 흰 헤더와 정보 안내 구성을 기본 참고로 삼습니다. **사진 없이 흰 헤더와 짙은 현재 위치 띠가 이어지는 구성**이 기본입니다. 연구실·행사·자료실의 실제 메뉴에 맞게 바꾸며, 대학 전체 메뉴나 동작하지 않는 로그인·검색을 붙이지 않습니다. 예시는 대학 웹 원본 로고를 사용하고 `data/web.json`의 `banner_image`는 `null`입니다. 사진 배너를 명시적으로 요청한 경우에만 제공한 로컬 이미지 경로를 지정합니다. 자세한 적용 방법은 [GNU 웹 디자인 참고](references/web-reference.md)에 있습니다.
-
-‘회색 테마’, ‘공식 장미 프레임’, ‘철쭉 모티프’도 요청할 수 있습니다. 공식 자산의 완성 도안을 선택해 적용하며, 로고를 새로 그리거나 임의 채색하지 않습니다. 흰 바탕·청색 선이 기본형입니다.
-
-A4 홍보문과 세미나 안내의 세로·가로형에는 **공식 FLY WITH G.N.U 도안**을 하단에 기본으로 넣습니다. 공식 원본에서 선택해 출력한 [fly-with-gnu.svg](assets/derived/fly-with-gnu.svg)를 왼쪽, 학교 로고를 오른쪽에 별도로 두고 문의처는 아래에 배치합니다. 추가 장식을 요청하면 실제 제공한 학교 이미지나 패키지의 공식 모티프를 여백 일부에 배치할 수 있습니다. 지누·캐릭터는 제외하며, 본문과 연구 그림을 가리거나 모든 여백을 장식으로 채우지 않습니다.
-
-예시의 `[입력 항목]`은 실제 사실로 바꿔 사용하세요. AI가 일정·연구 결과·연락처를 추측하게 하지 마세요. 그림·수식·QR이 필요하면 원본 그림이나 실제 주소를 함께 제공합니다.
-
-## 예시 파일
-
-| 제작물 | 수정할 HTML | PDF | PNG | 내용만 바꾸기 |
-|---|---|---|---|---|
-| A4 세로 홍보문 | [flyer.html](examples/flyer.html) | [PDF](examples/flyer.pdf) | [PNG](examples/flyer.png) | [JSON](data/flyer.json) |
-| A4 세로 세미나 안내 | [seminar.html](examples/seminar.html) | [PDF](examples/seminar.pdf) | [PNG](examples/seminar.png) | [JSON](data/seminar.json) |
-| A4 가로 세미나 플라이어 | [seminar-landscape.html](examples/seminar-landscape.html) | [PDF](examples/seminar-landscape.pdf) | [PNG](examples/seminar-landscape.png) | [JSON](data/seminar.json) |
-| A0 학술포스터 | [poster.html](examples/poster.html) | [PDF](examples/poster.pdf) | [PNG](examples/poster.png) | [JSON](data/poster.json) |
-| 16:9 발표자료 | [slides.html](examples/slides.html) | [5쪽 PDF](examples/slides.pdf) | [표지](examples/slides-01.png) · [본문](examples/slides-03.png) | [JSON](data/slides.json) |
-| 반응형 웹페이지 | [web.html](examples/web.html) | [PDF](examples/web.pdf) | [전체 PNG](examples/web.png) | [JSON](data/web.json) |
-
-![A4 홍보문 미리보기](examples/flyer.png)
-
-GitHub의 **Code → Download ZIP**으로 저장소를 내려받아 `templates/gnu-template` 폴더를 사용하면 됩니다.
-
-HTML은 GitHub 화면에서 실행되지 않습니다. 저장소를 내려받아 해당 파일을 브라우저로 여세요. 각 예시는 스타일과 해당 원본 로고를 파일 안에 넣어 **단일 HTML 파일만으로 오프라인 열기**가 가능합니다. 발표자료에서는 ‘발표 보기’를 누른 뒤 방향키로 이동하고 Esc로 전체 목록에 돌아옵니다.
-
-## Claude · Codex와 다른 AI
-
-`SKILL.md`와 참조 자료는 표준 파일입니다. 특정 모델·유료 API·MCP를 요구하지 않습니다. 자동 호출과 실제 PDF·PNG 출력에는 해당 호스트의 파일 접근·실행 도구가 필요합니다.
-
-- **Claude Code:** 이 `gnu-template` 폴더 전체를 `~/.claude/skills/gnu-template` 또는 프로젝트의 `.claude/skills/gnu-template`에 복사하고 `/gnu-template`으로 호출합니다. [공식 안내](https://code.claude.com/docs/en/skills)
-- **Codex:** 폴더 전체를 `~/.agents/skills/gnu-template` 또는 프로젝트의 `.agents/skills/gnu-template`에 복사하고 `$gnu-template`으로 호출합니다. [공식 안내](https://learn.chatgpt.com/docs/build-skills)
-- **Claude 웹앱:** 사용자 스킬 업로드가 가능한 환경에서는 이 폴더를 ZIP으로 압축해 스킬로 업로드합니다. 제공 여부는 계정·조직 설정을 따릅니다. [공식 안내](https://support.claude.com/en/articles/12512180-use-skills-in-claude)
-- **프롬프트 첨부만 가능한 AI:** `DESIGN.md`와 사용할 예시 HTML을 첨부합니다. 로고·모티프가 필요하면 해당 파일도 전달합니다. Markdown만으로 모든 자산이 자동 전달되지는 않습니다.
-
-저장소 전체 설치는 [루트 README](../../README.md)의 명령을 사용하세요. 별도 스킬로 압축할 때는 `SKILL.md`가 압축 폴더 최상위에 있는 `gnu-template` 폴더를 포함합니다. `node_modules`나 개인 작업 파일은 넣지 않습니다.
-
-## 내용을 직접 바꾸기
-
-브라우저에서 확인할 HTML만 만들 때는 Python 3.9 이상만 있으면 됩니다. 이 폴더에서 실행하세요.
+스킬 업로드가 켜진 계정이면 ZIP으로 올립니다. 설정 위치와 용량 제한은 [Claude 도움말](https://support.claude.com/en/articles/12512180-use-skills-in-claude)을 따릅니다.
 
 ```bash
-python3 scripts/build.py flyer --data data/flyer.json --output out/flyer.html
+python3 scripts/package.py --lite   # dist/gnu-template-lite.zip (Illustrator 원본·예시 PDF 제외)
+python3 scripts/package.py          # dist/gnu-template.zip (전체)
 ```
 
-`flyer`를 `seminar`, `poster`, `slides`, `web`으로 바꾸고 같은 이름의 JSON을 선택하면 됩니다. 원본 예시는 보관하고 JSON 사본을 편집하는 것을 권장합니다. `--no-logo`를 추가하면 학교 로고와 FLY 도안을 생략하고 대학명을 텍스트로 표시합니다. A4 JSON의 `fly_with_gnu`만 `false`로 바꾸면 학교 로고는 유지하면서 FLY 도안만 생략할 수 있습니다.
+스킬 업로드가 안 되면 **프로젝트 지식**이나 대화 첨부로 `DESIGN.md`와 가장 가까운 `examples/*.html`을 넣고 요청합니다. 이 경우 AI가 폰트·로고 파일을 직접 읽지 못하므로 결과 HTML을 이 폴더의 `examples/`에 저장해서 열거나 `node scripts/export.mjs`로 출력하면 학교 로고와 폰트가 적용됩니다.
 
-홍보문과 세미나 안내문의 기본 방향은 A4 세로입니다. **가로 버전은 `--orientation landscape`**를 지정하세요. 같은 세미나 JSON을 두 방향에 사용할 수 있습니다.
+### 다른 AI 채팅
+
+`DESIGN.md` 한 파일만 붙여도 색·서체·배치 규칙과 최소 HTML 골격(8장)이 전달됩니다. 로고는 텍스트 자리로 나오므로 마지막에 `assets/derived/gnu-signature.svg`로 바꿉니다.
+
+요청문은 실제 정보로 채웁니다. 일정·연구 결과·연락처를 AI가 추측하게 두지 마세요. 예시는 [references/prompts.md](references/prompts.md)에 매체별로 있습니다.
+
+## 직접 만들기
+
+필요한 것: Python 3.9 이상(빌드), Node.js 20 이상과 Playwright(PDF·PNG 출력).
 
 ```bash
-python3 scripts/build.py seminar --orientation landscape --data data/seminar.json --output out/seminar-landscape.html
+cd templates/gnu-template
+cp data/seminar.json my-seminar.json          # 내용을 편집
+python3 scripts/build.py seminar --data my-seminar.json --output out/seminar.html
+npm install && npx playwright install chromium   # 처음 한 번
+node scripts/export.mjs out/seminar.html out/  # seminar.html · seminar.pdf · seminar.png
 ```
 
-JSON 빌더는 텍스트와 그림 자리부터 만드는 시작 도구입니다. 실제 그림·수식·표는 생성된 HTML을 편집해서 넣습니다. 그림을 `data:` URI로 포함하거나 로컬 파일로 연결할 수 있으며, 공유할 때는 이미지가 함께 전달되는지 확인합니다. 다시 빌드하면 HTML의 직접 수정 내용은 덮어쓰므로 수정본을 따로 보관하세요.
+| 매체 | 명령의 매체 이름 | 내용 틀 |
+|---|---|---|
+| A4 홍보문 | `flyer` | [data/flyer.json](data/flyer.json) |
+| A4 공식 서식형 안내문 | `flyer` | [data/notice-form.json](data/notice-form.json) |
+| A4 세미나 안내 | `seminar` | [data/seminar.json](data/seminar.json) |
+| A4 가로 세미나 안내 | `seminar --orientation landscape` | [data/seminar.json](data/seminar.json) |
+| A0 학술포스터 | `poster` | [data/poster.json](data/poster.json) |
+| 16:9 발표자료 | `slides` | [data/slides.json](data/slides.json) |
+| 웹페이지 | `web` | [data/web.json](data/web.json) |
 
-홍보문·세미나에 추가 장식을 넣고 싶다면 JSON의 `decoration_image`에 실제 SVG·PNG·JPG 등 로컬 이미지 경로를, `decoration_alt`에 설명을 적습니다. 이 스킬 폴더 기준 상대 경로나 절대 경로를 사용할 수 있습니다. 기본값은 `decoration_image: null`, `decoration_alt: ""`이며 순수 장식이면 설명은 빈 문자열로 둡니다. 공식 AI·PDF 도안 시트는 필요한 완성 도안을 출력용 이미지로 내보낸 뒤 사용합니다. 이미지가 지정되지 않으면 추가 장식을 넣지 않습니다. 포함된 원본이나 전달한 파일에 없는 그림이 자동으로 생기는 기능은 아닙니다.
+내용 틀 작성법:
 
-## HTML · PDF · PNG로 저장하기
+- 굵게 `**핵심어**`, 줄바꿈 `\n`, 문단 나눔 `\n\n`. 다른 HTML은 글자 그대로 표시됩니다.
+- 홍보문의 `items`는 원하는 만큼 `{"label": "주제", "value": "…"}`를 추가·삭제합니다.
+- A4는 `--orientation landscape`(또는 JSON `"orientation": "landscape"`)로 가로 297×210mm가 됩니다. 세미나 가로형은 오른쪽에 ‘참석 안내’ 칸(일시·장소·대상·참여)이 생깁니다.
+- A4 하단의 FLY WITH G.N.U는 기본으로 들어갑니다. 빼려면 `"fly_with_gnu": false`.
+- 학교 이미지·꽃 모티프 장식은 요청받았을 때만 `"decoration_image": "경로.svg"`, `"decoration_alt": ""`(장식이면 빈 값). 본문 오른쪽 아래 여백에 들어갑니다.
+- 웹은 `sections` 배열이 항목 행이 됩니다. `in_menu: false`는 하위 메뉴에서만 뺍니다. 사진 배너는 요청받고 파일이 있을 때만 `banner_image`를 씁니다.
+- A4의 `style`은 `band`(기본, 대비 확보 청색 띠), `brand`(GNU Blue 띠, 띠 안 글자는 18pt 이상), `form`(공식 서식형).
+- 포스터 `columns`의 개수가 단 수입니다. 그림은 `"figures": [{"src": "fig1.png", "caption": "Fig. 1. …"}]`, 빈자리 표시는 `"label"`. 남는 공간을 채울 섹션에 `"grow": true`.
+- 저자는 `{"name": "…", "mark": "1", "presenter": true}`. 발표자는 청색 굵게 표시됩니다.
+- QR은 실제 QR 이미지를 `"qr": {"src": "qr.png", "label": "발표자 연락처"}`로 넣습니다(포스터·발표 표지·A4 공통, A4는 이미지가 있을 때만 표시).
+- 발표자료 `slides`의 `layout`은 `cover`, 일반(생략), `closing`. 그림이 있으면 오른쪽 단에 들어갑니다.
 
-자동 내보내기를 쓰려면 **Node.js 20 이상**과 Playwright를 준비합니다. 이 폴더에서 한 번 설치하세요.
+`--fonts link`는 폰트를 넣지 않고 `assets/fonts`를 가리키는 가벼운 HTML을 만듭니다(예시 파일이 이 방식). `export.mjs`가 저장하는 HTML에는 폰트가 다시 포함됩니다. `--no-logo`는 로고 대신 대학명 텍스트를 씁니다.
+
+출력 검사는 외부 리소스, 깨진 그림, 글자 넘침, 종이 밖 글자, 로고·캐릭터가 글자를 가리는 경우를 찾아 멈춥니다. 내용이 넘치면 글자를 줄이기보다 문장을 다듬거나 쪽을 나누세요. Chrome을 쓰려면 `GNU_BROWSER_CHANNEL=chrome`, 특정 실행 파일은 `GNU_BROWSER_PATH=/경로`를 앞에 붙입니다.
+
+브라우저로 직접 PDF를 만들 때는 배율 100%, 여백 없음, 배경 그래픽 켜기, 머리말·꼬리말 끄기. A0 포스터 인쇄는 벡터 PDF를 쓰고 CMYK 변환은 인쇄소 프로파일로 합니다.
+
+## 지누 캐릭터
+
+캐릭터 원본은 저장소에 아직 들어 있지 않을 수 있습니다. 학교 사이트에 접속되는 PC에서 한 번 실행하면 공식 페이지의 내려받기 파일을 `assets/character/official/`에 저장하고 출처·SHA-256을 기록합니다.
 
 ```bash
-npm install
-npx playwright install chromium
+python3 scripts/assets.py --fetch-character --dry-run   # 목록 확인
+python3 scripts/assets.py --fetch-character
 ```
 
-그 다음 실행합니다.
+AI 원본에서 한 자세를 SVG로 잘라 넣는 방법과 규칙은 [assets/character/README.md](assets/character/README.md), [DESIGN.md 6장](DESIGN.md#6-캐릭터-지누누누)에 있습니다. 한 쪽에 한 자세, 오른쪽 아래, 말풍선·대사·재작화·반전·색 변경 없이 씁니다. 웹페이지에는 넣지 않습니다.
 
-```bash
-node scripts/export.mjs out/flyer.html out/flyer
-```
+## 권리와 범위
 
-가로 세미나 플라이어도 같은 방법으로 세 형식을 저장합니다. HTML에 지정한 A4 가로 규격이 PDF에 적용됩니다.
+이 폴더의 코드·문서는 저장소의 GPL-3.0을 따릅니다. 대학 로고·슬로건·교화·캐릭터는 경상국립대학교의 자산이며 이 라이선스가 그 이용을 허락하지 않습니다. 서체는 각 OFL을 따릅니다. 대학 명의 공식 홍보물이나 상업적 사용은 담당 부서와 협의하세요. 공식 규정·홈페이지 관찰값·이 도구의 제안값은 [근거 기록](references/source-notes.md)에서 구분합니다.
 
-```bash
-node scripts/export.mjs out/seminar-landscape.html out/seminar-landscape
-```
-
-기본적으로 같은 폴더에 HTML·PDF·PNG가 생깁니다. 슬라이드는 `slides.pdf` 한 파일과 `slides-01.png`, `slides-02.png` …로 저장합니다. `--scale=2`로 PNG를 두 배 크기로 만들 수 있습니다.
-
-```bash
-node scripts/export.mjs examples/slides.html out/slides --scale=2
-```
-
-이미 설치된 Google Chrome을 사용할 경우 macOS/Linux에서는 `GNU_BROWSER_CHANNEL=chrome`을 명령 앞에 붙일 수 있습니다. Windows PowerShell에서는 `$env:GNU_BROWSER_CHANNEL="chrome"`을 먼저 지정합니다. 기본값은 Playwright Chromium입니다.
-
-스크립트는 원격 폰트·이미지 요청, 깨진 이미지, 글자 넘침을 확인합니다. 선택된 폰트와 이미지를 기다린 뒤 출력합니다. 출력 실패 메시지를 고친 후 다시 실행하세요. 내용이 길면 문장을 편집하거나 A4 페이지·슬라이드를 추가합니다. 작은 글자로 무리하게 압축하지 않습니다.
-
-자동 도구를 쓰지 않는 경우 HTML을 브라우저로 열어 인쇄 → PDF 저장을 선택하세요. **배율 100%, 여백 없음, 배경 그래픽 켜기, 브라우저 머리말·꼬리말 끄기**를 기본으로 하고, 웹페이지의 읽기용 PDF는 CSS에 지정된 여백을 따릅니다. PNG는 브라우저의 페이지 캡처 도구로 저장할 수 있습니다.
-
-PNG 기본값은 약 96dpi의 미리보기입니다. **대형 포스터 인쇄는 벡터 PDF를 권장합니다.** 300ppi PNG가 필요하면 인쇄 규격과 픽셀 크기를 별도로 계산해야 합니다. 예시 PDF는 RGB 출력이며 인쇄소의 CMYK·별색 작업을 대신하지 않습니다.
-
-## 디자인과 자산
-
-대학 VI의 Noto Sans KR·SUIT, 대학 웹의 Noto Sans KR·SUITE를 구분했습니다. 폰트 파일은 포함하지 않으며 설치되지 않은 환경에서는 시스템 한글 산세리프로 대체됩니다. 예시 출력은 macOS의 대체 서체로 확인했습니다. 필요한 서체를 설치하거나 허용된 폰트를 HTML에 포함한 다음 다시 출력하면 됩니다.
-
-공식색은 GNU Blue `#009EDB`, Grey `#43525A`, Silver `#BCBEC0`, Gold `#B3A177`입니다. 작은 글자·버튼에는 대비를 확보한 별도 UI 색을 씁니다. 로고 원본의 색은 바꾸지 않습니다. 후크 메시지·버블·둥근 카드 반복 없이 제목·문단·표·직사각형 구획으로 구성합니다.
-
-`assets/official/`에는 대학 공식 공개 페이지의 로고·시그니처·색상 견본·모티프·교화·안내문 AI/PDF/이미지를 보관했습니다. 출처와 해시는 `assets/manifest.json`, 선택 방법은 `assets/catalog.md`에 있습니다. 여러 도안이 들어 있는 견본 시트를 통째로 로고처럼 넣지 마세요.
-
-이 저장소의 GPL-3.0은 대학 로고·상징·폰트 등의 제3자 권리를 새로 허락하는 라이선스가 아닙니다. 자산은 원 권리자의 이용조건을 따릅니다. 공식 기관 제작·승인을 받았다는 표시는 실제 사실이 있을 때만 사용합니다. 공식 규정·웹 관찰값·이 도구의 제안값은 [근거 문서](references/source-notes.md)에서 구분합니다.
-
-## 확인한 범위
-
-2026-10-04에 여섯 예시의 HTML·PDF·PNG를 실제 생성하고 화면과 PDF를 확인했습니다. A4 세로 안내문 1쪽씩, A4 가로 세미나 플라이어 1쪽, A0 포스터 1쪽, 16:9 발표자료 5쪽과 페이지별 PNG를 점검했습니다. 웹페이지는 320·768·1360px 폭·200% 확대·키보드 이동을 확인했습니다. 실제 문장을 넣은 결과는 길이가 달라지므로 다시 확인해야 합니다. 다른 운영체제·Claude 환경에서 동일한 서체 출력까지 검증했다는 뜻은 아닙니다.
+이 도구는 학교의 공식 승인 도구가 아닙니다. 확인 범위는 [검증 기록](references/validation.md)에 있습니다.

@@ -1,26 +1,68 @@
 {
-  "organization": "[주최 학과·연구실]",
-  "contact": "[문의 담당자·연락처]",
-  "title": "[연구실·학술 행사명]",
-  "body": "[연구실 또는 학술 행사의 소개를 입력하세요.]\n\n[연구 분야, 운영 주체, 참여 대상 등 실제 정보를 입력하세요.]",
-  "events": [
-    {
-      "date": "[일시]",
-      "title": "[행사명]",
-      "venue": "[장소]"
-    }
+  "lang": "ko",
+  "title": "[페이지 제목]",
+  "organization": "[운영 학과·연구실]",
+  "location": [
+    "홈",
+    "[상위 메뉴]"
   ],
-  "resources": [
+  "sections": [
     {
-      "label": "경상국립대학교",
-      "url": "https://www.gnu.ac.kr/"
+      "id": "intro",
+      "menu": "소개",
+      "heading": "[소개]",
+      "body": "[연구실 또는 행사의 소개를 입력하세요.]\n\n[연구 분야, 운영 주체, 참여 대상 등 확인된 정보만 입력합니다.]"
     },
     {
-      "label": "KRDS 디자인 자료",
-      "url": "https://www.krds.go.kr/html/site/index.html"
+      "id": "schedule",
+      "menu": "일정",
+      "heading": "[일정]",
+      "table": {
+        "caption": "[표 제목]",
+        "columns": [
+          "일시",
+          "내용",
+          "장소"
+        ],
+        "rows": [
+          [
+            "[일시]",
+            "[행사명]",
+            "[장소]"
+          ],
+          [
+            "[일시]",
+            "[행사명]",
+            "[장소]"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "files",
+      "menu": "자료",
+      "heading": "[자료]",
+      "links": [
+        {
+          "label": "경상국립대학교",
+          "url": "https://www.gnu.ac.kr/"
+        },
+        {
+          "label": "[자료 이름]",
+          "url": "#files"
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "menu": "문의",
+      "heading": "[문의]",
+      "body": "[담당자 · 전화 · 이메일]",
+      "in_menu": false
     }
   ],
-  "updated": "[최종 갱신일]",
-  "table_caption": "학술 행사 일정",
+  "address": "[주소]",
+  "contact": "[대표 연락처]",
+  "updated": "[최종 수정일]",
   "banner_image": null
 }
