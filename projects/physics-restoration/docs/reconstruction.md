@@ -47,12 +47,12 @@
 ## 검증
 
 - 독립 물리 불변량·극한 7개 테스트 그룹: 고전 극한, 점유수 제한과 상태수, Wien 최대, σT⁴와 직접 파장 적분, T³ 비열, 고정 경계 정상파, N 보존·Sommerfeld, 압력 평형·질량 스케일링.
-- 브라우저 결과는 `browser-report.json`: 문서 10개, 수식/실험 렌더링, 중복 ID·내부 앵커, 자산 오류·외부 요청, 화면 폭, 조절 경계값·키보드·재생·정지·확대·JS 비활성 검증.
+- 브라우저 결과는 `browser-report.json`: 문서 15개, 수식/실험 렌더링, 중복 ID·내부 앵커, 자산 오류·외부 요청, 화면 폭, 조절 경계값·키보드·재생·정지·확대·JS 비활성 검증.
 - PNG와 인쇄 PDF는 로컬 `preview/`에 생성한다. 인쇄물은 현재 선택한 실험 상태를 담는다.
 
 ## 서체 최적화
 
-Noto Sans KR와 SUITE에서 현재 교재·조작 화면에 필요한 글자만 WOFF2로 다시 저장했다. 원본 대비 합계 1,633,140→151,940 bytes로 90.7% 감소했다. SIL OFL의 Reserved Font Name을 유지하지 않도록 내부 이름을 PhysicaText·PhysicaTitle로 바꾸고 저작권·라이선스는 보존했다. 추가 한글의 누락은 빌드에서 검사하며 재생성 절차는 README에 있다. `font-report.json`에 크기·포함 한글을 기록한다.
+Noto Sans KR와 SUITE에서 현재 교재·조작 화면에 필요한 글자만 WOFF2로 다시 저장했다. 원본 대비 합계 1,633,140→218,596 bytes로 86.6% 감소했다. SIL OFL의 Reserved Font Name을 유지하지 않도록 내부 이름을 PhysicaText·PhysicaTitle로 바꾸고 저작권·라이선스는 보존했다. 추가 한글의 누락은 빌드에서 검사하며 재생성 절차는 README에 있다. `font-report.json`에 크기·포함 한글을 기록한다.
 
 ## 참고 문서
 
@@ -63,3 +63,17 @@ Noto Sans KR와 SUITE에서 현재 교재·조작 화면에 필요한 글자만 
 - [NIST CODATA 원자료](https://physics.nist.gov/cuu/Constants/Table/allascii.txt)
 - [GitHub Pages 사용자 workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
 - [JPEXS 공식 26.3.0 릴리스](https://github.com/jindrapetrik/jpexs-decompiler/releases/tag/version26.3.0)
+
+## 상단 로고와 표기
+
+사용자가 제공한 원본 로고에서 내장 imagegen으로 색상만 톤다운한 판본을 승인받아 적용했다. 원래 글자 형태·배치를 유지하는 것을 편집 조건으로 삼았다. 일반 서체와 본문 디자인은 유지한다. 상단 저자 표기와 하단 메모는 사용자 요청 문구를 그대로 따른다. 편집 프롬프트는 `logo-edit.md`에 기록했다.
+
+## 전체 교재 탐색과 화면 설정
+
+2026-10-04 원본의 `list.xml` 및 자료종류 XML 5개, `phtml/headwordIndex.html`·`phtml/index.html`에서 제목·유형·출처 링크를 추출했다. 원본 문장·본문·SWF를 이 목록에 복제하지 않았다. 재현 가능한 빌드 입력은 `src/catalog.json`이며, 색인 출처의 SHA-256도 그 파일에 기록했다. 본문 복원과 목록 구축을 구별한다.
+
+7개 대단원, 149개 주제, 566쪽 중 본문 복원은 8쪽이다. 다른 쪽은 안정적인 원본 순서 ID로 `lesson.html?id=...`에 연결하며 원본 링크와 같은 주제의 다른 페이지를 안내한다. 자료 목록은 원본 1,072개와 복원 인터랙션 17개를 제공한다. 원본 자료종류 목록은 중복된 자료가 포함될 수 있으므로 서로 다른 작동 프로그램의 수를 뜻하지 않는다.
+
+표제어 1,866개와 찾아보기 2,455개를 정적 문서로 생성하고, 조작 가능한 목록은 50개씩 표시한다. 내부검색은 제목·단원·복원 본문을 대상으로 하며 미복원 본문의 전문을 검색한 것으로 표시하지 않는다. 검색/준비 화면에 필요한 JSON은 해당 화면에서만 읽는다.
+
+라이트/다크 모드는 시스템 설정을 초기값으로 삼고 사용자의 선택을 저장한다. 수식은 현재 글자색을 따르고 SVG는 공통 테마 변수를 사용한다. 인쇄는 밝은 바탕으로 전환한다. 원본 로고의 승인된 파스텔 색상과 본문 폰트는 유지했다. 웹·태블릿 세로/가로·모바일의 넘침과 터치 조작을 브라우저 검증에 포함했다.

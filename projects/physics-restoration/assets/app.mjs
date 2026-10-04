@@ -1,19 +1,23 @@
 import * as P from './physics.mjs';
-const BLUE='#0069b4', CYAN='#009edb', GREY='#43525a', LIGHT='#e9edf0';
+import {notation} from './math-labels.mjs';
+const BLUE='var(--plot-action)', CYAN='var(--plot-secondary)', GREY='var(--plot-muted)', LIGHT='var(--plot-line)';
 const svgNS='http://www.w3.org/2000/svg';
 const fmt=(v,d=3)=>Number.isFinite(v)?Number(v.toPrecision(d)).toLocaleString('ko-KR',{maximumFractionDigits:8}):'—';
 const sci=v=>{if(!Number.isFinite(v))return '—';const [m,e]=v.toExponential(3).split('e');return `${m} × 10<sup>${Number(e)}</sup>`;};
 const escaped=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+const mathText=s=>String(s).replace(/kBT|kB/g,key=>notation[key]);
+const spoken=s=>String(s).replaceAll('kBT','볼츠만 상수와 온도의 곱').replaceAll('kB','볼츠만 상수');
 function slider(key,label,min,max,step,value,unit='') {
- return `<label class="control"><span class="control-head"><span>${label}</span><output data-for="${key}">${value} ${unit}</output></span><input type="range" data-key="${key}" data-unit="${unit}" aria-label="${label}" min="${min}" max="${max}" step="${step}" value="${value}"></label>`;
+ return `<label class="control"><span class="control-head"><span>${mathText(escaped(label))}</span><output data-for="${key}">${value} ${unit}</output></span><input type="range" data-key="${key}" data-unit="${unit}" aria-label="${escaped(spoken(label))}" min="${min}" max="${max}" step="${step}" value="${value}"></label>`;
 }
 function select(key,label,options,value) {
  return `<label class="control"><span>${label}</span><select data-key="${key}" aria-label="${label}">${options.map(([v,t])=>`<option value="${v}" ${v==value?'selected':''}>${t}</option>`).join('')}</select></label>`;
 }
 const legend=`<div class="legend"><span><i></i>BE · 실선</span><span><i class="dashed"></i>MB · 긴 점선</span><span><i class="dotted"></i>FD · 짧은 점선</span></div>`;
-const readout=(label,value)=>`<span>${label} <strong>${value}</strong></span>`;
+const readout=(label,value)=>`<span>${mathText(escaped(label))} <strong>${mathText(value)}</strong></span>`;
 const line=(x1,y1,x2,y2,color=GREY,width=1,dash='')=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="${width}" ${dash?`stroke-dasharray="${dash}"`:''}/>`;
-const text=(x,y,s,attrs='')=>`<text x="${x}" y="${y}" ${attrs}>${escaped(s)}</text>`;
+const svgText=s=>escaped(s).replace(/kBT|kB/g,key=>`<tspan font-style="italic">k</tspan><tspan baseline-shift="sub" font-size="70%">B</tspan>${key==='kBT'?'<tspan font-style="italic">T</tspan>':''}`);
+const text=(x,y,s,attrs='')=>`<text x="${x}" y="${y}" ${attrs}>${svgText(s)}</text>`;
 const circle=(x,y,r,color=BLUE,attrs='')=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${color}" ${attrs}/>`;
 function svg(title,body,h=320,desc=title) {
  return `<svg class="plot" xmlns="${svgNS}" viewBox="0 0 740 ${h}" role="img" aria-label="${escaped(title)}"><title>${escaped(title)}</title><desc>${escaped(desc)}</desc>${body}</svg>`;
@@ -24,7 +28,7 @@ function chart({title,xmin=0,xmax=8,ymin=0,ymax=1.2,xlabel='ε / eV',ylabel='평
  let body='';
  for(let i=0;i<=4;i++) {
   const y=ymin+(ymax-ymin)*i/4;
-  body+=line(left,Y(y),right,Y(y),'#dce2e6')+text(left-10,Y(y)+5,fmt(y),`text-anchor="end"`);
+  body+=line(left,Y(y),right,Y(y),LIGHT)+text(left-10,Y(y)+5,fmt(y),`text-anchor="end"`);
  }
  const ticks=xticks||Array.from({length:6},(_,i)=>xmin+(xmax-xmin)*i/5);
  for(const x of ticks) body+=line(X(x),top,X(x),bottom,LIGHT)+text(X(x),bottom+23,fmt(x),`text-anchor="middle"`);
@@ -60,7 +64,7 @@ function mount(el,state,controls,draw,{animate=false,actions=[]}={}) {
   el.querySelector('[data-view]').innerHTML=result.svg;
   const r=el.querySelector('[data-readouts]');
   if(r.innerHTML!==result.readouts)r.innerHTML=result.readouts||'';
-  el.querySelector('[data-note]').textContent=result.note||'';
+  el.querySelector('[data-note]').innerHTML=mathText(escaped(result.note||''));
   el.querySelectorAll('input[data-key]').forEach(input=>{
    input.value=state[input.dataset.key];
    const out=el.querySelector(`[data-for="${input.dataset.key}"]`);

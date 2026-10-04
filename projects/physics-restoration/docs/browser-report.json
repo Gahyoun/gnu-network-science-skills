@@ -2,7 +2,7 @@
   "pages": [
     {
       "file": "index.html",
-      "title": "양자통계와 그 응용 | 물리의 이해",
+      "title": "웹교재 목차 | 물리의 이해",
       "math": 0,
       "widgets": 0,
       "rendered": 0,
@@ -13,7 +13,7 @@
     {
       "file": "quantum-statistics.html",
       "title": "고전 분포함수 | 물리의 이해",
-      "math": 6,
+      "math": 8,
       "widgets": 2,
       "rendered": 2,
       "duplicates": [],
@@ -33,7 +33,7 @@
     {
       "file": "distribution-comparison.html",
       "title": "분포함수의 비교 | 물리의 이해",
-      "math": 7,
+      "math": 10,
       "widgets": 3,
       "rendered": 3,
       "duplicates": [],
@@ -43,7 +43,7 @@
     {
       "file": "density-of-states.html",
       "title": "상태밀도 | 물리의 이해",
-      "math": 7,
+      "math": 8,
       "widgets": 4,
       "rendered": 4,
       "duplicates": [],
@@ -63,7 +63,7 @@
     {
       "file": "heat-capacity.html",
       "title": "고체의 비열 | 물리의 이해",
-      "math": 4,
+      "math": 5,
       "widgets": 2,
       "rendered": 2,
       "duplicates": [],
@@ -73,7 +73,7 @@
     {
       "file": "free-electrons.html",
       "title": "자유전자 기체 | 물리의 이해",
-      "math": 6,
+      "math": 9,
       "widgets": 2,
       "rendered": 2,
       "duplicates": [],
@@ -92,7 +92,57 @@
     },
     {
       "file": "about.html",
-      "title": "복원 기록 | 물리의 이해",
+      "title": "사이트 안내 | 물리의 이해",
+      "math": 1,
+      "widgets": 0,
+      "rendered": 0,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "materials.html",
+      "title": "자료종류별 | 물리의 이해",
+      "math": 4,
+      "widgets": 0,
+      "rendered": 0,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "search.html",
+      "title": "내부검색 | 물리의 이해",
+      "math": 0,
+      "widgets": 0,
+      "rendered": 0,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "headwords.html",
+      "title": "표제어 목록 | 물리의 이해",
+      "math": 3,
+      "widgets": 0,
+      "rendered": 0,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "browse.html",
+      "title": "찾아보기 | 물리의 이해",
+      "math": 4,
+      "widgets": 0,
+      "rendered": 0,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "lesson.html",
+      "title": "복원 준비 중 | 물리의 이해",
       "math": 0,
       "widgets": 0,
       "rendered": 0,
@@ -104,9 +154,10 @@
   "widths": [
     320,
     768,
+    1024,
     1360
   ],
   "errors": [],
   "externalResources": [],
-  "interactionChecks": 71
+  "interactionChecks": 98
 }
