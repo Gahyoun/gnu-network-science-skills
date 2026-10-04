@@ -1,0 +1,194 @@
+{
+  "retrieved": "2026-10-04",
+  "encoding": "CP949 (legacy HTML)",
+  "decompiler": "JPEXS FFDec 26.3.0",
+  "publication": "Source files and decompiled code excluded; independent implementation only.",
+  "files": [
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/beparticle_Canvas.html",
+      "sha256": "de6280817dda4fb5c73248f26b17baa2137d9fce233ebb0d2867b2d6cfc66327",
+      "bytes": 3778,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/beparticle_Canvas.js",
+      "sha256": "44725bf63d95d19f79217b67d8e985827a6b4738e45b32d976656555e775aead",
+      "bytes": 25328,
+      "kind": "js"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/boltzmannf_Canvas.html",
+      "sha256": "b44eaf1897cd11d73e47b89f9e4f2032063b9d711f8206b9790563dc82aa4c49",
+      "bytes": 3751,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/boltzmannf_Canvas.js",
+      "sha256": "ec82240cc86b3f645fdb921b7a5d5f36758ffb1938b7bbef36c3c28b61688cac",
+      "bytes": 23355,
+      "kind": "js"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/distributionftn.swf",
+      "sha256": "0aa4998b758ecd8afaab95a58449489a931d0b9883bc8532719900c51212fdbb",
+      "bytes": 8701,
+      "kind": "swf"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/distributionftnx.swf",
+      "sha256": "5bda0364170204a3e25475b04f2037a932311a9b64057185957ddc741a50737e",
+      "bytes": 8499,
+      "kind": "swf"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/fddistftn.swf",
+      "sha256": "574b6e5cc885ddb7fba159907f3c0dde26f3cb42c1b52b95d31879a172baab31",
+      "bytes": 8279,
+      "kind": "swf"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/fdparticle_Canvas.html",
+      "sha256": "214bf4e1702fa4a30975004aa7c37530582eead589b958346a97ba0ef89ec6ba",
+      "bytes": 3778,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/fdparticle_Canvas.js",
+      "sha256": "2426850a894a1aef84bf33a0ea747a6fea152374ffa9616038b2792a412a9ed1",
+      "bytes": 34220,
+      "kind": "js"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/mbparticle_Canvas.html",
+      "sha256": "72ee52ba53937d11cfc4cb303bb0f00e1577fe9bcaa438b19abc3bbf4726b44d",
+      "bytes": 3778,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/mbparticle_Canvas.js",
+      "sha256": "91c580519a0282ea8b6cc634ce1835d2388900b31b89877ae394b288bfeda435",
+      "bytes": 33380,
+      "kind": "js"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/qdistribute.html",
+      "sha256": "7a8fa92824eff479b41bc91f3480615e4cc5ff28aefcb21b2093b7e80c778aa7",
+      "bytes": 20393,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/qdistribute2.html",
+      "sha256": "0199d550ec76580214cdd2353a4eb26115f263eb042cc2a358518697014fc08d",
+      "bytes": 28535,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qdistribute/qdistribute3.html",
+      "sha256": "e4589730c288b652c6581f55b656d4f1b63076959d47a00d54051575500b6bfe",
+      "bytes": 21199,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/freeelectronftn.swf",
+      "sha256": "dd1f7f8815915dfef79a4132bd24c1361659d9276e05f43ccbf3c5d599ab392b",
+      "bytes": 8509,
+      "kind": "swf"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/gftnnftn_Canvas.html",
+      "sha256": "c1d2649364a5d9447472a47e0d8fe4955b69f2f0929ea8ac51397f726bb20dc7",
+      "bytes": 3772,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/gftnnftn_Canvas.js",
+      "sha256": "b67c379e2b88b8e5b67d9f32755ae817d5d4250ca6b60331e15d415167272608",
+      "bytes": 50481,
+      "kind": "js"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/grblackbody.swf",
+      "sha256": "ec9b453a7bb67cb4c4b220bad3758cf83ee7514913cdf21fa8d045ca57b688bc",
+      "bytes": 13682,
+      "kind": "swf"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/metalsta_Canvas.html",
+      "sha256": "5f97d7a051eb67c19d831ba0cd9f41798246b5583fcd507316a832ad6163bf4b",
+      "bytes": 3745,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/metalsta_Canvas.js",
+      "sha256": "685f1a3b65b83de4570bf33992a80ab40e58281c1df8cd32191268d91b30d824",
+      "bytes": 10747,
+      "kind": "js"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/mode1dim.swf",
+      "sha256": "b73f158ee949517f6391457b053dda1e2185f89c21aa80756971fba0daa0fa56",
+      "bytes": 8781,
+      "kind": "swf"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/mode2dim.swf",
+      "sha256": "cc17b24bacf27d5de78de413be00e6bb5852d581f15bd4bdc322682c4e95f965",
+      "bytes": 9101,
+      "kind": "swf"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/mode3dim.swf",
+      "sha256": "bb299c9d2c04344edcdc210984777eb5d41b7930455d6db2ae0f3c9794c67fa1",
+      "bytes": 4239,
+      "kind": "swf"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/neutronstar_Canvas.html",
+      "sha256": "64856f61743a44637ded4a972e6faba2bb80959c5456c2e6fdd997ed8d05bb95",
+      "bytes": 3754,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/neutronstar_Canvas.js",
+      "sha256": "c5ac2b0db3e5e9d2381596235680413d04b5ce94eaade77eea0d6be9216e3107",
+      "bytes": 35994,
+      "kind": "js"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/qsexample.html",
+      "sha256": "e4eedebf2617d9924620b2177eaf0a03715c8057048c864674650462be91597f",
+      "bytes": 26405,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/qsexample2.html",
+      "sha256": "f6217af4f670be5fd9b5432b948967330b8bd7601bc15b5575dbc419df7eb8ff",
+      "bytes": 26579,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/qsexample3.html",
+      "sha256": "694d63257cd67813f2ed3ba38cbaf17154c0857ef73f00c4234b94b5660cd5db",
+      "bytes": 23495,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/qsexample4.html",
+      "sha256": "04cd8f11789b41243dd24952d9eed3876ce253705f646616cb8cf46045a0620f",
+      "bytes": 24160,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/qsexample5.html",
+      "sha256": "b53f07d5774acaa6bcddd7a925f7ebe6b0b46067cc525a2ab238fe829e2cf156",
+      "bytes": 21261,
+      "kind": "html"
+    },
+    {
+      "url": "http://physica.gnu.ac.kr/phtml/modern/q_statistics/qsexample/solidosc.swf",
+      "sha256": "e50c27921a3a44af90bb3c6fb2f566bb9659a24b13d4bf8c857d71b73fa8ba24",
+      "bytes": 3948,
+      "kind": "swf"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "physics-understanding-restoration",
+  "private": true,
+  "type": "module",
+  "scripts": {"build": "node tools/build.mjs", "test": "node --test tools/physics.test.mjs", "serve": "python3 -m http.server 8765 --bind 127.0.0.1"},
+  "engines": {"node": ">=22"}
+}

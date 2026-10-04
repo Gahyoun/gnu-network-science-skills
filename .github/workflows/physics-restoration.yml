@@ -1,0 +1,58 @@
+name: Restore physics textbook
+
+on:
+  pull_request:
+    paths:
+      - 'projects/physics-restoration/**'
+      - '.github/workflows/physics-restoration.yml'
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish this textbook to the repository GitHub Pages root'
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: physics-restoration-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Build compiled mathematics
+        working-directory: projects/physics-restoration
+        run: node tools/build.mjs
+      - name: Verify numerical models
+        working-directory: projects/physics-restoration
+        run: node --test tools/physics.test.mjs
+      - name: Stage website
+        working-directory: projects/physics-restoration
+        run: node tools/stage.mjs
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: projects/physics-restoration/_site
+
+  deploy:
+    if: github.event_name == 'workflow_dispatch' && inputs.publish && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Publish
+        id: deployment
+        uses: actions/deploy-pages@v4

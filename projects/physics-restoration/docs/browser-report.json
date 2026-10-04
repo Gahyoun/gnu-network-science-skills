@@ -1,0 +1,112 @@
+{
+  "pages": [
+    {
+      "file": "index.html",
+      "title": "양자통계와 그 응용 | 물리의 이해",
+      "math": 0,
+      "widgets": 0,
+      "rendered": 0,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "quantum-statistics.html",
+      "title": "고전 분포함수 | 물리의 이해",
+      "math": 6,
+      "widgets": 2,
+      "rendered": 2,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "quantum-distributions.html",
+      "title": "양자 분포함수 | 물리의 이해",
+      "math": 10,
+      "widgets": 2,
+      "rendered": 2,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "distribution-comparison.html",
+      "title": "분포함수의 비교 | 물리의 이해",
+      "math": 7,
+      "widgets": 3,
+      "rendered": 3,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "density-of-states.html",
+      "title": "상태밀도 | 물리의 이해",
+      "math": 7,
+      "widgets": 4,
+      "rendered": 4,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "blackbody.html",
+      "title": "흑체복사의 해석 | 물리의 이해",
+      "math": 4,
+      "widgets": 1,
+      "rendered": 1,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "heat-capacity.html",
+      "title": "고체의 비열 | 물리의 이해",
+      "math": 4,
+      "widgets": 2,
+      "rendered": 2,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "free-electrons.html",
+      "title": "자유전자 기체 | 물리의 이해",
+      "math": 6,
+      "widgets": 2,
+      "rendered": 2,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "neutron-stars.html",
+      "title": "중성자별 | 물리의 이해",
+      "math": 2,
+      "widgets": 1,
+      "rendered": 1,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    },
+    {
+      "file": "about.html",
+      "title": "복원 기록 | 물리의 이해",
+      "math": 0,
+      "widgets": 0,
+      "rendered": 0,
+      "duplicates": [],
+      "badHashes": [],
+      "brokenMath": 0
+    }
+  ],
+  "widths": [
+    320,
+    768,
+    1360
+  ],
+  "errors": [],
+  "externalResources": [],
+  "interactionChecks": 71
+}
