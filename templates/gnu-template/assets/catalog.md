@@ -2,7 +2,7 @@
 
 대학 공식 공개 페이지에서 받은 원본을 변경 없이 보관했다. 파일별 출처·SHA-256은 [manifest.json](manifest.json)에 있다. `.ai`는 Adobe Illustrator 원본이며 생성형 AI 이미지라는 뜻이 아니다.
 
-도안 시트에서는 필요한 완성형 하나를 선택해서 사용한다. 지누·캐릭터 파일은 제외했다. [선택·출력 방법](../references/asset-usage.md) · [색상·꽃 모티프](../references/brand-variants.md)
+도안 시트에서는 필요한 완성형 하나를 선택해서 사용한다. 캐릭터 지누·누누 원본은 [character/](character/README.md)에 따로 모은다. [선택·출력 방법](../references/asset-usage.md) · [색상·꽃 모티프](../references/brand-variants.md)
 
 | 원본 | 파일 | 출처 |
 |---|---|---|
@@ -45,8 +45,15 @@
 | BS23 그래픽 모티프E-교화.pdf | [열기](official/BS23%20%EA%B7%B8%EB%9E%98%ED%94%BD%20%EB%AA%A8%ED%8B%B0%ED%94%84E-%EA%B5%90%ED%99%94.pdf) | [공식 내려받기](https://www.gnu.ac.kr/images/web/main/sub_cnt/BS23%20%EA%B7%B8%EB%9E%98%ED%94%BD%20%EB%AA%A8%ED%8B%B0%ED%94%84E-%EA%B5%90%ED%99%94.pdf) |
 | BS23 그래픽 모티프E-교화.jpg | [열기](official/BS23%20%EA%B7%B8%EB%9E%98%ED%94%BD%20%EB%AA%A8%ED%8B%B0%ED%94%84E-%EA%B5%90%ED%99%94.jpg) | [공식 내려받기](https://www.gnu.ac.kr/images/web/main/sub_cnt/BS23%20%EA%B7%B8%EB%9E%98%ED%94%BD%20%EB%AA%A8%ED%8B%B0%ED%94%84E-%EA%B5%90%ED%99%94.jpg) |
 
-## 예시에 포함된 선택 도안
+## HTML용 출력 사본
 
-[gnu-signature.svg](derived/gnu-signature.svg)는 BS08 PDF의 국영문 가로형 시그니처를 선택해 출력한 벡터다. 원본의 벡터 경로·비례를 유지하고 견본 안내문·작도선만 제외했다. [변환 기록](../references/brand-variants.md)을 함께 확인한다.
+`derived/`의 SVG는 원본 PDF의 벡터 경로를 그대로 잘라 낸 것이다. 견본 안내문·다른 변형·작도선만 뺐다. 만드는 방법과 색 처리는 [자산 사용](../references/asset-usage.md)에 있다.
+
+| 파일 | 원본 |
+|---|---|
+| [gnu-signature.svg](derived/gnu-signature.svg) | BS08 국영문 가로조합 |
+| [gnu-symbol.svg](derived/gnu-symbol.svg) | BS08 심벌 |
+| [fly-with-gnu.svg](derived/fly-with-gnu.svg) | (원형)GNU 엠블럼_서식(안내문) 상단 |
+| [emblem-signature-white.svg](derived/emblem-signature-white.svg) | (원형)GNU 엠블럼_서식(안내문) 하단 |
 
 공식 자산의 권리와 이용조건은 대학 등 원 권리자에게 있다. 이 저장소의 코드 라이선스를 로고·모티프의 재사용 허가로 해석하지 않는다.

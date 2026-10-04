@@ -1,45 +1,89 @@
 {
-  "organization": "[주최 학과·연구실]",
-  "contact": "[문의 담당자·연락처]",
-  "title": "[연구 제목]\n[필요한 경우 부제]",
-  "authors": "[저자 이름 및 소속 번호]",
-  "affiliation": "[학과·기관·소속]",
-  "event": "[학회명 · 발표번호 · 발표일]",
+  "lang": "en",
+  "event": "[Conference name]\n[Session · Poster No. · Date]",
+  "title": "[Research title with **key phrase** in bold]\n[Subtitle, if any]",
+  "authors": [
+    {
+      "name": "[Presenter NAME (한글 이름)]",
+      "mark": "1",
+      "presenter": true
+    },
+    {
+      "name": "[Co-author NAME]",
+      "mark": "1"
+    }
+  ],
+  "affiliations": [
+    {
+      "mark": "1",
+      "name": "Department of [Department], Gyeongsang National University"
+    }
+  ],
+  "qr": {
+    "label": "[Presenter website\nand contact]",
+    "src": null
+  },
   "columns": [
     [
       {
-        "heading": "연구 배경과 질문",
-        "body": "[연구 배경, 기존 연구의 범위, 연구 질문을 입력하세요.]"
+        "heading": "[Background]",
+        "body": "[State the problem and what earlier work leaves open. 3–5 sentences.]\n\n[State the research question in one sentence.]"
       },
       {
-        "heading": "방법",
-        "body": "[데이터, 표본, 분석 방법과 수식의 정의를 입력하세요.]",
-        "figure_label": "[방법 도식 또는 수식]",
-        "caption": "[그림 1. 기호·변수·단위 설명]"
+        "heading": "[Method]",
+        "body": "[Define the data, model and every symbol used in the equations below.]",
+        "grow": true,
+        "figures": [
+          {
+            "label": "[Schematic or equation block]",
+            "caption": "Fig. 1. [Symbols, variables and units]"
+          }
+        ]
       },
       {
-        "heading": "자료와 분석 조건",
-        "body": "[분석 조건, 비교 기준, 재현에 필요한 정보를 입력하세요.]"
+        "heading": "[Data and conditions]",
+        "bullets": [
+          "[Data source and size]",
+          "[Parameters and their ranges]",
+          "[Null model or baseline]"
+        ]
       }
     ],
     [
       {
-        "heading": "결과",
-        "body": "[관찰한 결과를 실제 수치와 함께 입력하세요.]",
-        "figure_label": "[주요 결과 그림]",
-        "caption": "[그림 2. 축·단위·범례·오차 정의]"
+        "heading": "[Results]",
+        "body": "[Report the observed results with the actual values.]",
+        "figures": [
+          {
+            "label": "[Main result figure]",
+            "height": 250,
+            "caption": "Fig. 2. [Axes, units, legend, error definition, sample size]"
+          }
+        ]
       },
       {
-        "heading": "비교와 검증",
-        "body": "[비교 결과와 검증 방법을 입력하세요.]",
-        "figure_label": "[비교 결과 그림]",
-        "caption": "[그림 3. 비교 조건과 해석 범위]"
+        "heading": "[Comparison]",
+        "body": "[Compare against the baseline or null model you actually used.]",
+        "grow": true,
+        "figures": [
+          {
+            "label": "[Comparison figure]",
+            "caption": "Fig. 3. [Conditions and scope of interpretation]"
+          }
+        ]
       },
       {
-        "heading": "논의와 한계",
-        "body": "[결과의 의미, 한계, 후속 연구 질문을 입력하세요.]"
+        "heading": "[Discussion and limits]",
+        "body": "[Meaning of the result, its limits, and the next question.]"
       }
     ]
   ],
-  "references": "[실제 참고문헌·연구비 지원 표기]"
+  "references": [
+    "[1] [Author, Journal Vol, Page (Year)]",
+    "[2] [Author, Journal Vol, Page (Year)]"
+  ],
+  "acknowledgment": "[Funding statement exactly as required by the grant.]",
+  "contact": "[Presenter email]",
+  "unit": "[Department name]",
+  "character": null
 }

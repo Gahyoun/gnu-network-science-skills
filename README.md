@@ -28,7 +28,7 @@ AI 에게 네트워크 과학을 물어보면 용어를 영어로 섞어 쓰거�
   Monte Carlo 자기상관·jackknife·data collapse 헬퍼(`kernel.py`)와 저널 지형도 내장.
   구조 측정은 `network-science-kr`, 구조 위의 과정과 상전이는 이 스킬입니다.
 
-- **`gnu-template`** — 경상국립대 학교테마의 A4 홍보문·세미나 안내문, 학술포스터, HTML 발표자료와 간단한 웹페이지. 기본 출력은 **HTML·PDF·PNG**입니다. [사용법·미리보기](templates/gnu-template/README.md) · [독립 DESIGN.md](templates/gnu-template/DESIGN.md) · [공식 로고·AI 자산](templates/gnu-template/assets/catalog.md). 지누·캐릭터는 제외합니다.
+- **`gnu-template`** — 경상국립대 학교테마의 A4 홍보문·세미나 안내문, A0 학술포스터, 16:9 HTML 발표자료, 대학 홈페이지형 웹페이지. 학교 로고·지정서체(포함)·학과 안내문 양식을 따르고 지누 캐릭터를 규칙에 맞게 넣을 수 있습니다. 출력은 **HTML·PDF·PNG**. [사용법·미리보기](templates/gnu-template/README.md) · [독립 DESIGN.md](templates/gnu-template/DESIGN.md) · [공식 로고·AI 자산](templates/gnu-template/assets/catalog.md).
 
 관련 레포: [`stem-journal-club-deck`](https://github.com/Gahyoun/stem-journal-club-deck) (논문 → 저널클럽 덱).
 
