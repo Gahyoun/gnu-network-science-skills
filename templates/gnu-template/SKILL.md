@@ -9,7 +9,7 @@ description: 경상국립대학교 학교테마(로고·GNU Blue·Noto Sans KR/S
 
 ## 작업 순서
 
-1. **매체 고르기.** 홍보문(`flyer`), 공식 서식형 안내문(`flyer` + `style: "form"`), 세미나 안내(`seminar`), 학술포스터(`poster`), 발표자료(`slides`), 웹페이지(`web`). A4는 방향 지정이 없으면 세로, ‘가로’면 `--orientation landscape`(297×210mm). 웹은 먼저 `references/web-reference.md`, `references/krds.md`, `references/krds-style.md`(KRDS 스타일 규칙)를 읽는다. 웹은 KRDS 마크업·토큰을 그대로 쓰고 색만 GNU 단계로 바꾸며, 로고는 넣지 않는다(요청 시 `"logo": true`).
+1. **매체 고르기.** 홍보문(`flyer`), 공식 서식형 안내문(`flyer` + `style: "form"`), 세미나 안내(`seminar`), 학술포스터(`poster`), 발표자료(`slides`), 웹페이지(`web`). A4는 방향 지정이 없으면 세로, ‘가로’면 `--orientation landscape`(297×210mm). 웹은 먼저 `references/web-reference.md`, `references/krds.md`, `references/krds-style.md`(적용 메모)를 읽고, KRDS 스타일 규칙 자체는 `../krds-design-system/DESIGN-SYSTEM.md`를 따른다. 웹은 KRDS 마크업·토큰을 그대로 쓰고 색만 GNU 단계로 바꾸며, 로고는 넣지 않는다(요청 시 `"logo": true`).
 2. **사실 확인.** 제목·일시·장소·연사·저자·소속·연락처·연구 내용은 사용자가 준 것만 쓴다. 빠진 항목은 `[입력 항목]`으로 남기고 마지막에 목록으로 알린다. 묻지 않고 지어내지 않는다.
 3. **내용 파일 만들기.** `data/<매체>.json`을 복사해 내용을 채운다. 굵게는 `**핵심어**`, 줄바꿈은 `\n`, 문단은 `\n\n`. 실제 그림·QR은 `"src": "경로"`로 넣는다.
 4. **빌드.** `python3 scripts/build.py <매체> --data <json> --output out/<이름>.html`. 폰트·로고·그림이 들어간 HTML 한 파일이 생긴다. A4에는 FLY WITH G.N.U가 하단 왼쪽에 기본으로 들어간다(`fly_with_gnu: false`로 끔). 학교 이미지·꽃 모티프 장식은 요청받았을 때만 `decoration_image`.
