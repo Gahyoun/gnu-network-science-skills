@@ -30,13 +30,15 @@ AI 에게 네트워크 과학을 물어보면 용어를 영어로 섞어 쓰거�
 
 - **`gnu-template`** — 경상국립대 학교테마의 A4 세로·가로 홍보문과 세미나 안내문, A0 학술포스터, 16:9 HTML 발표자료, KRDS 구조에 GNU 색을 입힌 웹페이지. 학교 로고·지정서체(포함)·학과 안내문 양식을 따릅니다. 출력은 **HTML·PDF·PNG**. [사용법·미리보기](templates/gnu-template/README.md) · [독립 DESIGN.md](templates/gnu-template/DESIGN.md) · [공식 로고·AI 자산](templates/gnu-template/assets/catalog.md).
 
+- **`krds-design-system`** — KRDS(정부 디자인 시스템) 디자인 스타일을 지침으로 역산하고 GNU 색·서체를 확장형 스타일로 입힌 웹·앱 화면 디자인 시스템. 매직넘버 대비를 지킨 GNU 색 단계, 선명한 화면 모드, 토큰 CSS/JSON. [지침서](templates/krds-design-system/DESIGN-SYSTEM.md) · [견본](templates/krds-design-system/examples/index.html).
+
 관련 레포: [`stem-journal-club-deck`](https://github.com/Gahyoun/stem-journal-club-deck) (논문 → 저널클럽 덱).
 
 ---
 
 ## 설치 — 터미널에 복붙만 (macOS · Linux · Windows)
 
-먼저 [Git](https://git-scm.com/downloads)이 설치돼 있어야 합니다. 아래 **한 블록**이면 이 저장소의 네 스킬을
+먼저 [Git](https://git-scm.com/downloads)이 설치돼 있어야 합니다. 아래 **한 블록**이면 이 저장소의 다섯 스킬을
 Claude Code·Codex·Gemini CLI 사용자 폴더에 복사합니다. 외부 추천 스킬은 포함하지 않습니다.
 **업데이트도 같은 블록을 다시 붙여넣으면 됩니다**(복사한 스킬 파일을 로컬에서 수정했다면 먼저 보관하세요).
 
@@ -64,6 +66,7 @@ fi && (
       cp -Rf "$HOME/gnu-network-science-skills/skills/$skill" "$HOME/$d/skills/"
     done
     cp -Rf "$HOME/gnu-network-science-skills/templates/gnu-template" "$HOME/$d/skills/"
+    cp -Rf "$HOME/gnu-network-science-skills/templates/krds-design-system" "$HOME/$d/skills/"
   done
   echo "설치 완료. 아래 도구별 확인 방법을 보세요."
 )
@@ -88,6 +91,7 @@ foreach ($d in ".claude",".agents",".gemini") {
     Copy-Item -Recurse -Force "$HOME\gnu-network-science-skills\skills\$skill" "$HOME\$d\skills\"
   }
   Copy-Item -Recurse -Force "$HOME\gnu-network-science-skills\templates\gnu-template" "$HOME\$d\skills\"
+  Copy-Item -Recurse -Force "$HOME\gnu-network-science-skills\templates\krds-design-system" "$HOME\$d\skills\"
 }
 Write-Host "설치 완료. 아래 도구별 확인 방법을 보세요."
 ```
@@ -98,8 +102,8 @@ Write-Host "설치 완료. 아래 도구별 확인 방법을 보세요."
 
 **새 세션(터미널 다시 시작)** 을 연 뒤:
 
-- Claude Code: `/research-skill-guide` · `/network-science-kr` · `/statphys-pre` · `/gnu-template`.
-- Codex: `$research-skill-guide` · `$network-science-kr` · `$statphys-pre` · `$gnu-template`. 목록은 `/skills`.
+- Claude Code: `/research-skill-guide` · `/network-science-kr` · `/statphys-pre` · `/gnu-template` · `/krds-design-system`.
+- Codex: `$research-skill-guide` · `$network-science-kr` · `$statphys-pre` · `$gnu-template` · `$krds-design-system`. 목록은 `/skills`.
 - Gemini CLI: `/skills list`로 확인한 뒤 목적을 자연어로 요청하세요.
 - 예: "물리학 실험 데이터를 분석할 스킬을 추천하고 원문 링크를 알려줘."
 - 그래도 안 잡히면 도구를 완전히 재시작하세요.
@@ -109,13 +113,13 @@ Write-Host "설치 완료. 아래 도구별 확인 방법을 보세요."
 ```bash
 # macOS / Linux
 for d in .claude .agents .gemini; do
-  rm -rf "$HOME/$d/skills/network-science-kr" "$HOME/$d/skills/statphys-pre" "$HOME/$d/skills/research-skill-guide" "$HOME/$d/skills/gnu-template"
+  rm -rf "$HOME/$d/skills/network-science-kr" "$HOME/$d/skills/statphys-pre" "$HOME/$d/skills/research-skill-guide" "$HOME/$d/skills/gnu-template" "$HOME/$d/skills/krds-design-system"
 done
 ```
 ```powershell
 # Windows PowerShell
 foreach ($d in ".claude",".agents",".gemini") {
-  foreach ($skill in "network-science-kr","statphys-pre","research-skill-guide","gnu-template") {
+  foreach ($skill in "network-science-kr","statphys-pre","research-skill-guide","gnu-template","krds-design-system") {
     Remove-Item -Recurse -Force "$HOME\$d\skills\$skill" -ErrorAction SilentlyContinue
   }
 }

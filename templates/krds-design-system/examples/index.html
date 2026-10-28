@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ko" data-krds-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GNU × KRDS 스타일 견본</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov-dynamic-subset.min.css">
+<link rel="stylesheet" href="../tokens/primitives.css">
+<link rel="stylesheet" href="../tokens/semantic.css">
+<style>
+  /* Everything below uses tokens only (DESIGN-SYSTEM.md 9장). */
+  html { font-size: 62.5%; }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--gk-bg); color: var(--gk-text);
+    font: var(--krds-typo-font-weight-regular) var(--krds-typo-body-medium)/var(--krds-line-height-base) var(--krds-typo-font-type);
+    word-break: keep-all;
+  }
+  ::selection { background: var(--gk-selection); color: #fff; }
+  a { color: var(--gk-link); text-underline-offset: 0.3rem; }
+  a:hover { color: var(--gk-link-hover); }
+  a:active { color: var(--gk-link-pressed); }
+  :focus-visible { outline: 0; box-shadow: var(--gk-focus); }
+  .skip { position: absolute; left: -999rem; }
+  .skip:focus { left: var(--krds-number-8); top: var(--krds-number-8); background: var(--gk-surface); padding: var(--krds-number-5); }
+  .inner { max-width: calc(var(--krds-contents-size-max) + 2 * var(--krds-screen-margin-large)); margin: 0 auto; padding: 0 var(--krds-screen-margin-large); }
+
+  header { border-bottom: 1px solid var(--gk-border-light); }
+  .head { display: flex; align-items: center; justify-content: space-between; gap: var(--krds-number-8); min-height: 8rem; }
+  .identity { display: flex; align-items: center; gap: var(--krds-number-5); font-weight: 700; font-size: var(--krds-pc-typo-navigation-title-small); color: var(--gk-text-bolder); }
+  .identity::before { content: ""; width: 0.4rem; height: 2.4rem; background: var(--gk-brand); }
+  .identity small { font-weight: 400; font-size: var(--krds-typo-body-small); color: var(--gk-text-subtle); }
+
+  main { padding: var(--krds-pc-gap-layout-breadcrumb-h1) 0 var(--krds-pc-gap-layout-contents-footer); }
+  h1 { font-size: var(--krds-pc-typo-heading-xlarge); line-height: 1.5; letter-spacing: 0.1rem; margin: 0; }
+  h2 { font-size: var(--krds-pc-typo-heading-large); line-height: 1.5; letter-spacing: 0.1rem; margin: var(--krds-pc-gap-layout-h2-h2) 0 var(--krds-pc-gap-layout-title-body-medium); }
+  h1 + p { margin: var(--krds-pc-gap-layout-title-body-medium) 0 0; color: var(--gk-text-subtle); }
+  h3 { font-size: var(--krds-pc-typo-heading-medium); line-height: 1.5; margin: var(--krds-pc-gap-layout-h2-h3) 0 var(--krds-pc-gap-layout-title-body-small); }
+  p { margin: 0 0 var(--krds-pc-gap-layout-text-text-medium); }
+  section:first-of-type h2 { margin-top: var(--krds-pc-gap-layout-h1-h2); }
+
+  /* palette */
+  .ramp { display: grid; grid-template-columns: repeat(11, 1fr); gap: 0; border: 1px solid var(--gk-border-light); border-radius: var(--krds-radius-medium); overflow: hidden; margin-bottom: var(--krds-number-8); }
+  .ramp div { min-height: 6.4rem; padding: var(--krds-number-3); font-size: var(--krds-typo-body-xsmall); display: flex; align-items: flex-end; }
+  .ramp-name { font-weight: 700; margin: 0 0 var(--krds-number-5); }
+
+  /* type */
+  .type-row { display: grid; grid-template-columns: 16rem 1fr; gap: var(--krds-number-8); align-items: baseline; padding: var(--krds-number-7) 0; border-bottom: 1px solid var(--gk-divider); }
+  .type-row span:first-child { color: var(--gk-text-subtle); font-size: var(--krds-typo-body-small); }
+
+  /* buttons: heights and radius from tokens, states move one step in the same hue */
+  .row { display: flex; flex-wrap: wrap; gap: var(--krds-number-8); align-items: center; }
+  .btn { font: inherit; font-size: var(--krds-typo-label-medium); border: 1px solid transparent; cursor: pointer;
+         height: var(--krds-size-height-medium); padding: 0 var(--krds-number-9); border-radius: var(--krds-radius-medium); }
+  .btn.large { height: var(--krds-size-height-large); font-size: var(--krds-typo-label-large); }
+  .btn.small { height: var(--krds-size-height-small); font-size: var(--krds-typo-label-small); padding: 0 var(--krds-number-8); }
+  .btn.primary { background: var(--gk-btn-primary); color: #fff; }
+  .btn.primary:hover { background: var(--gk-btn-primary-hover); }
+  .btn.primary:active { background: var(--gk-btn-primary-pressed); }
+  .btn.secondary { background: var(--gk-btn-secondary); color: var(--gk-text-primary); border-color: var(--gk-btn-secondary-border); }
+  .btn.secondary:hover { background: var(--gk-btn-secondary-hover); }
+  .btn.secondary:active { background: var(--gk-btn-secondary-pressed); }
+  .btn.tertiary { background: var(--gk-surface); color: var(--gk-text); border-color: var(--gk-btn-tertiary-border); }
+  .btn:disabled { background: var(--gk-surface-disabled); color: var(--gk-text-disabled); border-color: transparent; cursor: not-allowed; }
+  .btn svg { width: var(--krds-icon-size-small); height: var(--krds-icon-size-small); vertical-align: -0.4rem; margin-left: var(--krds-number-3); }
+
+  /* input */
+  .field { display: grid; gap: var(--krds-gap-input-parts); max-width: 48rem; }
+  .field label { font-weight: 700; }
+  .field input { font: inherit; height: var(--krds-size-height-large); padding: 0 var(--krds-padding-input); color: var(--gk-text);
+                 background: var(--gk-surface); border: var(--gk-border-width-input) solid var(--gk-border-input); border-radius: var(--krds-radius-medium); }
+  .field .help { font-size: var(--krds-typo-body-small); color: var(--gk-text-subtle); }
+
+  /* tabs: selected = secondary 70 bar + bold (not color alone) */
+  .tabs { display: flex; border-bottom: 1px solid var(--gk-border); }
+  .tabs button { font: inherit; background: none; border: 0; padding: var(--krds-number-7) var(--krds-number-9); color: var(--gk-text-subtle); cursor: pointer; border-bottom: 0.3rem solid transparent; margin-bottom: -1px; }
+  .tabs [aria-selected="true"] { color: var(--gk-selected); border-bottom-color: var(--gk-selected); font-weight: 700; }
+
+  /* radius + elevation */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr)); gap: var(--krds-gap-card-list); }
+  .card { background: var(--gk-surface); border: 1px solid var(--gk-border-light); border-radius: var(--krds-radius-large); padding: var(--krds-pc-padding-card-small); }
+  .card h3 { margin: 0 0 var(--krds-number-5); font-size: var(--krds-typo-heading-small); }
+  .card p { margin: 0; font-size: var(--krds-typo-body-small); color: var(--gk-text-subtle); }
+  .sunken { background: var(--gk-bg-sunken); border-radius: var(--krds-radius-large); padding: var(--krds-pc-padding-card-small); }
+  .e1 { background: var(--gk-surface-raised); } .e2 { box-shadow: var(--gk-shadow-2); } .e3 { box-shadow: var(--gk-shadow-3); } .e4 { box-shadow: var(--gk-shadow-4); }
+  .radius { display: flex; gap: var(--krds-number-8); align-items: flex-end; flex-wrap: wrap; }
+  .radius div { background: var(--gk-surface-primary); border: 1px solid var(--gk-border-primary); display: grid; place-items: center; font-size: var(--krds-typo-body-xsmall); color: var(--gk-text-primary); }
+
+  /* system alerts: color + icon + text */
+  .alert { display: flex; gap: var(--krds-number-5); align-items: flex-start; border: 1px solid; border-radius: var(--krds-radius-medium); padding: var(--krds-number-8); margin-bottom: var(--krds-number-7); }
+  .alert svg { flex: none; width: var(--krds-icon-size-medium); height: var(--krds-icon-size-medium); }
+  .alert.danger { background: var(--krds-color-light-danger-5); border-color: var(--krds-color-light-danger-10); color: var(--krds-color-light-danger-60); }
+  .alert.info { background: var(--krds-color-light-information-5); border-color: var(--krds-color-light-information-10); color: var(--krds-color-light-information-60); }
+  [data-krds-mode="high-contrast"] .alert.danger { background: var(--krds-color-high-contrast-danger-95); border-color: var(--krds-color-high-contrast-danger-90); color: var(--krds-color-high-contrast-danger-20); }
+  [data-krds-mode="high-contrast"] .alert.info { background: var(--krds-color-high-contrast-information-95); border-color: var(--krds-color-high-contrast-information-90); color: var(--krds-color-high-contrast-information-20); }
+  .badge { display: inline-block; font-size: var(--krds-typo-body-xsmall); font-weight: 700; padding: 0 var(--krds-number-5); border-radius: var(--krds-radius-xsmall); background: var(--gk-point); color: #fff; }
+
+  /* icons: 24px base, 1.6px stroke, round caps */
+  .icons { display: flex; gap: var(--krds-number-10); color: var(--gk-icon); }
+  .icons svg { width: var(--krds-icon-size-medium); height: var(--krds-icon-size-medium); }
+  .icon { fill: none; stroke: currentColor; stroke-width: var(--krds-icon-stroke); stroke-linecap: round; stroke-linejoin: round; }
+
+  footer { background: var(--gk-surface-raised); border-top: 1px solid var(--gk-border-light); padding: var(--krds-number-14) 0; font-size: var(--krds-typo-body-small); color: var(--gk-text-subtle); }
+  footer a { color: inherit; }
+
+  @media (max-width: 1023px) {
+    .ramp { grid-template-columns: repeat(6, 1fr); }
+  }
+  @media (max-width: 767px) {
+    .inner { padding: 0 var(--krds-screen-margin-small); }
+    main { padding: var(--krds-mobile-gap-layout-breadcrumb-h1) 0 var(--krds-mobile-gap-layout-contents-footer); }
+    h1 { font-size: var(--krds-mobile-typo-heading-xlarge); }
+    h2 { font-size: var(--krds-mobile-typo-heading-large); margin-top: var(--krds-mobile-gap-layout-h2-h2); }
+    section:first-of-type h2 { margin-top: var(--krds-mobile-gap-layout-h1-h2); }
+    h3 { font-size: var(--krds-mobile-typo-heading-medium); }
+    .type-row { grid-template-columns: 1fr; gap: 0; }
+    .ramp { grid-template-columns: repeat(4, 1fr); }
+    .head { flex-wrap: wrap; padding: var(--krds-number-7) 0; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문 바로가기</a>
+<header>
+  <div class="inner head">
+    <div class="identity">경상국립대학교 <small>[학과·연구실명]</small></div>
+    <div class="tabs" role="group" aria-label="화면 표시 모드">
+      <button type="button" data-mode="light" aria-pressed="true">기본</button>
+      <button type="button" data-mode="high-contrast" aria-pressed="false">선명하게</button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="inner">
+  <h1>GNU × KRDS 스타일 견본</h1>
+  <p>모든 색·크기·간격은 <code>tokens/</code>의 토큰에서 온다. 위 ‘선명하게’를 누르면 선명한 화면 모드로 바뀐다.</p>
+
+  <section>
+    <h2>색상</h2>
+    <div id="ramps"></div>
+    <p>번호는 흰 바탕 대비를 뜻한다: 40 = 3:1, 50 = 4.5:1, 70 = 7:1, 90 = 15:1. 공식 GNU Blue는 그래픽에만 쓴다 — 왼쪽 위 사이트 이름 앞의 막대.</p>
+  </section>
+
+  <section>
+    <h2>타이포그래피</h2>
+    <div class="type-row"><span>heading-xlarge 40</span><span style="font-size:var(--krds-pc-typo-heading-xlarge);font-weight:700">네트워크 과학 세미나</span></div>
+    <div class="type-row"><span>heading-large 32</span><span style="font-size:var(--krds-pc-typo-heading-large);font-weight:700">네트워크 과학 세미나</span></div>
+    <div class="type-row"><span>heading-medium 24</span><span style="font-size:var(--krds-pc-typo-heading-medium);font-weight:700">네트워크 과학 세미나</span></div>
+    <div class="type-row"><span>heading-small 19</span><span style="font-size:var(--krds-typo-heading-small);font-weight:700">네트워크 과학 세미나</span></div>
+    <div class="type-row"><span>body-large 19</span><span style="font-size:var(--krds-typo-body-large)">요약이나 중요한 정보를 전달하는 문장.</span></div>
+    <div class="type-row"><span>body-medium 17</span><span>본문 표준 크기. 줄 간격은 150%이고 <a href="#main">밑줄은 링크에만</a> 쓴다.</span></div>
+    <div class="type-row"><span>body-small 15</span><span style="font-size:var(--krds-typo-body-small)">덜 중요한 정보나 부가 설명.</span></div>
+    <div class="type-row"><span>body-xsmall 13</span><span style="font-size:var(--krds-typo-body-xsmall)">주석과 출처.</span></div>
+  </section>
+
+  <section>
+    <h2>버튼과 입력</h2>
+    <div class="row">
+      <button class="btn primary large" type="button">신청하기</button>
+      <button class="btn primary" type="button">주 버튼</button>
+      <button class="btn secondary" type="button">보조 버튼</button>
+      <button class="btn tertiary" type="button">3차 버튼<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+      <button class="btn small primary" type="button">작은 버튼</button>
+      <button class="btn primary" type="button" disabled>비활성</button>
+    </div>
+    <h3>텍스트 입력</h3>
+    <div class="field">
+      <label for="email">이메일</label>
+      <span class="help" id="email-help">학교 메일 주소를 입력한다.</span>
+      <input id="email" type="email" aria-describedby="email-help" placeholder="name@gnu.ac.kr">
+    </div>
+  </section>
+
+  <section>
+    <h2>형태</h2>
+    <p>래디어스 = 높이 × 1/8, 짝수로 올림, 최대 12px.</p>
+    <div class="radius">
+      <div style="width:1.6rem;height:1.6rem;border-radius:var(--krds-radius-xsmall)" title="16px, 2px"></div>
+      <div style="width:3.2rem;height:3.2rem;border-radius:var(--krds-radius-small)">4</div>
+      <div style="width:9.6rem;height:4.8rem;border-radius:var(--krds-radius-medium)">48 → 6</div>
+      <div style="width:12rem;height:8rem;border-radius:var(--krds-radius-large)">80 → 10</div>
+      <div style="width:16rem;height:12rem;border-radius:var(--krds-radius-xlarge)">120 → 12</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>엘리베이션</h2>
+    <div class="sunken">
+      <p style="margin-bottom:var(--krds-number-8)">레벨 −1: 묶음 영역</p>
+      <div class="cards">
+        <div class="card e1"><h3>+1 기본</h3><p>카드·탭·메뉴. 표면 색으로 구분.</p></div>
+        <div class="card e2"><h3>+2 펼침</h3><p>셀렉트·드롭다운. shadow-2.</p></div>
+        <div class="card e3"><h3>+3 주목</h3><p>툴팁·패널. shadow-3.</p></div>
+        <div class="card e4"><h3>+4 최상위</h3><p>모달(딤드 함께). shadow-4.</p></div>
+      </div>
+    </div>
+    <p style="margin-top:var(--krds-number-8)">선명한 화면 모드에서는 그림자 대신 경계선이 높이를 표시한다.</p>
+  </section>
+
+  <section>
+    <h2>시스템 색과 아이콘</h2>
+    <div class="alert danger" role="alert"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/></svg><span><strong>오류</strong> 필수 항목이 비어 있다. 색과 함께 아이콘·문구로 알린다.</span></div>
+    <div class="alert info"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.5v.01"/></svg><span><strong>안내</strong> 접수는 11월 30일까지. <span class="badge">NEW</span> 강조 색은 화면의 5% 이하.</span></div>
+    <h3>시스템 아이콘 24px · 선 1.6px · 둥근 끝</h3>
+    <div class="icons" aria-hidden="true">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg>
+      <svg class="icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      <svg class="icon" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-8 8M17 14v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h4"/></svg>
+      <svg class="icon" viewBox="0 0 24 24"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"/><circle cx="12" cy="12" r="2.5"/><path d="M4 4l16 16"/></svg>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="inner">
+    <p><strong>[운영 주체]</strong> · [주소] · [연락처]</p>
+    <p><a href="https://www.krds.go.kr/html/site/style/style_01.html" target="_blank" rel="noopener" title="새 창 열림">KRDS 디자인 스타일</a>을 따르는 비공식 견본이다. 대학의 공식 디자인 규정이 아니다.</p>
+  </div>
+</footer>
+
+<script>
+  // Palette ramps are drawn from the CSS custom properties so they always match tokens/.
+  const steps = [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95];
+  const families = [['primary', 'GNU Blue'], ['secondary', 'GNU Grey'], ['point', 'Gold'], ['gray', 'Gray (KRDS)']];
+  function drawRamps() {
+    const mode = document.documentElement.dataset.krdsMode === 'high-contrast' ? 'high-contrast' : 'light';
+    const css = getComputedStyle(document.documentElement);
+    const host = document.getElementById('ramps');
+    host.textContent = '';
+    for (const [name, label] of families) {
+      const title = document.createElement('p');
+      title.className = 'ramp-name';
+      title.textContent = `${name} — ${label}`;
+      const ramp = document.createElement('div');
+      ramp.className = 'ramp';
+      for (const s of steps) {
+        const value = css.getPropertyValue(`--krds-color-${mode}-${name}-${s}`).trim();
+        const cell = document.createElement('div');
+        cell.style.background = value;
+        cell.style.color = s >= 50 ? '#fff' : '#1e2124';
+        cell.textContent = `${s} ${value}`;
+        ramp.append(cell);
+      }
+      host.append(title, ramp);
+    }
+  }
+  document.querySelectorAll('[data-mode]').forEach((btn) => btn.addEventListener('click', () => {
+    document.documentElement.dataset.krdsMode = btn.dataset.mode;
+    document.querySelectorAll('[data-mode]').forEach((b) => {
+      b.setAttribute('aria-pressed', String(b === btn));
+      b.setAttribute('aria-selected', String(b === btn));
+    });
+    drawRamps();
+  }));
+  document.querySelector('[data-mode="light"]').setAttribute('aria-selected', 'true');
+  drawRamps();
+</script>
+</body>
+</html>
