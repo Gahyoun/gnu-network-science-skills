@@ -22,7 +22,6 @@
     "label": "[발표자 연락처]",
     "src": null
   },
-  "character": null,
   "slides": [
     {
       "layout": "cover",
@@ -59,8 +58,7 @@
     {
       "layout": "closing",
       "title": "[마무리 문구 또는 질의응답]",
-      "body": "[발표자 이메일]\n\n[자료 주소]",
-      "character": true
+      "body": "[발표자 이메일]\n\n[자료 주소]"
     }
   ]
 }

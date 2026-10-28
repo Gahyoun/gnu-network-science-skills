@@ -102,22 +102,13 @@ class Builder:
         return f'<img class="{cls}" alt="{alt}" src="{self.image_uri(path)}">'
 
     def picture(self, spec, cls, alt=''):
-        """Optional user image (character, QR, figure). spec: path or {src, alt}."""
+        """Optional user image (QR, figure, decoration). spec: path or {src, alt}."""
         if not spec:
             return ''
         if isinstance(spec, str):
             spec = {'src': spec}
         alt = spec.get('alt', alt)
         return f'<img class="{cls}" alt="{self.esc(alt)}" src="{self.image_uri(spec["src"])}">'
-
-    def character(self, cls):
-        spec = self.data.get('character')
-        if not spec:
-            return ''
-        if isinstance(spec, str):
-            spec = {'src': spec}
-        # 장식용 캐릭터는 보조기기가 읽지 않도록 빈 대체텍스트를 기본으로 한다.
-        return self.picture({'src': spec['src'], 'alt': spec.get('alt', '')}, cls)
 
     def font_css(self):
         if self.fonts == 'system':
@@ -207,7 +198,7 @@ class Builder:
         return bool(value) and not self.no_logo
 
     def decoration(self):
-        """Opt-in approved school image or motif in the body margin (not a character)."""
+        """Opt-in approved school image or motif in the body margin."""
         src = self.data.get('decoration_image')
         if not src:
             return ''
@@ -262,7 +253,7 @@ class Builder:
             info = f'<div class="form-info">{foot_text}</div>' if foot_text else ''
             gap = f'<div class="slogan-gap">{self.logo("slogan")}</div>' if not self.no_logo else ''
             return (f'<div class="form-frame">{gap}'
-                    f'<div class="sheet-body">{title}{body}</div>{info}{self.character("form-mascot")}</div>'
+                    f'<div class="sheet-body">{title}{body}</div>{info}</div>'
                     f'<div class="form-band">{self.logo("signature-white")}</div>')
         band_cls = 'band brand' if style == 'brand' else 'band'
         if kind == 'seminar':
@@ -275,7 +266,7 @@ class Builder:
             head = f'<header class="{band_cls}"><h1>{self.title(d.get("title"))}</h1></header>'
         slogan = self.logo('slogan', 'slogan') if self.wants_slogan() else ''
         foot = (f'<footer class="sheet-foot"><div class="foot-text">{slogan}{foot_text}</div>'
-                f'{self.identity()}{self.character("mascot")}</footer>')
+                f'{self.identity()}</footer>')
         return f'<div class="frame">{head}<div class="sheet-body">{body}</div>{foot}</div>'
 
     def poster(self):
@@ -300,8 +291,7 @@ class Builder:
                 f'</div>{self.qr()}</div></header>')
         ack = f'<p class="ack">{self.inline(d["acknowledgment"])}</p>' if d.get('acknowledgment') else ''
         foot = (f'<footer class="poster-foot"><div>{self.references()}{ack}</div><div>'
-                f'<p class="contact">{self.field("contact")}</p>{self.identity()}</div>'
-                f'{self.character("mascot")}</footer>')
+                f'<p class="contact">{self.field("contact")}</p>{self.identity()}</div></footer>')
         grid = f' style="grid-template-columns:repeat({max(1, len(columns))},1fr)"'
         return head + f'<div class="poster-body"{grid}>' + ''.join(cols) + '</div>' + foot
 
@@ -313,16 +303,15 @@ class Builder:
             if s.get('layout') == 'closing':
                 lines = self.paragraphs(s.get('body', ''))
                 body = (f'<div class="cover-frame"></div><div class="cover-body closing"><h1>{self.title(s.get("title"))}</h1>'
-                        f'{lines}</div>{self.character("cover-mascot") if s.get("character") else ""}')
+                        f'{lines}</div>')
                 out.append(f'<section class="slide cover" data-export-page aria-label="슬라이드 {i}">{body}</section>')
                 continue
             if s.get('layout') == 'cover':
                 body = (f'<div class="cover-frame"><div class="gap">{self.logo("signature")}</div></div>'
                         f'<div class="cover-body"><h1>{self.title(s.get("title"))}</h1>'
                         f'<p class="authors">{self.authors()}</p><p class="affiliations">{self.affiliations()}</p>'
-                        f'{self.qr()}</div>{self.character("cover-mascot") if s.get("character") else ""}')
-                extra = ' with-mascot' if s.get('character') and self.data.get('character') else ''
-                out.append(f'<section class="slide cover{extra}" data-export-page aria-label="슬라이드 {i}">{body}</section>')
+                        f'{self.qr()}</div>')
+                out.append(f'<section class="slide cover" data-export-page aria-label="슬라이드 {i}">{body}</section>')
                 continue
             body = f'<h2>{self.inline(s.get("title", ""))}</h2>'
             text = self.paragraphs(s.get('body', ''))
@@ -510,20 +499,14 @@ def main():
     p.add_argument('--output', type=Path, help='HTML 저장 경로')
     p.add_argument('--fonts', choices=('embed', 'link', 'system'), default='embed',
                    help='embed: HTML 한 파일에 폰트 포함(기본), link: assets/fonts 상대경로, system: 설치된 폰트만')
-    p.add_argument('--character', help='지누 등 캐릭터 PNG·SVG 경로. JSON의 character 값보다 우선')
     p.add_argument('--no-logo', action='store_true', help='로고 그림 대신 대학명 텍스트(FLY WITH GNU도 생략)')
     p.add_argument('--orientation', choices=('portrait', 'landscape'),
                    help='A4 방향(flyer·seminar). 기본은 JSON의 orientation, 없으면 portrait')
     a = p.parse_args()
     source = a.data or ROOT / 'data' / f'{a.kind}.json'
     data = json.loads(source.read_text(encoding='utf-8'))
-    if a.character:
-        data['character'] = {'src': str(Path(a.character).resolve())}
     suffix = '-landscape' if (a.orientation or data.get('orientation') or 'portrait') == 'landscape' else ''
     out = a.output or ROOT / 'out' / f'{a.kind}{suffix}.html'
-    if data.get('character') and data.get('decoration_image'):
-        print('주의: 캐릭터와 장식 이미지를 한 쪽에 함께 넣었습니다. DESIGN.md 6장은 하나만 쓰도록 권합니다.',
-              file=sys.stderr)
     out.parent.mkdir(parents=True, exist_ok=True)
     builder = Builder(a.kind, data, source.resolve().parent, a.fonts, out, a.no_logo, a.orientation)
     out.write_text(builder.build(), encoding='utf-8')

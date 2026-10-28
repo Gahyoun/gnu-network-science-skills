@@ -2,7 +2,7 @@
 
 경상국립대학교 학교테마로 A4 세로·가로 홍보문과 세미나 안내문, A0 학술포스터, 16:9 HTML 발표자료, KRDS(대한민국 정부 디자인 시스템) 구조에 GNU 색을 입힌 웹페이지를 만드는 도구입니다. 결과는 **HTML·PDF·PNG**로 저장합니다. 교내 구성원의 학술·공익 목적 제작을 돕는 비공식 자료입니다.
 
-[디자인 지침 DESIGN.md](DESIGN.md) · [요청문 예시](references/prompts.md) · [공식 자산 목록](assets/catalog.md) · [캐릭터 지누](assets/character/README.md) · [검증 기록](references/validation.md)
+[디자인 지침 DESIGN.md](DESIGN.md) · [요청문 예시](references/prompts.md) · [공식 자산 목록](assets/catalog.md) · [검증 기록](references/validation.md)
 
 | A4 세미나 안내 | A4 홍보문 | 공식 서식형 안내문 |
 |---|---|---|
@@ -18,8 +18,7 @@ A0 포스터·발표 본문·웹페이지 미리보기: [poster.png](examples/po
 
 - **학교 양식**: 학과 세미나 안내문의 청색 제목 띠와 하단 FLY WITH G.N.U·시그니처+학과명(세로·가로), 공식 안내문 서식(그라데이션 테두리·띠), 테두리 선이 GNU 심벌로 이어지는 발표·포스터 표지, KRDS HTML 컴포넌트 키트와 같은 마크업·간격의 웹(로고 없이 운영 주체를 글자로 표시, 색은 GNU Blue·Grey·Gold로 만든 KRDS 단계).
 - **공식 자산**: 대학 공개 VI 원본(AI·PDF·PNG), 홈페이지 헤더 로고, 그중 필요한 로고를 원본 벡터 그대로 잘라 낸 SVG 4종.
-- **서체**: Noto Sans KR(국문 지정서체), SUIT(영문 지정서체), SUITE(홈페이지 메뉴·제목). 모두 OFL이며 HTML에 포함되어 어느 PC에서나 같은 모양으로 출력됩니다.
-- **캐릭터 지누·누누**: 공식 페이지에서 원본을 받아 오는 명령과 배치 자리, 사용 규칙. [아래 참고](#지누-캐릭터)
+- **서체**: Noto Sans KR(국문 지정서체), SUIT(영문 지정서체), SUITE(홈페이지 메뉴·제목), Pretendard GOV(KRDS 웹 기본). 모두 OFL이며 HTML에 포함되어 어느 PC에서나 같은 모양으로 출력됩니다.
 - **AI 티 줄이기**: 후크 문구·말풍선·둥근 카드·그라데이션 장식을 쓰지 않는 규칙과, 글자 넘침·그림 겹침을 잡는 출력 검사.
 
 ## AI에게 맡기기
@@ -46,7 +45,7 @@ A0 포스터·발표 본문·웹페이지 미리보기: [poster.png](examples/po
 스킬 업로드가 켜진 계정이면 ZIP으로 올립니다. 설정 위치와 용량 제한은 [Claude 도움말](https://support.claude.com/en/articles/12512180-use-skills-in-claude)을 따릅니다.
 
 ```bash
-python3 scripts/package.py --lite   # dist/gnu-template-lite.zip (공식 원본 AI·PDF·JPG, 캐릭터 원본, 예시 PDF·PNG 제외)
+python3 scripts/package.py --lite   # dist/gnu-template-lite.zip (공식 원본 AI·PDF·JPG, 예시 PDF·PNG 제외)
 python3 scripts/package.py          # dist/gnu-template.zip (전체)
 ```
 
@@ -97,23 +96,12 @@ node scripts/export.mjs out/seminar.html out/  # seminar.html · seminar.pdf · 
 
 `--fonts link`는 폰트를 넣지 않고 `assets/fonts`를 가리키는 가벼운 HTML을 만듭니다(예시 파일이 이 방식). `export.mjs`가 저장하는 HTML에는 폰트와 로컬 그림이 다시 포함됩니다. `--no-logo`는 로고 대신 대학명 텍스트를 씁니다.
 
-출력 검사는 외부 리소스, 깨진 그림, 글자 넘침, 종이 밖 글자, 로고·캐릭터가 글자를 가리는 경우를 찾아 멈춥니다. 내용이 넘치면 글자를 줄이기보다 문장을 다듬거나 쪽을 나누세요. Chrome을 쓰려면 `GNU_BROWSER_CHANNEL=chrome`, 특정 실행 파일은 `GNU_BROWSER_PATH=/경로`를 앞에 붙입니다.
+출력 검사는 외부 리소스, 깨진 그림, 글자 넘침, 종이 밖 글자, 로고·그림이 글자를 가리는 경우를 찾아 멈춥니다. 내용이 넘치면 글자를 줄이기보다 문장을 다듬거나 쪽을 나누세요. Chrome을 쓰려면 `GNU_BROWSER_CHANNEL=chrome`, 특정 실행 파일은 `GNU_BROWSER_PATH=/경로`를 앞에 붙입니다.
 
 브라우저로 직접 PDF를 만들 때는 배율 100%, 여백 없음, 배경 그래픽 켜기, 머리말·꼬리말 끄기. A0 포스터 인쇄는 벡터 PDF를 쓰고 CMYK 변환은 인쇄소 프로파일로 합니다.
 
-## 지누 캐릭터
-
-캐릭터 원본은 저장소에 아직 들어 있지 않을 수 있습니다. 학교 사이트에 접속되는 PC에서 한 번 실행하면 공식 페이지의 내려받기 파일을 `assets/character/official/`에 저장하고 출처·SHA-256을 기록합니다.
-
-```bash
-python3 scripts/assets.py --fetch-character --dry-run   # 목록 확인
-python3 scripts/assets.py --fetch-character
-```
-
-AI 원본에서 한 자세를 SVG로 잘라 넣는 방법과 규칙은 [assets/character/README.md](assets/character/README.md), [DESIGN.md 6장](DESIGN.md#6-캐릭터-지누누누)에 있습니다. 한 쪽에 한 자세, 오른쪽 아래, 말풍선·대사·재작화·반전·색 변경 없이 씁니다. 웹페이지에는 넣지 않습니다.
-
 ## 권리와 범위
 
-이 폴더의 코드·문서는 저장소의 GPL-3.0을 따릅니다. 대학 로고·슬로건·교화·캐릭터는 경상국립대학교의 자산이며 이 라이선스가 그 이용을 허락하지 않습니다. 서체는 각 OFL을 따릅니다. 대학 명의 공식 홍보물이나 상업적 사용은 담당 부서와 협의하세요. 공식 규정·홈페이지 관찰값·이 도구의 제안값은 [근거 기록](references/source-notes.md)에서 구분합니다.
+이 폴더의 코드·문서는 저장소의 GPL-3.0을 따릅니다. 대학 로고·슬로건·교화는 경상국립대학교의 자산이며 이 라이선스가 그 이용을 허락하지 않습니다. 서체는 각 OFL을 따릅니다. 대학 명의 공식 홍보물이나 상업적 사용은 담당 부서와 협의하세요. 공식 규정·홈페이지 관찰값·이 도구의 제안값은 [근거 기록](references/source-notes.md)에서 구분합니다.
 
 이 도구는 학교의 공식 승인 도구가 아닙니다. 확인 범위는 [검증 기록](references/validation.md)에 있습니다.

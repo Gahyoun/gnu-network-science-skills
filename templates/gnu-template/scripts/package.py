@@ -2,7 +2,7 @@
 """Zip this skill folder for upload (e.g. Claude 웹앱 스킬, 다른 사람에게 전달).
 
     python3 scripts/package.py            # dist/gnu-template.zip (전체)
-    python3 scripts/package.py --lite     # Illustrator·캐릭터 원본과 예시 PDF·PNG 제외
+    python3 scripts/package.py --lite     # Illustrator 원본과 예시 PDF·PNG 제외
 
 ZIP 최상위에 gnu-template/SKILL.md가 오도록 만든다.
 """
@@ -21,8 +21,6 @@ def wanted(path, lite):
         return False
     if lite:
         if rel.parts[:2] == ('assets', 'official') and path.suffix.lower() in ('.ai', '.jpg', '.pdf'):
-            return False
-        if rel.parts[:3] == ('assets', 'character', 'official') and path.name != '.gitkeep':
             return False
         if rel.parts[0] == 'examples' and path.suffix.lower() in ('.pdf', '.png'):
             return False

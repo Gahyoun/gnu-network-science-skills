@@ -2,7 +2,7 @@
 
 대학 공식 공개 페이지에서 받은 원본을 변경 없이 보관했다. 파일별 출처·SHA-256은 [manifest.json](manifest.json)에 있다. `.ai`는 Adobe Illustrator 원본이며 생성형 AI 이미지라는 뜻이 아니다.
 
-도안 시트에서는 필요한 완성형 하나를 선택해서 사용한다. 캐릭터 지누·누누 원본은 [character/](character/README.md)에 따로 모은다. [선택·출력 방법](../references/asset-usage.md) · [색상·꽃 모티프](../references/brand-variants.md)
+도안 시트에서는 필요한 완성형 하나를 선택해서 사용한다. [선택·출력 방법](../references/asset-usage.md) · [색상·꽃 모티프](../references/brand-variants.md)
 
 | 원본 | 파일 | 출처 |
 |---|---|---|

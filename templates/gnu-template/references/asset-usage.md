@@ -2,7 +2,7 @@
 
 `assets/official/`은 대학 공개 다운로드에서 받은 VI 원본이다. `.ai`는 Adobe Illustrator 문서이며 인공지능 생성 이미지라는 뜻이 아니다. 일부 파일명은 찾기 쉽게 바꿨지만 내용은 그대로다. 원래 파일명·URL·출처·SHA-256은 `assets/manifest.json`에 있다.
 
-이 폴더는 학교가 승인한 배포물이 아니다. 로고·모티프·교화·캐릭터의 권리는 원 권리자에게 있고, 저장소의 소프트웨어 라이선스가 그 이용을 허락하지 않는다. 최신 이용 조건은 [공식 VI 페이지](https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369)에서 확인한다.
+이 폴더는 학교가 승인한 배포물이 아니다. 로고·모티프·교화의 권리는 원 권리자에게 있고, 저장소의 소프트웨어 라이선스가 그 이용을 허락하지 않는다. 최신 이용 조건은 [공식 VI 페이지](https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369)에서 확인한다.
 
 ## 이미 준비된 HTML용 사본
 
@@ -19,7 +19,7 @@
 
 ## 장식 이미지
 
-학교 이미지·꽃 모티프는 사용자가 장식을 요청했을 때만 A4 본문 오른쪽 아래 여백에 넣는다. 원본 시트에서 완성 도안 하나를 SVG·PNG로 출력하고 JSON의 `decoration_image`에 경로, `decoration_alt`에 대체텍스트(장식이면 빈 값)를 넣는다. 지누는 이 자리가 아니라 `--character`로 넣는다(DESIGN.md 6장).
+학교 이미지·꽃 모티프는 사용자가 장식을 요청했을 때만 A4 본문 오른쪽 아래 여백에 넣는다. 원본 시트에서 완성 도안 하나를 SVG·PNG로 출력하고 JSON의 `decoration_image`에 경로, `decoration_alt`에 대체텍스트(장식이면 빈 값)를 넣는다.
 
 ## 새 도안이 필요할 때
 
@@ -34,6 +34,5 @@
 
 - `python3 scripts/assets.py`: 오프라인으로 파일 헤더와 SHA-256을 검사한다.
 - `python3 scripts/assets.py --download`: manifest에 있으나 빠진 파일만 받는다. 기존 파일은 덮어쓰지 않는다.
-- `python3 scripts/assets.py --fetch-character`: 공식 캐릭터 페이지의 내려받기 파일을 `assets/character/official/`에 저장하고 manifest에 기록한다.
 
 파일 검증이 Illustrator의 모든 레이어 편집 가능성을 보장하지는 않는다.

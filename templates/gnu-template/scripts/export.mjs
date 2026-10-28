@@ -70,7 +70,7 @@ try {
         if (box.scrollHeight > box.clientHeight + 2) bad.push(`본문 영역 넘침(${box.className}): 내용을 줄이거나 쪽을 나누세요.`);
       }
       const hit = (a, b) => a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1;
-      const pictures = [...el.querySelectorAll('img.logo,img.mascot,img.form-mascot,img.cover-mascot,img.slogan,img.decoration-image,img.qr-image,img.figure-image')]
+      const pictures = [...el.querySelectorAll('img.logo,img.slogan,img.decoration-image,img.qr-image,img.figure-image')]
         .filter(im => im.offsetParent !== null);
       for (const im of pictures) {
         const r = im.getBoundingClientRect();

@@ -32,7 +32,6 @@ img{max-width:100%;height:auto}
 .sheet.a4{width:210mm;height:297mm;padding:10mm}
 .figure-slot{border:1px solid #b1b8be;background:#fafafa;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--ui-subtle)}
 .figure img{display:block;width:100%;height:auto}
-.mascot{display:block;width:auto;object-fit:contain}
 
 /* ── A4 안내문: 청색 제목 띠(기본) ──────────── */
 .frame{flex:1;display:flex;flex-direction:column;border:2px solid var(--gnu-blue);min-height:0}
@@ -65,7 +64,6 @@ img{max-width:100%;height:auto}
 .identity{display:flex;align-items:flex-end;gap:2.6mm}
 .identity .logo{height:9.2mm;width:auto}
 .identity .unit{font-family:var(--font-kr);font-weight:700;font-size:15pt;line-height:1;color:var(--gnu-grey);letter-spacing:-.01em;padding-bottom:.4mm}
-.sheet-foot .mascot{height:34mm;margin-bottom:-4mm;margin-top:-12mm}
 
 /* ── A4 가로(297×210mm) ─────────────────── */
 .sheet.a4.landscape{width:297mm;height:210mm;padding:9mm}
@@ -77,7 +75,6 @@ img{max-width:100%;height:auto}
 .landscape .abstract p{font-size:11pt;line-height:1.75;margin-bottom:1.6mm}
 .landscape .facts{grid-template-columns:max-content 1fr max-content 1fr;column-gap:5mm;row-gap:4mm;font-size:14pt}
 .landscape .sheet-foot{min-height:16mm;padding:0 6mm 3mm 9mm}
-.landscape .sheet-foot .mascot{height:30mm;margin-top:-12mm;margin-bottom:-3mm}
 .landscape .identity .logo{height:8.4mm}
 .landscape .identity .unit{font-size:13.5pt}
 .seminar-layout{display:grid;grid-template-columns:minmax(0,1fr) 62mm;gap:9mm;align-items:start}
@@ -89,7 +86,7 @@ img{max-width:100%;height:auto}
 .facts-list dt:first-child{margin-top:0}
 .facts-list dd{margin-top:.6mm}
 
-/* 요청이 있을 때만 넣는 승인된 학교 이미지·공식 모티프(캐릭터 아님) */
+/* 요청이 있을 때만 넣는 승인된 학교 이미지·공식 모티프 */
 .paper-decoration{margin-top:auto;align-self:flex-end;line-height:0}
 .paper-decoration img{display:block;max-width:60mm;max-height:32mm;width:auto;height:auto;object-fit:contain}
 .landscape .paper-decoration img{max-width:70mm;max-height:24mm}
@@ -109,7 +106,6 @@ img{max-width:100%;height:auto}
 .form-info{padding:0 10mm 4mm;font-size:10pt;line-height:1.45;color:var(--ui-subtle)}
 .form-info strong{display:block;font-size:11pt;color:var(--ui-text)}
 .form-band .logo{height:9mm;width:auto}
-.form-mascot{position:absolute;right:6mm;bottom:0;height:34mm}
 
 /* ── A0 학술포스터 ─────────────────────────── */
 .sheet.poster{width:841mm;height:1189mm;padding:24mm 26mm 20mm}
@@ -147,7 +143,6 @@ html[lang=en] .poster section p{word-break:normal;hyphens:auto}
 .poster-foot .ack{font-size:15pt;margin-top:3mm}
 .poster-foot .identity .logo{height:15mm}
 .poster-foot .identity .unit{font-size:24pt}
-.poster-foot .mascot{height:70mm;margin-bottom:-6mm}
 .poster-foot .contact{font-size:17pt;text-align:right;margin-bottom:4mm}
 
 /* ── 16:9 발표자료 ─────────────────────────── */
@@ -178,8 +173,6 @@ html[lang=en] .poster section p{word-break:normal;hyphens:auto}
 .cover-body.closing{top:36%;align-items:flex-start}
 .cover-body.closing h1{font-weight:700;margin-bottom:3cqw}
 .cover-body.closing p{font-size:1.9cqw;margin-bottom:.6cqw}
-.cover-mascot{position:absolute;right:8%;bottom:calc(9.5% + .42cqw);height:24%;width:auto}
-.slide.cover.with-mascot .cover-body .qr{right:auto;left:0;flex-direction:row-reverse;text-align:left}
 .deck-controls{display:flex;gap:12px;align-items:center;max-width:1280px;margin:16px auto 0;padding:0 16px;font-size:14px;color:var(--ui-subtle)}
 .deck-controls button{font:inherit;border:1px solid #9aa1a7;background:#fff;color:#222;padding:8px 14px;cursor:pointer;border-radius:2px;min-height:40px}
 .deck-controls button:disabled{color:#767676;cursor:default}

@@ -185,11 +185,11 @@ def derive(pdf, x, y, w, h, map_colours=True, page=1):
 def main():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog='예) 캐릭터 AI에서 한 자세만 SVG로:\n'
-               '  python3 scripts/derive_svg.py --source "assets/character/official/지누.ai" --preview out/jinu.png\n'
+        epilog='예) 그래픽 모티프 AI에서 도안 하나만 SVG로:\n'
+               '  python3 scripts/derive_svg.py --source "assets/official/BS23 그래픽 모티프E-교화.ai" --preview out/motif.png\n'
                '  (PNG의 픽셀 좌표 = PDF pt 좌표. 원하는 도안을 감싸는 영역을 확인한 뒤)\n'
-               '  python3 scripts/derive_svg.py --source "assets/character/official/지누.ai" '
-               '--crop 40 60 180 220 --output assets/character/derived/jinu-basic.svg')
+               '  python3 scripts/derive_svg.py --source "assets/official/BS23 그래픽 모티프E-교화.ai" '
+               '--crop 40 60 180 220 --output out/motif.svg')
     parser.add_argument('preset', nargs='?', choices=sorted(PRESETS), help='수록된 학교 로고 출력 사본')
     parser.add_argument('--source', type=Path, help='임의의 AI(PDF 호환)·PDF 파일')
     parser.add_argument('--crop', type=float, nargs=4, metavar=('X', 'Y', 'W', 'H'), help='선택 영역(pt)')
@@ -209,7 +209,7 @@ def main():
             return
         if not args.crop or not args.output:
             parser.error('--source에는 --preview 또는 --crop과 --output이 필요합니다.')
-        # 캐릭터·기타 도안은 선(stroke)도 그림의 일부이고, 색도 원본 그대로 둔다.
+        # 모티프 등 기타 도안은 선(stroke)도 그림의 일부이고, 색도 원본 그대로 둔다.
         global KEEP_STROKES
         KEEP_STROKES = True
         svg = derive(source, *args.crop, map_colours=False, page=args.page)
