@@ -4,15 +4,26 @@
 KRDS numbers each color step by its contrast with white ("magic number"):
 40 >= 3:1, 50 >= 4.5:1, 70 >= 7:1, 90 >= 15:1. This script keeps the hue of each
 GNU official color (VI BS13) and solves OKLCH lightness so that every step has the
-same relative luminance as the KRDS step it replaces. Standard library only.
+same relative luminance as the KRDS step it replaces.
 
+The color math is the same as gnu-template/scripts/gnu_palette.py (coloraide, OKLCH,
+default sRGB gamut fit), so both folders get identical hex values; main() checks this.
+
+    pip install coloraide
     python3 scripts/build_tokens.py          # writes tokens/primitives.css, tokens/tokens.json
     python3 scripts/build_tokens.py --check  # only prints the contrast report
+
+Maintainer tool. The generated files are committed, so users do not need coloraide.
 """
 import json
-import math
+import re
 import sys
 from pathlib import Path
+
+try:
+    from coloraide import Color
+except ImportError as exc:  # pragma: no cover
+    raise SystemExit('pip install coloraide 가 필요합니다.') from exc
 
 ROOT = Path(__file__).resolve().parents[1]
 STEPS = (5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95)
@@ -42,28 +53,10 @@ KRDS_FIXED = {
 }
 
 
-# --- color math (sRGB <-> OKLab, WCAG luminance) -------------------------------------------
-
-def hex_to_rgb(h):
-    h = h.lstrip('#')
-    return [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
-
-
-def rgb_to_hex(rgb):
-    return '#' + ''.join(f'{round(min(1, max(0, c)) * 255):02x}' for c in rgb)
-
-
-def to_linear(c):
-    return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
-
-
-def from_linear(c):
-    return 12.92 * c if c <= 0.0031308 else 1.055 * c ** (1 / 2.4) - 0.055
-
+# --- color math (same calls as gnu-template/scripts/gnu_palette.py) -----------------------
 
 def luminance(h):
-    r, g, b = (to_linear(c) for c in hex_to_rgb(h))
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+    return Color(h).luminance()
 
 
 def contrast(a, b='#ffffff'):
@@ -71,58 +64,31 @@ def contrast(a, b='#ffffff'):
     return (max(la, lb) + 0.05) / (min(la, lb) + 0.05)
 
 
-def hex_to_oklch(h):
-    r, g, b = (to_linear(c) for c in hex_to_rgb(h))
-    l = (0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b) ** (1 / 3)
-    m = (0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b) ** (1 / 3)
-    s = (0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b) ** (1 / 3)
-    L = 0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s
-    A = 1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s
-    B = 0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s
-    return L, math.hypot(A, B), math.degrees(math.atan2(B, A)) % 360
-
-
-def oklch_to_linear(L, C, H):
-    A, B = C * math.cos(math.radians(H)), C * math.sin(math.radians(H))
-    l = (L + 0.3963377774 * A + 0.2158037573 * B) ** 3
-    m = (L - 0.1055613458 * A - 0.0638541728 * B) ** 3
-    s = (L - 0.0894841775 * A - 1.2914855480 * B) ** 3
-    return [4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
-            -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
-            -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s]
-
-
-def oklch_to_hex(L, C, H):
-    """Reduce chroma until the color fits in sRGB (keeps hue and lightness)."""
-    lo, hi = 0.0, C
-    if all(-1e-6 <= c <= 1 + 1e-6 for c in oklch_to_linear(L, C, H)):
-        lo = C
-    else:
-        for _ in range(40):
-            mid = (lo + hi) / 2
-            if all(-1e-6 <= c <= 1 + 1e-6 for c in oklch_to_linear(L, mid, H)):
-                lo = mid
-            else:
-                hi = mid
-    return rgb_to_hex([from_linear(min(1, max(0, c))) for c in oklch_to_linear(L, lo, H)])
+def oklch(lightness, chroma, hue):
+    return Color('oklch', [lightness, chroma, hue]).fit('srgb')
 
 
 def solve(hue, chroma, target_lum):
     lo, hi = 0.0, 1.0
-    for _ in range(50):
+    for _ in range(60):  # bisection on OKLCH lightness, chroma fitted into sRGB
         mid = (lo + hi) / 2
-        if luminance(oklch_to_hex(mid, chroma, hue)) < target_lum:
+        if oklch(mid, chroma, hue).luminance() < target_lum:
             lo = mid
         else:
             hi = mid
-    return oklch_to_hex((lo + hi) / 2, chroma, hue)
+    return oklch((lo + hi) / 2, chroma, hue).convert('srgb').to_string(hex=True)
+
+
+def lch(h):
+    c = Color(h).convert('oklch')
+    return c['chroma'], c['hue']
 
 
 def scale(seed, refs, chroma_from_ref=False):
-    _, seed_c, seed_h = hex_to_oklch(seed)
+    seed_c, seed_h = lch(seed)
     out = {}
     for step, ref in zip(STEPS, refs.split()):
-        chroma = hex_to_oklch(ref)[1] if chroma_from_ref else seed_c
+        chroma = lch(ref)[0] if chroma_from_ref else seed_c
         out[step] = solve(seed_h, chroma, luminance(ref))
     return out
 
@@ -144,7 +110,7 @@ def build():
         light[name] = hc[name] = fixed(name)
     # Graphic (charts, banners, illustrations): GNU Blue hue toned down to 40 % chroma,
     # the same move KRDS makes for its own graphic palette.
-    _, c, h = hex_to_oklch(GNU['blue'])
+    c, h = lch(GNU['blue'])
     graphic = {}
     for step, ref in zip(STEPS, KRDS_LIGHT['primary'].split()):
         if step in (10, 30, 50, 70, 90):
@@ -198,15 +164,29 @@ def write(light, hc, graphic):
     (ROOT / 'tokens/tokens.json').write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
 
+def check_gnu_template(light):
+    """The sibling gnu-template must carry the same light primary/secondary/point values."""
+    path = ROOT.parent / 'gnu-template/assets/krds/krds-gnu-tokens.css'
+    if not path.exists():
+        return True
+    theirs = dict(re.findall(r'--krds-color-light-(\w+-\d+):\s*(#[0-9a-f]{6})', path.read_text(encoding='utf-8')))
+    diff = [f'{name}-{step}: {value} != {theirs.get(f"{name}-{step}")}'
+            for name in ('primary', 'secondary', 'point') for step, value in light[name].items()
+            if theirs.get(f'{name}-{step}') != value]
+    print('gnu-template tokens:', 'identical' if not diff else 'DIFFER\n  ' + '\n  '.join(diff))
+    return not diff
+
+
 def main():
     light, hc, graphic = build()
     ok, rows = report(light, hc)
     print('\n'.join(rows))
+    ok &= check_gnu_template(light)
     if '--check' not in sys.argv:
         write(light, hc, graphic)
         print('wrote tokens/primitives.css, tokens/tokens.json')
     if not ok:
-        raise SystemExit('magic number check failed')
+        raise SystemExit('check failed')
 
 
 if __name__ == '__main__':

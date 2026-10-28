@@ -19,6 +19,6 @@ KRDS 디자인 스타일 규칙(색상·타이포그래피·형태·레이아웃
 | 9장 디자인 토큰 | 1층(primitive)만 바꾸고 의미·컴포넌트 토큰은 키트 이름 그대로 |
 | 12장 점검표 | 웹 결과물도 같은 점검표로 확인한다. 추가로 읽기용 PDF에서는 메뉴류를 뺀다(DESIGN.md 6장) |
 
-## 두 폴더의 색 값 차이
+## 두 폴더의 색 값
 
-`krds-gnu-tokens.css`(coloraide의 CSS 색역 매핑)와 `krds-design-system/tokens/primitives.css`(채도만 줄이는 매핑)는 일부 단계에서 hex 한 자리가 다르다(예: primary-50 `#007EB0` / `#007FB0`). 둘 다 같은 매직넘버를 지키므로 한 결과물 안에서는 한쪽만 쓴다. gnu-template 예시 PNG는 `krds-gnu-tokens.css` 기준이다.
+`krds-gnu-tokens.css`와 `krds-design-system/tokens/primitives.css`의 기본 모드 primary·secondary·point 33개 값은 같다(예: primary-50 `#007EB0`). 두 스크립트가 같은 계산을 쓰고, `krds-design-system/scripts/build_tokens.py`가 실행할 때마다 일치 여부를 검사한다. 색을 바꿀 때는 두 스크립트를 함께 고치고 둘 다 다시 실행한다.

@@ -8,7 +8,7 @@ KRDS(대한민국 정부 디자인 시스템) [디자인 스타일](https://www.
 | [`tokens/primitives.css`](tokens/primitives.css) | 1층 토큰: GNU Blue·Grey·Gold로 만든 primary·secondary·point 단계(기본·선명 모드), KRDS gray·시스템색·alpha, graphic, `--gnu-brand-*` |
 | [`tokens/semantic.css`](tokens/semantic.css) | 2층 토큰: 글자 스케일, number·간격, 래디어스, 아이콘, 색 역할(두 모드), 화면에서 쓰는 별칭 `--gk-*` |
 | [`tokens/tokens.json`](tokens/tokens.json) | 같은 색 값의 JSON (Figma Tokens 등) |
-| [`scripts/build_tokens.py`](scripts/build_tokens.py) | 색 단계 생성·매직넘버 검사. 표준 라이브러리만 사용 |
+| [`scripts/build_tokens.py`](scripts/build_tokens.py) | 색 단계 생성·매직넘버 검사·gnu-template과 값 일치 검사. 관리자용(coloraide 필요) |
 | [`examples/index.html`](examples/index.html) | 스타일 견본 페이지(색·글자·버튼·입력·형태·엘리베이션·시스템색·아이콘, 모드 전환) |
 
 ## 쓰는 법
@@ -33,13 +33,17 @@ KRDS(대한민국 정부 디자인 시스템) [디자인 스타일](https://www.
 
 KRDS 공식 키트([krds-uiux](https://github.com/KRDS-uiux/krds-uiux))를 이미 쓰는 프로젝트: 키트 CSS 다음에 `tokens/primitives.css`만 불러오면 이름이 같아서 색이 GNU로 바뀐다.
 
-색을 다시 만들 때:
+색을 다시 만들 때(관리자용, 생성 파일은 커밋돼 있어 사용자는 필요 없음):
+
+```bash
+pip install coloraide
+```
 
 ```bash
 python3 scripts/build_tokens.py
 ```
 
-매직넘버(40 = 3:1, 50 = 4.5:1, 70 = 7:1, 90 = 15:1)를 못 지키면 실패로 끝난다.
+매직넘버(40 = 3:1, 50 = 4.5:1, 70 = 7:1, 90 = 15:1)를 못 지키거나 `gnu-template/assets/krds/krds-gnu-tokens.css`와 기본 모드 primary·secondary·point 값이 하나라도 다르면 실패로 끝난다. 두 폴더는 같은 계산(coloraide OKLCH, 기본 sRGB 색역 맞춤)을 쓴다.
 
 ## 관계
 
