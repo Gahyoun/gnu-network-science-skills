@@ -4,6 +4,7 @@
 
 - 원본: [KRDS-uiux/krds-uiux](https://github.com/KRDS-uiux/krds-uiux) (`resources/css/token/krds_tokens.css` 2024-12-09 생성본, `resources/css/common/common.css`, `resources/css/component/component.css`, `html/code/*.html`)
 - 문서: [KRDS 누리집](https://www.krds.go.kr/html/site/index.html) · [컴포넌트](https://www.krds.go.kr/html/site/component/component_summary.html) · [디자인 스타일](https://www.krds.go.kr/html/site/style/style_01.html) · [기본 패턴](https://www.krds.go.kr/html/site/global/global_01.html) · [서비스 패턴](https://www.krds.go.kr/html/site/service/service_summary.html)
+- 스타일 규칙 전체(색·글자·형태·레이아웃·아이콘·엘리베이션·고대비·토큰): [krds-style.md](krds-style.md)
 - 구현: `assets/krds/krds-gnu.css`(템플릿용, KRDS 클래스 이름 사용), `assets/krds/krds-gnu-tokens.css`(공식 키트용 색 덮어쓰기)
 
 ## 1. 색: KRDS 단계에 GNU 색 넣기
