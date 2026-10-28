@@ -32,6 +32,8 @@ AI 에게 네트워크 과학을 물어보면 용어를 영어로 섞어 쓰거�
 
 - **`krds-design-system`** — KRDS(정부 디자인 시스템) 디자인 스타일을 지침으로 역산하고 GNU 색·서체를 확장형 스타일로 입힌 웹·앱 화면 디자인 시스템. 매직넘버 대비를 지킨 GNU 색 단계, 선명한 화면 모드, 토큰 CSS/JSON. [지침서](templates/krds-design-system/DESIGN-SYSTEM.md) · [견본](templates/krds-design-system/examples/index.html).
 
+**복원 웹교재** — 정기수 교수님의 「물리의 이해」 [양자통계·응용 8쪽](projects/physics-restoration/README.md)을 GNU 홈페이지형 디자인, 사전 컴파일 LaTeX, HTML 인터랙션으로 복원했습니다. 원저자·원본 출처와 SWF 분석 근거를 기록했습니다.
+
 관련 레포: [`stem-journal-club-deck`](https://github.com/Gahyoun/stem-journal-club-deck) (논문 → 저널클럽 덱).
 
 ---
