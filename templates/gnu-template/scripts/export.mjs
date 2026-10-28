@@ -40,8 +40,11 @@ try {
   const broken = await page.locator('img').evaluateAll(ims => ims.filter(i => !i.complete || !i.naturalWidth).map(i => i.alt || i.className));
   if (broken.length) throw new Error('이미지 로드 실패: ' + broken.join(', '));
   const fonts = await page.evaluate(() => [...document.fonts].map(f => `${f.family.replace(/"/g, '')}:${f.status}`));
+  const failedFonts = fonts.filter(f => f.endsWith(':error'));
+  if (failedFonts.length) throw new Error('서체를 불러오지 못했습니다(대체 서체로 출력됨): ' + failedFonts.join(', ') +
+    '. --fonts embed로 다시 빌드하거나 HTML을 템플릿 폴더 안에 두세요.');
   const kind = await page.locator('meta[name="gnu-template-kind"]').getAttribute('content');
-  const printed = kind === 'web' ? page.locator('.site') : page.locator('[data-export-page]');
+  const printed = kind === 'web' ? page.locator('body') : page.locator('[data-export-page]');
   const count = await printed.count();
   if (!count) throw new Error('출력 페이지가 없습니다.');
 
@@ -62,12 +65,27 @@ try {
         if (!isWeb && (r.bottom > page.bottom + 1 || r.right > page.right + 1)) bad.push('페이지 밖: ' + n.textContent.trim().slice(0, 50));
       }
       if (!isWeb && el.scrollHeight > el.clientHeight + 2) bad.push('지정된 종이 높이 초과: 내용을 줄이거나 페이지를 나누세요.');
+      // A region can overflow into the footer while the page itself still fits.
+      if (!isWeb) for (const box of el.querySelectorAll('.sheet-body,.poster-column,.slide .two-column,.cover-body')) {
+        if (box.scrollHeight > box.clientHeight + 2) bad.push(`본문 영역 넘침(${box.className}): 내용을 줄이거나 쪽을 나누세요.`);
+      }
       const hit = (a, b) => a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1;
-      for (const im of el.querySelectorAll('img.logo,img.mascot,img.form-mascot,img.cover-mascot,img.slogan')) {
+      const pictures = [...el.querySelectorAll('img.logo,img.mascot,img.form-mascot,img.cover-mascot,img.slogan,img.decoration-image,img.qr-image,img.figure-image')]
+        .filter(im => im.offsetParent !== null);
+      for (const im of pictures) {
         const r = im.getBoundingClientRect();
         for (const n of texts) {
           if (im.closest('.identity') && n.closest('.identity')) continue;
-          if (hit(r, n.getBoundingClientRect())) bad.push(`그림이 글자를 가림(${im.className}): ` + n.textContent.trim().slice(0, 40));
+          if (im.closest('.qr') && n.closest('.qr')) continue;
+          if (n.contains(im)) continue;
+          // Compare with the glyph boxes, not the block box: a short line in a full-width <p> leaves the right side free.
+          const range = document.createRange(); range.selectNodeContents(n);
+          if ([...range.getClientRects()].some(t => t.width > 0 && hit(r, t)))
+            bad.push(`그림이 글자를 가림(${im.className}): ` + n.textContent.trim().slice(0, 40));
+        }
+        for (const other of pictures) {
+          if (other !== im && im.compareDocumentPosition(other) & Node.DOCUMENT_POSITION_FOLLOWING && hit(r, other.getBoundingClientRect()))
+            bad.push(`그림끼리 겹침: ${im.className} / ${other.className}`);
         }
       }
       return [...new Set(bad)];
@@ -84,13 +102,27 @@ try {
   const pdf = path.join(output, stem + '.pdf');
   await page.emulateMedia({media: 'print'});
   await page.pdf({path: pdf, preferCSSPageSize: true, printBackground: true, displayHeaderFooter: false});
-  // The saved HTML must open on another PC: inline fonts referenced by relative path.
+  // The saved HTML must open on another PC: inline fonts and local images referenced by relative path.
+  const MIME = {'.woff2': 'font/woff2', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
+                '.svg': 'image/svg+xml', '.webp': 'image/webp', '.gif': 'image/gif'};
+  const local = new Map();
+  for (const m of original.matchAll(/url\((['"]?)([^'")]+)\1\)|<img\b[^>]*?\ssrc=(["'])([^"']+)\3/g)) {
+    const ref = m[2] || m[4];
+    if (/^(data:|https?:|#|\/\/)/i.test(ref)) continue;
+    const type = MIME[path.extname(ref.split(/[?#]/)[0]).toLowerCase()];
+    if (!type) continue;
+    const file = path.resolve(path.dirname(input), decodeURIComponent(ref.split(/[?#]/)[0]));
+    const data = await fs.readFile(file).catch(() => null);
+    if (!data) throw new Error('HTML에 넣을 로컬 파일을 읽지 못했습니다: ' + ref);
+    local.set(ref, `data:${type};base64,${data.toString('base64')}`);
+  }
   let portable = original;
-  for (const [ref, file] of [...original.matchAll(/url\('([^'():]+\.woff2)'\)/g)].map(m => [m[0], m[1]])) {
-    const data = await fs.readFile(path.resolve(path.dirname(input), file)).catch(() => null);
-    if (data) portable = portable.split(ref).join(`url('data:font/woff2;base64,${data.toString('base64')}')`);
+  for (const [ref, uri] of local) {
+    portable = portable.split(`url('${ref}')`).join(`url('${uri}')`).split(`url("${ref}")`).join(`url("${uri}")`)
+      .split(`url(${ref})`).join(`url(${uri})`).split(`src="${ref}"`).join(`src="${uri}"`).split(`src='${ref}'`).join(`src='${uri}'`);
   }
   const html = path.join(output, stem + '.html');
-  if (html !== input) await fs.writeFile(html, portable, 'utf8');
+  // Same folder as the input: replace it with the self-contained version (content unchanged).
+  if (html !== input || portable !== original) await fs.writeFile(html, portable, 'utf8');
   console.log(JSON.stringify({html, pdf, png: sizes, png_scale: scale, kind, fonts}, null, 2));
 } finally { await browser.close(); }

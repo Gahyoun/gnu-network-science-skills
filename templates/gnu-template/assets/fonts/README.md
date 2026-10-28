@@ -5,8 +5,9 @@
 | `NotoSansKR-Variable.subset.woff2` | Noto Sans KR 2.004 가변(100–900) | [google/fonts](https://github.com/google/fonts/tree/main/ofl/notosanskr) `NotoSansKR[wght].ttf` | 라틴, 그리스 문자, 일반 구두점·기호, 화살표·수학 기호, 원문자, CJK 기호, 호환 자모, 완성형 한글 11,172자로 줄여 WOFF2로 저장 |
 | `SUIT-Variable.woff2` | SUIT 2.040 가변(100–900) | [sun-typeface/SUIT](https://github.com/sun-typeface/SUIT) | 원본 그대로 |
 | `SUITE-Variable.woff2` | SUITE 2.040 가변(300–900) | [sun-typeface/SUITE](https://github.com/sun-typeface/SUITE) | 원본 그대로 |
+| `PretendardGOV-{Regular,Medium,Bold}.subset.woff2` | Pretendard GOV 1.3.9 (400·500·700) | npm `pretendard-gov` 1.3.9 `dist/web/static/woff2-subset` (KRDS 키트에 든 파일과 해시 동일) | 저자 배포 subset 그대로 |
 
-모두 SIL Open Font License 1.1이며 라이선스 원문을 같은 폴더에 두었다. SUIT와 SUITE는 예약 서체명(Reserved Font Name)이 있어 줄이거나 고치지 않고 원본 파일을 그대로 넣었다. SUIT·SUITE에 없는 한글 글자는 Noto Sans KR로 표시된다.
+모두 SIL Open Font License 1.1이며 라이선스 원문을 같은 폴더에 두었다. SUIT·SUITE·Pretendard는 예약 서체명(Reserved Font Name)이 있어 줄이거나 고치지 않고 저자 배포 파일을 그대로 넣었다. SUIT·SUITE·Pretendard GOV에 없는 한글 글자는 Noto Sans KR로 표시된다.
 
 Noto Sans KR 사본을 다시 만들 때:
 

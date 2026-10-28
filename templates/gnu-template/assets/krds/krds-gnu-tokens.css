@@ -1,0 +1,46 @@
+@charset "utf-8";
+/* GNU 색으로 바꾼 KRDS 색 단계. scripts/gnu_palette.py가 만든 파일이다. 직접 고치지 않는다.
+   KRDS 공식 키트(krds-uiux)의 krds_tokens.css 다음에 불러오면 primary·secondary·point가 GNU 색으로 바뀐다.
+   단계별 명도(흰 바탕 대비)는 KRDS와 같다. gray·danger·warning·success·information은 KRDS 값을 그대로 쓴다. */
+:root {
+  /* primary: seed #009edb (BS13) */
+  --krds-color-light-primary-5: #e3f4ff;
+  --krds-color-light-primary-10: #c6e9ff;
+  --krds-color-light-primary-20: #8dd5ff;
+  --krds-color-light-primary-30: #3ab9f8;
+  --krds-color-light-primary-40: #0094cd;
+  --krds-color-light-primary-50: #007eb0;
+  --krds-color-light-primary-60: #006189;
+  --krds-color-light-primary-70: #004360;
+  --krds-color-light-primary-80: #002c41;
+  --krds-color-light-primary-90: #001a28;
+  --krds-color-light-primary-95: #00111d;
+  /* secondary: seed #43525a (BS13) */
+  --krds-color-light-secondary-5: #e3f4fe;
+  --krds-color-light-secondary-10: #d0e2eb;
+  --krds-color-light-secondary-20: #baccd5;
+  --krds-color-light-secondary-30: #9fb0b9;
+  --krds-color-light-secondary-40: #85959e;
+  --krds-color-light-secondary-50: #607078;
+  --krds-color-light-secondary-60: #4b5a62;
+  --krds-color-light-secondary-70: #2e3d44;
+  --krds-color-light-secondary-80: #1f2d35;
+  --krds-color-light-secondary-90: #132128;
+  --krds-color-light-secondary-95: #0a171e;
+  /* point: seed #b3a177 (BS13) */
+  --krds-color-light-point-5: #fff1d0;
+  --krds-color-light-point-10: #efdcb0;
+  --krds-color-light-point-20: #cebb90;
+  --krds-color-light-point-30: #af9d73;
+  --krds-color-light-point-40: #938259;
+  --krds-color-light-point-50: #86744c;
+  --krds-color-light-point-60: #6b5a32;
+  --krds-color-light-point-70: #4f3f16;
+  --krds-color-light-point-80: #372800;
+  --krds-color-light-point-90: #211700;
+  --krds-color-light-point-95: #170f00;
+  /* 브랜드 그래픽(글자 아닌 선·도형)에는 공식 GNU Blue를 쓴다. 흰 바탕 3.04:1 */
+  --krds-light-color-graphic-brand: #009edb;
+  --gnu-brand-blue: #009edb;
+  --gnu-brand-grey: #43525a;
+}

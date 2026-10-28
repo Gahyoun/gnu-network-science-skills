@@ -142,10 +142,11 @@ def prune_defs(defs, body):
     return pruned
 
 
-def derive(pdf, x, y, w, h, map_colours=True):
+def derive(pdf, x, y, w, h, map_colours=True, page=1):
     with tempfile.TemporaryDirectory() as tmp:
         out = Path(tmp) / 'page.svg'
-        subprocess.run(['pdftocairo', '-svg', str(pdf), str(out)], check=True)
+        # 한 쪽만 변환한다. 여러 쪽 PDF·여러 대지 AI는 pageSet으로 묶여 좌표가 맞지 않는다.
+        subprocess.run(['pdftocairo', '-svg', '-f', str(page), '-l', str(page), str(pdf), str(out)], check=True)
         tree = ET.parse(out)
     root = tree.getroot()
     defs = root.find('{%s}defs' % SVG)
@@ -192,7 +193,8 @@ def main():
     parser.add_argument('preset', nargs='?', choices=sorted(PRESETS), help='수록된 학교 로고 출력 사본')
     parser.add_argument('--source', type=Path, help='임의의 AI(PDF 호환)·PDF 파일')
     parser.add_argument('--crop', type=float, nargs=4, metavar=('X', 'Y', 'W', 'H'), help='선택 영역(pt)')
-    parser.add_argument('--preview', type=Path, help='--source 첫 쪽을 72dpi PNG로 저장해 좌표 확인')
+    parser.add_argument('--preview', type=Path, help='--source의 해당 쪽을 72dpi PNG로 저장해 좌표 확인')
+    parser.add_argument('--page', type=int, default=1, help='여러 쪽 PDF·여러 대지 AI에서 쓸 쪽 번호(기본 1)')
     parser.add_argument('--output', type=Path)
     parser.add_argument('--keep-pdf-colours', action='store_true', help='프리셋에서도 PDF 변환색 유지')
     args = parser.parse_args()
@@ -201,7 +203,7 @@ def main():
         if args.preview:
             args.preview.parent.mkdir(parents=True, exist_ok=True)
             stem = args.preview.with_suffix('')
-            subprocess.run(['pdftoppm', '-r', '72', '-png', '-f', '1', '-l', '1', '-singlefile',
+            subprocess.run(['pdftoppm', '-r', '72', '-png', '-f', str(args.page), '-l', str(args.page), '-singlefile',
                             str(source), str(stem)], check=True)
             print(stem.with_suffix('.png'))
             return
@@ -210,7 +212,7 @@ def main():
         # 캐릭터·기타 도안은 선(stroke)도 그림의 일부이고, 색도 원본 그대로 둔다.
         global KEEP_STROKES
         KEEP_STROKES = True
-        svg = derive(source, *args.crop, map_colours=False)
+        svg = derive(source, *args.crop, map_colours=False, page=args.page)
         out = args.output
     elif args.preset:
         source, x, y, w, h, _ = PRESETS[args.preset]

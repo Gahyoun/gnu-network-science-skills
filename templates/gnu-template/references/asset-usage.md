@@ -8,12 +8,12 @@
 
 | `assets/derived/` | 원본 | 쓰는 곳 |
 |---|---|---|
-| `gnu-signature.svg` | BS08 국영문 가로조합 | 안내문 하단, 포스터·표지 테두리, 웹 머리글 |
+| `gnu-signature.svg` | BS08 국영문 가로조합 | 안내문 하단, 포스터·표지 테두리 |
 | `gnu-symbol.svg` | BS08 심벌 | 슬라이드 바닥글 |
 | `fly-with-gnu.svg` | 슬로건 BI 가이드 AI(`design system guidelines_fly with gnu_3.ai`) | A4 홍보문·세미나 하단 왼쪽(기본), 서식형 상단 |
 | `emblem-signature-white.svg` | 공식 안내문 서식 | 그라데이션 띠 위 |
 
-웹 머리글에는 홈페이지 헤더 원본 `assets/official/gnu-web-logo.png`를 그대로 쓴다(출처·해시는 manifest.json).
+웹은 기본으로 로고를 넣지 않는다. `"logo": true`일 때만 홈페이지 헤더 원본 `assets/official/gnu-web-logo.png`를 그대로 쓴다(출처·해시는 manifest.json).
 
 다시 만들기: `python3 scripts/derive_svg.py gnu-signature` (나머지도 같은 방식). Poppler `pdftocairo`와 `pip install svgelements`가 필요하다.
 

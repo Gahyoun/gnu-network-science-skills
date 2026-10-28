@@ -16,14 +16,18 @@ import json
 import re
 import subprocess
 import tempfile
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import quote, unquote, urljoin, urlparse
-from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / 'assets/manifest.json'
 HOST = 'www.gnu.ac.kr'
+def today_kst():
+    # 고정 UTC+9: Windows에서 tzdata 없이도 동작한다.
+    return datetime.now(timezone(timedelta(hours=9))).date().isoformat()
+
+
 ALLOWED_DIRS = (ROOT / 'assets/official', ROOT / 'assets/character/official')
 # 대학 캐릭터(지누)·캐릭터 응용 디자인 공개 페이지. 메뉴 번호가 바뀌면 여기에 추가한다.
 CHARACTER_PAGES = [
@@ -84,7 +88,7 @@ def process(item, download):
         if not download:
             return item, 'checksum not recorded'
         item.update(sha256=digest, bytes=path.stat().st_size,
-                    downloaded_date=datetime.now(ZoneInfo('Asia/Seoul')).date().isoformat())
+                    downloaded_date=today_kst())
     return item, 'ok'
 
 
@@ -100,6 +104,10 @@ def page_links(page_url):
         if href.startswith(('javascript:', '#', 'mailto:')):
             continue
         url = urljoin(page_url, href)
+        if url.startswith('http://' + HOST + '/'):  # 같은 학교 서버의 http 링크는 https로 받는다
+            url = 'https://' + url[len('http://'):]
+        if urlparse(url).scheme != 'https':
+            continue
         path = unquote(urlparse(url).path).lower()
         if urlparse(url).hostname == HOST and (path.endswith(ASSET_EXT) or DOWNLOAD_HINT.search(url)) \
                 and 'cntntsView.do' not in url:
@@ -129,6 +137,27 @@ def filename_for(url, headers_file):
     return name or 'download.bin'
 
 
+def download_into(url, target):
+    """Download into target/ and return (path, name). An existing file is kept, not overwritten."""
+    target.mkdir(parents=True, exist_ok=True)
+    # 같은 폴더 안의 임시 폴더를 써서 다른 드라이브·tmpfs로의 이동 오류를 피한다.
+    with tempfile.TemporaryDirectory(dir=target) as tmp:
+        body, headers = Path(tmp) / 'body', Path(tmp) / 'headers'
+        try:
+            curl(url, body, headers)
+        except subprocess.CalledProcessError as exc:
+            raise RuntimeError(exc.stderr.decode(errors='replace').strip()) from exc
+        name = filename_for(url, headers)
+        path = target / name
+        if path.suffix.lower() not in ASSET_EXT:
+            return None, f'허용하지 않는 형식: {name}'
+        if path.exists():
+            print(f'    이미 있음: {path.name} (덮어쓰지 않음)')
+            return path, name
+        body.replace(path)
+    return path, name
+
+
 def fetch_character(manifest, dry_run):
     target = ROOT / 'assets/character/official'
     known = {i['url'] for i in manifest['items']}
@@ -144,35 +173,30 @@ def fetch_character(manifest, dry_run):
             print(f'  - {label or "(이름 없음)"}: {url}')
             if dry_run or url in known:
                 continue
-            with tempfile.TemporaryDirectory() as tmp:
-                body, headers = Path(tmp) / 'body', Path(tmp) / 'headers'
-                try:
-                    curl(url, body, headers)
-                except subprocess.CalledProcessError as exc:
-                    failures.append((url, 'download failed: ' + exc.stderr.decode(errors='replace').strip()))
-                    continue
-                name = filename_for(url, headers)
-                path = target / name
-                if path.suffix.lower() not in ASSET_EXT:
-                    failures.append((url, f'허용하지 않는 형식: {name}'))
-                    continue
-                if path.exists():
-                    print(f'    이미 있음: {path.name}')
-                    continue
-                path.parent.mkdir(parents=True, exist_ok=True)
-                body.replace(path)
+            try:
+                path, name = download_into(url, target)
+            except Exception as exc:  # noqa: BLE001 - one bad link must not stop the run
+                failures.append((url, f'download failed: {exc}'))
+                continue
+            if path is None:
+                failures.append((url, name))
+                continue
             if not signature_ok(path):
                 path.unlink()
                 failures.append((url, 'invalid signature (HTML 오류 페이지일 수 있음)'))
                 continue
+            rel = path.relative_to(ROOT).as_posix()
+            if any(i['path'] == rel for i in manifest['items']):
+                print(f'    이미 기록됨: {path.name}')
+                continue
             manifest['items'].append({
-                'path': path.relative_to(ROOT).as_posix(), 'url': url, 'source_page': page,
+                'path': rel, 'url': url, 'source_page': page,
                 'kind': 'character', 'label': label, 'original_filename': name,
                 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'bytes': path.stat().st_size,
-                'downloaded_date': datetime.now(ZoneInfo('Asia/Seoul')).date().isoformat()})
+                'downloaded_date': today_kst()})
             known.add(url)
             added += 1
-            print(f'    저장: {path.relative_to(ROOT)}')
+            print(f'    기록: {rel}')
     return added, failures
 
 

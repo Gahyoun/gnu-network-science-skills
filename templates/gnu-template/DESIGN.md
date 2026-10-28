@@ -1,8 +1,8 @@
 # GNU template — 경상국립대학교 학교테마 디자인 지침
 
-버전 2.0 · 자료 확인일 2026-10-04 · 교내 구성원의 학술·공익 목적 제작을 돕는 비공식 자료
+버전 2.1 · 자료 확인일 2026-10-28 · 교내 구성원의 학술·공익 목적 제작을 돕는 비공식 자료
 
-A4 세로·가로 홍보문과 세미나 안내문, 학술포스터, HTML 발표자료, 간단한 웹페이지를 만들 때 AI에게 함께 주는 지침이다. 화면 구조와 접근성은 KRDS(대한민국 정부 디자인 시스템)를, 로고·색·서체는 대학 VI와 대학 홈페이지를 따른다. 수치 옆의 표시는 출처의 종류다.
+A4 세로·가로 홍보문과 세미나 안내문, 학술포스터, HTML 발표자료, 간단한 웹페이지를 만들 때 AI에게 함께 주는 지침이다. 화면 구조와 접근성은 KRDS(대한민국 정부 디자인 시스템)를, 로고·색·서체는 대학 VI와 대학 홈페이지를 따른다. 웹페이지는 KRDS HTML 컴포넌트 키트의 마크업·토큰·간격을 그대로 따르고, 색만 대학 공식색으로 만든 KRDS 단계로 바꾸며, 학교 로고는 기본으로 넣지 않는다. 수치 옆의 표시는 출처의 종류다.
 
 - **공식**: 대학 VI 자료에 적힌 값.
 - **관찰**: 대학 홈페이지 CSS나 공식 서식 파일에서 읽은 값.
@@ -58,10 +58,13 @@ A4 세로·가로 홍보문과 세미나 안내문, 학술포스터, HTML 발표
 | 동작색 | `#0069B4` / 마우스 올림 `#005A9C` | 제안 | 링크, 선택 메뉴, 버튼, 포커스 (5.71:1). 웹 선택 하위 메뉴는 `#0069B4 → #005A9C` 그라데이션 |
 | 면 | `#F4F5F6` | 제안(KRDS 회색 참고) | 표 머리, 웹 하단 |
 | 보조 글자 | `#555555`, `#666666` | 제안 | 설명, 날짜 |
+| 웹 primary 단계 | 50 `#007EB0` · 60 `#006189` · 5 `#E3F4FF` 등 | 제안: GNU Blue 색상으로 KRDS 단계 명도를 맞춤 | 웹 버튼·링크·포커스(50은 4.55:1) |
+| 웹 secondary 단계 | 70 `#2E3D44` · 80 `#1F2D35` · 5 `#E3F4FE` 등 | 제안: GNU Grey 색상으로 KRDS 단계 명도를 맞춤 | 웹 탭·메뉴 선택·페이지 번호·표 머리 |
+| 웹 point 단계 | 60 `#6B5A32` 등 | 제안: Gold 색상으로 KRDS 단계 명도를 맞춤 | 웹 강조 글자 |
 
 흰 바탕의 GNU Blue는 대비가 3.04:1이다. 24px 이상 또는 굵은 19px 이상 글자, 선, 테두리에만 쓴다. 작은 글자와 흰 글자 버튼에는 동작색을 쓴다. 학과 기존 안내문처럼 GNU Blue 띠에 흰 글자를 얹을 때는 띠 안의 모든 글자를 18pt 이상 굵게 한다. 로고 색을 어둡게 바꿔서 대비를 맞추지 않는다. 데이터 계열은 색과 함께 기호·선 종류로 구분한다.
 
-KRDS의 정부 청색(`#256EF4`)은 대학 색이 아니다. 대학 결과물에 쓰지 않는다.
+KRDS의 정부 청색(`#256EF4`)은 대학 색이 아니다. 대학 결과물에 쓰지 않는다. 웹은 KRDS의 색 단계 구조(번호 = 흰 바탕 대비)를 유지하고 값만 GNU 색에서 계산한 단계로 바꾼다. 전체 표와 역할 대응은 `references/krds.md` 1장에 있다.
 
 ## 4. 서체
 
@@ -69,19 +72,19 @@ KRDS의 정부 청색(`#256EF4`)은 대학 색이 아니다. 대학 결과물에
 |---|---|---|
 | 인쇄물 국문 | Noto Sans KR | 공식 BS16 국문 지정서체 |
 | 인쇄물 영문 | SUIT | 공식 BS17 영문 지정서체 |
-| 웹 본문 | Noto Sans KR | 관찰: 홈페이지 본문 CSS |
-| 웹 메뉴·페이지 제목 | SUITE 700–800 | 관찰: 홈페이지 `layout.css` |
+| 웹(기본) | Pretendard GOV 400·500·700 | KRDS 기본 서체(`--krds-typo-font-type`) |
+| 웹(`"font": "gnu"`) | 본문 Noto Sans KR, 제목·메뉴 SUITE | 관찰: 홈페이지 본문 CSS, `layout.css` |
 
-SUIT(VI)와 SUITE(홈페이지)는 다른 서체다. 세 서체는 모두 SIL OFL 1.1이며 `assets/fonts/`에 들어 있다. Noto Sans KR은 완성형 한글 11,172자·라틴·그리스 문자·수학 기호로 줄인 사본이다. SUIT와 SUITE는 예약 서체명이 있어 원본 파일을 그대로 넣었다. 빌드한 HTML에는 폰트가 포함되므로 다른 PC에서도 같은 모양으로 열린다. 로고 안의 학교명은 서체로 다시 쓰지 않고 로고 파일을 쓴다.
+SUIT(VI)와 SUITE(홈페이지)는 다른 서체다. 네 서체(Noto Sans KR·SUIT·SUITE·Pretendard GOV)는 모두 SIL OFL 1.1이며 `assets/fonts/`에 들어 있다. Noto Sans KR은 완성형 한글 11,172자·라틴·그리스 문자·수학 기호로 줄인 사본이다. SUIT와 SUITE는 예약 서체명이 있어 원본 파일을 그대로 넣었다. 빌드한 HTML에는 폰트가 포함되므로 다른 PC에서도 같은 모양으로 열린다. 로고 안의 학교명은 서체로 다시 쓰지 않고 로고 파일을 쓴다.
 
 **크기(제안)**
 
 | 영역 | A4 안내문 | A0 포스터 | 16:9 발표(1280px 기준) | 웹 데스크톱 / 모바일 |
 |---|---|---|---|---|
-| 제목 | 26–29pt, 700 | 70–80pt | 44–48px | 33px / 28px, 800 (관찰: 1.65rem×20px) |
-| 섹션 제목 | 15–17pt | 34–36pt | 36–38px | 24px / 22px |
-| 본문 | 11.5–12pt, 행간 1.8 | 24–26pt, 행간 1.6 | 24–26px | 17px, 행간 1.65 (KRDS 본문 토큰 참고) |
-| 캡션·출처 | 8.5–10pt | 18–20pt | 16–18px | 14–15px |
+| 제목 | 26–29pt, 700 | 70–80pt | 44–48px | 40px / 28px, 700 (KRDS heading-xlarge) |
+| 섹션 제목 | 15–17pt | 34–36pt | 36–38px | 32px / 24px (heading-large), 하위 24px / 22px |
+| 본문 | 11.5–12pt, 행간 1.8 | 24–26pt, 행간 1.6 | 24–26px | 17px, 행간 1.5 (KRDS body-medium) |
+| 캡션·출처 | 8.5–10pt | 18–20pt | 16–18px | 15px / 13px (body-small / xsmall) |
 
 한글 제목은 `word-break: keep-all`로 단어 단위 줄바꿈한다. 내용이 넘치면 글자를 줄이기 전에 문장을 다듬거나 쪽을 나눈다.
 
@@ -95,7 +98,7 @@ SUIT(VI)와 SUITE(홈페이지)는 다른 서체다. 세 서체는 모두 SIL OF
 | `gnu-symbol.svg` | BS08 심벌 부분 | 슬라이드 바닥글 같은 작은 자리 |
 | `fly-with-gnu.svg` | 슬로건 BI `design system guidelines_fly with gnu_3.ai`의 청색 로고타입 | A4 홍보문·세미나 하단 왼쪽(기본), 서식형 상단 |
 | `emblem-signature-white.svg` | 공식 안내문 서식의 흰색 엠블럼 조합 | 그라데이션 띠 위 |
-| `../official/gnu-web-logo.png` | 대학 홈페이지 헤더 로고 원본 | 웹페이지 머리글 |
+| `../official/gnu-web-logo.png` | 대학 홈페이지 헤더 로고 원본 | 웹 머리글(`"logo": true`일 때만, 기본은 로고 없이 글자) |
 
 - 늘이기, 색 바꾸기, CSS `filter`, 그림자, 외곽선 추가, 생성형 AI로 다시 그리기를 하지 않는다.
 - 여러 도안이 함께 있는 견본 시트(BS13, BS14, BS21, BS23)를 통째로 붙이지 않는다. 한 도안만 `scripts/derive_svg.py`로 잘라 쓴다.
@@ -162,31 +165,35 @@ SUIT(VI)와 SUITE(홈페이지)는 다른 서체다. 세 서체는 모두 SIL OF
 
 ### 웹페이지
 
-대학 홈페이지의 **VI 하위 페이지**(사용자 제공 화면) 구성을 기본형으로 삼고, KRDS 구성 요소를 대응시킨다. 자세한 근거와 반응형 기준은 `references/web-reference.md`에 있다.
+KRDS HTML 컴포넌트 키트(krds-uiux v1.1.0)의 하위 페이지 구성을 따른다. 클래스 이름·토큰·간격은 키트와 같고, 색은 GNU 단계, 로고는 기본으로 빼고 운영 주체를 글자로 표시한다. 수치와 클래스 목록은 `references/krds.md`, 시작 파일은 `examples/web.html`.
 
 ```text
-[본문 바로가기]                                        ← KRDS 건너뛰기 링크
-홈페이지 헤더 로고(홈 링크)             주 메뉴(SUITE 700, 20px)   ← 흰 헤더
-████ 홈 │ 상위 메뉴 │ 현재 페이지 ██████████████████   ← 짙은 현재 위치 띠(사진 없음)
-페이지 제목(SUITE 800, 33px)                        [인쇄]
-[ 소개            ↓ ][ 일정            ↓ ][ 자료            ↓ ]  ← 직사각형 하위 메뉴
-소개          본문 문단                               ← 항목명 165px │ 본문
-일정          표(윗선 3px, 행 구분선)
-자료          자료 목록
+[본문 바로가기]                                         ← #krds-skip-link
+                                   경상국립대학교 ↗     ← .header-utility (실제 외부 링크만)
+▬ 경상국립대학교 ○○학과                                ← .site-identity: 글자 표시, ▬는 GNU Blue 선
+  사이트 이름                               ≡ 전체메뉴  ← 1023px 이하에서만 버튼
 ──────────────────────────────────────────────
-운영 부서 · 주소 · 연락처 · 최종 수정일                ← 회색 면 하단
+  소개   일정   자료   문의                            ← .krds-main-menu, 선택은 아래 막대(secondary 70)
+──────────────────────────────────────────────
+[사이드 메뉴]   홈 > 상위 메뉴 > 현재 페이지      이 페이지의 구성  ← 브레드크럼 / in-page navigation
+ (여러 쪽일 때) 페이지 제목 40px                    소개 · 일정 …
+                섹션 제목 32px
+                본문 17px / 표 / 목록 / 버튼
+──────────────────────────────────────────────
+운영 주체 · 주소 · 연락처 · 최종 수정일
+[이 누리집은 ○○ 누리집입니다.]                         ← 글자만 쓴 식별자
 ```
 
-- 최대 폭 1565px(관찰: 홈페이지 `.container`), 좌우 32px, 모바일 16px(제안). 헤더와 현재 위치 띠의 배경은 화면 폭 전체, 안쪽 내용은 본문 기준선에 맞춘다.
-- 머리글 로고는 `assets/official/gnu-web-logo.png`(홈페이지 원본). 현재 위치 띠는 사진 없이 짙은 단색이다. 사용자가 사진 배너를 요청하고 파일을 줄 때만 `banner_image`를 쓴다. 캠퍼스 사진을 찾아 넣지 않는다.
-- 하위 메뉴는 넓은 직사각형. 선택 항목은 동작색 그라데이션에 흰 글자, 나머지는 흰 면·회색 테두리·회색 글자. 개수는 실제 섹션 수에 맞춘다. 같은 페이지 안 이동이므로 `a href="#id"`와 `aria-current="location"`을 쓰고, 탭 역할을 흉내 내지 않는다.
-- 본문은 왼쪽 굵은 항목명과 오른쪽 문단·표·목록의 두 열. 800px 이하에서는 한 열로 쌓는다.
-- 800px 이하에서 주 메뉴는 `aria-expanded`가 있는 ‘메뉴’ 버튼으로 접고 Esc로 닫는다. 현재 위치 띠는 처음과 마지막 항목만 남긴다.
-- 제목 오른쪽 도구는 실제로 동작하는 인쇄만 둔다. 검색·로그인·언어 선택·공유는 실제 기능이 있을 때만.
-- 페이지 이동은 `a`, 화면 안 동작은 `button`. 표는 `caption`과 `scope`. 버튼·입력 높이 44px 이상, 모서리 2–4px, 그림자 없음(제안).
-- 텍스트 대비 4.5:1, 큰 글자·UI 3:1, 보이는 포커스, 320px 폭과 200% 확대에서 가로 스크롤 없음. KRDS와 한국형 웹 콘텐츠 접근성 지침(KWCAG 2.2)의 검사 항목을 따른다.
-- KRDS의 ‘공식 전자정부 누리집’ 배너와 정부 상징은 쓰지 않는다. 대학 전체 메뉴·MY GNU·로그인을 복제하지 않고 운영 주체의 실제 메뉴만 둔다. 캐릭터·떠 있는 위젯은 넣지 않는다.
-- 읽기용 PDF에서는 메뉴·버튼·현재 위치 띠를 빼고 제목·본문·표·문의를 순서대로 남긴다.
+- 폭 1200px(감싸는 폭 1248px), 좌우 24px, 모바일 16px. 분기점 1280·1024·768px. 간격은 KRDS 토큰(브레드크럼→h1 40px, h1→h2 48px, h2→h2 80px, 제목→본문 20px; 모바일 값은 `references/krds.md` 3장).
+- 버튼은 KRDS 위계 그대로: 주(primary 50 바탕), 보조(primary 5 바탕·50 테두리), 3차(회색 테두리). 높이 56·48·40px, 반경 8·6·6px. 실제 주소가 있는 동작에만 둔다.
+- 탭·메뉴·사이드 메뉴·페이지 번호의 선택 상태는 secondary(GNU Grey 단계), 버튼·링크·포커스는 primary(GNU Blue 단계). 두 계열을 섞지 않는다.
+- 표는 `.krds-table-wrap .tbl`: 머리 면 secondary 5, 15px 굵게; 칸 17px, 회색 구분선. `caption`은 KRDS처럼 화면에서 숨기고 섹션 제목이 표 제목 역할을 한다.
+- ‘이 페이지의 구성’은 섹션이 둘 이상일 때 오른쪽(160px)에 두고, 1023px 이하에서는 제목 아래 상자로 옮긴다. 현재 섹션은 스크롤에 따라 `aria-current="location"`.
+- 사이드 메뉴는 실제로 다른 쪽이 있을 때만 쓴다(`side_nav`). 한 쪽짜리 페이지에 가짜 메뉴를 만들지 않는다.
+- 쓰지 않는 것: KRDS 공식 배너(“대한민국 공식 전자정부 누리집”), 정부·KRDS 로고, 키트 예시의 통합검색·로그인·‘나의 GOV’, 동작하지 않는 버튼, 캠퍼스 사진 배너, 캐릭터·떠 있는 위젯. 학교 로고는 요청이 있을 때만 `"logo": true`.
+- 접근성: 본문 바로가기, 흰 0.2rem 외곽선 + primary 0.4rem 포커스, `aria-current`, 표 `scope`, 새 창 표시, 대비 4.5:1, 320px·200% 확대에서 가로 스크롤 없음(KWCAG 2.2).
+- 공식 KRDS CSS를 쓰는 프로젝트에서는 키트 CSS 다음에 `assets/krds/krds-gnu-tokens.css`만 불러오면 같은 색이 된다.
+- 읽기용 PDF에서는 메뉴·전체메뉴·사이드 메뉴·‘이 페이지의 구성’을 빼고 제목·본문·표·바닥글을 남긴다.
 
 ## 8. 파일 없이 쓸 때의 최소 골격
 
@@ -197,6 +204,7 @@ SUIT(VI)와 SUITE(홈페이지)는 다른 서체다. 세 서체는 모두 SIL OF
 --ui-text:#222;--ui-line:#d7d7d7;--ui-surface:#f4f5f6;
 --font-kr:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;--font-en:'SUIT',var(--font-kr)}
 @page{size:A4;margin:0}
+*{box-sizing:border-box}body{margin:0}
 .sheet{width:210mm;height:297mm;padding:10mm;background:#fff;display:flex;flex-direction:column}
 .frame{flex:1;display:flex;flex-direction:column;border:.5mm solid var(--gnu-blue)}
 .band{background:var(--ui-banner);color:#fff;padding:8mm 10mm}
@@ -208,12 +216,13 @@ SUIT(VI)와 SUITE(홈페이지)는 다른 서체다. 세 서체는 모두 SIL OF
 ```
 
 ```html
-<main class="sheet"><div class="frame">
+<!-- export.mjs로 저장하려면 <head>에 <meta name="gnu-template-kind" content="flyer">가 있어야 한다 -->
+<main class="sheet" data-export-page><div class="frame">
   <header class="band"><h1>[행사명]</h1></header>
   <div class="sheet-body"><dl class="facts">
     <dt>주제:</dt><dd>[주제]</dd><dt>연사:</dt><dd>[소속 · 이름]</dd>
     <dt>일시:</dt><dd>[일시]</dd><dt>장소:</dt><dd>[장소]</dd></dl></div>
-  <footer class="sheet-foot"><div>[주최] · [문의]</div><div>[시그니처] [학과명]</div></footer>
+  <footer class="sheet-foot"><div>[FLY WITH G.N.U] [주최] · [문의]</div><div>[시그니처] [학과명]</div></footer>
 </div></main>
 ```
 
@@ -234,7 +243,7 @@ SUIT(VI)와 SUITE(홈페이지)는 다른 서체다. 세 서체는 모두 SIL OF
 
 ## 10. 출처
 
-- KRDS: <https://www.krds.go.kr/html/site/index.html>, 토큰 CSS <https://www.krds.go.kr/resources/css/token/krds_tokens.css>
+- KRDS: <https://www.krds.go.kr/html/site/index.html>, HTML 컴포넌트 키트 <https://github.com/KRDS-uiux/krds-uiux> (v1.1.0), 토큰 CSS `resources/css/token/krds_tokens.css`
 - 대학 홈페이지 <https://www.gnu.ac.kr/>, 대학 상징 <https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=6225&mi=13278>
 - VI 기본요소 <https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?cntntsId=1198&mi=1369>, 슬로건 <https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?mi=17993&cntntsId=8192>, 응용요소 <https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?mi=1370&cntntsId=1199>
 - 대학 캐릭터(지누) <https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?mi=12102&cntntsId=5777>, 캐릭터 응용 디자인 <https://www.gnu.ac.kr/main/cm/cntnts/cntntsView.do?mi=12104&cntntsId=5779>

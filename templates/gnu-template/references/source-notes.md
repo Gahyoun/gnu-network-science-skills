@@ -6,15 +6,19 @@
 
 - 2026-10-04 1차: 대학 홈페이지·VI 페이지·CSS·KRDS 사이트를 직접 열람하고 VI 원본을 내려받았다(macOS).
 - 2026-10-04 2차: 클라우드 환경에서 학교 사이트와 KRDS 사이트에 접속할 수 없었다. 1차에서 받은 원본 파일(SHA-256 일치)과 사용자 제공 자료만으로 작업했다. 캐릭터 페이지는 열람하지 못했고 `--fetch-character`는 가짜 HTML로 구문 분석만 시험했다.
+- 2026-10-28 3차: 학교·KRDS 누리집은 계속 접속할 수 없었다. KRDS 공식 GitHub 키트 [KRDS-uiux/krds-uiux](https://github.com/KRDS-uiux/krds-uiux) v1.1.0을 받아 토큰·컴포넌트 HTML·CSS를 읽고, 키트 CSS로 그린 화면에서 계산된 스타일을 쟀다. 웹 기본형을 KRDS 구성으로 바꿨다.
 
 ## KRDS
 
-[KRDS](https://www.krds.go.kr/html/site/index.html)와 [토큰 CSS](https://www.krds.go.kr/resources/css/token/krds_tokens.css)(1차 열람).
+1차: [KRDS 누리집](https://www.krds.go.kr/html/site/index.html) 열람. 3차: GitHub 키트 v1.1.0(`krds_tokens.css` 2024-12-09 생성본)으로 값 확인.
 
-- 기본 서체 Pretendard GOV, 본문 medium 토큰 1.7rem(루트 10px 기준 17px), PC heading xlarge 4rem.
-- `--krds-color-light-primary-50: #256ef4`, `--krds-color-light-gray-90: #1e2124`. 대학 색이 아니므로 결과물에 쓰지 않는다.
-- 웹 구성에 가져온 것: 건너뛰기 링크, 머리글의 기관 식별·주 메뉴, 브레드크럼, 탭, 표, 바닥글의 기관 정보, 포커스·대비·확대·반응형 기준.
-- 가져오지 않은 것: 공식 전자정부 누리집 배너, 정부 상징, 전체 컴포넌트 라이브러리. 대학 페이지는 정부 누리집이 아니다.
+- 기본 서체 Pretendard GOV, 루트 62.5%, 본문 body-medium 1.7rem, 행간 1.5, h1 heading-xlarge 4rem(모바일 2.8rem).
+- 콘텐츠 폭 1200px, 좌우 24px, 감싸는 폭 1248px. 분기점 1280·1024·768px(`@media (max-width: 767px)` 등).
+- 색 단계 번호는 흰 바탕 대비를 뜻한다: primary-50 `#256ef4` 4.55:1, 60 `#0b50d0` 6.84:1. 이 구조를 유지하고 값만 GNU 색에서 계산했다(`references/krds.md` 1장, `scripts/gnu_palette.py`).
+- 역할 대응: 버튼·링크·포커스·입력은 primary, 탭·사이드 메뉴·페이지 번호·브레드크럼 상태는 secondary, 강조는 point.
+- 측정(키트 CSS, 1440px 화면): 주 메뉴 높이 56px·19px 굵게·선택 막대; 사이드 메뉴 폭 280px, 제목 24px; 표 머리 15px 굵게·secondary-5 면, 칸 17px·여백 12×16px; 버튼 56/48/40px·반경 8/6/6px; 페이지 번호 40×40px; 바닥글 gray-5 면, 식별자 흰 상자.
+- 가져오지 않은 것: 공식 전자정부 누리집 배너(masthead), 정부·KRDS 로고, 통합검색·로그인 예시, 키트 CSS·이미지 파일 자체. 대학 페이지는 정부 누리집이 아니다.
+- KRDS 키트는 KRDS 이용약관을 따른다. 이 패키지는 값과 클래스 이름만 따랐다.
 
 ## 대학 VI (공식)
 
@@ -44,13 +48,13 @@ PDF 색 관리를 거친 화면색(청색 약 0,152,216 / 회색 약 72,81,87)�
 
 | 파일·선택자 | 관찰 | 적용 |
 |---|---|---|
-| `basic.css` `body` | NotoSans 별칭, 0.8rem, `#222` | 글자색 채택, 본문 17px는 KRDS 참고 제안 |
+| `basic.css` `body` | NotoSans 별칭, 0.8rem, `#222` | 인쇄물 글자색. 웹은 KRDS gray-90 `#1e2124` |
 | `basic.css` `html` | 20px | rem 환산 기준 |
-| `layout.css` `.container` | 1565px | 참고. 소형 페이지는 1200px 제안 |
-| `layout.css` `#gnb .depth01 > ul > li > a` | SUITE, 1.1rem, 700 | 주 메뉴 SUITE 700 18px |
-| `layout.css` `.title_area .pageTitle` | SUITE, 1.65rem, 800 | 페이지 제목 33px |
-| `con_com.css` `.tab_st1` | 직사각형 테두리 탭, 청색 그라데이션 | 형태 채택, 선택 탭은 대비 확보 단색 |
-| `con_com.css` 표 | 윗선 3px, 회색 행 구분선 | 채택 |
+| `layout.css` `.container` | 1565px | 참고만. 웹은 KRDS 1200px |
+| `layout.css` `#gnb .depth01 > ul > li > a` | SUITE, 1.1rem, 700 | 웹 `"font": "gnu"`일 때 메뉴·제목에 SUITE |
+| `layout.css` `.title_area .pageTitle` | SUITE, 1.65rem, 800 | 참고만. 웹 제목은 KRDS 40px |
+| `con_com.css` `.tab_st1` | 직사각형 테두리 탭, 청색 그라데이션 | 참고만. 웹은 KRDS 탭·메뉴 |
+| `con_com.css` 표 | 윗선 3px, 회색 행 구분선 | 참고만. 웹은 KRDS 표 |
 
 근거 파일: `https://www.gnu.ac.kr/css/web/main/{basic,layout,con_com}.css`, 폰트 선언 `https://www.gnu.ac.kr/font/NotoSansKR/fonts.css`, `https://www.gnu.ac.kr/font/SUITE/SUITE-Variable.css`. 선언값이며 모든 환경의 계산값을 잰 것은 아니다.
 
@@ -66,4 +70,4 @@ PDF 색 관리를 거친 화면색(청색 약 0,152,216 / 회색 약 72,81,87)�
 
 ## 이 도구의 제안값
 
-UI 대비 색(`#007EAE`, `#0069B4` 등), 웹 1200px 폭과 간격, A4·A0·16:9의 여백·글자 크기·단 수, 캐릭터 크기·위치, 웹 섹션 제목의 왼쪽 청색 막대. 학교나 KRDS가 정한 값이 아니다.
+인쇄물의 UI 대비 색(`#007EAE`, `#0069B4` 등), A4·A0·16:9의 여백·글자 크기·단 수, 캐릭터 크기·위치, 웹의 GNU 색 단계 값(KRDS 단계 명도에 맞춘 계산값), 로고 대신 쓰는 글자 표시와 짧은 GNU Blue 선. 학교나 KRDS가 정한 값이 아니다.
