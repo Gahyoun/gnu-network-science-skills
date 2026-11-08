@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1.1 -17.2 528.9 426.4" role="img" aria-label="Network Science Lab mark">
+<rect x="-1.1" y="-17.2" width="528.9" height="426.4" fill="#0a0c0d"/>
+<g stroke="#f4f5f6" stroke-width="4" stroke-linecap="round">
+<line x1="195.0" y1="25.3" x2="160.8" y2="247.1"/>
+<line x1="195.0" y1="25.3" x2="365.7" y2="366.7"/>
+<line x1="297.5" y1="110.6" x2="41.4" y2="247.2"/>
+<line x1="126.8" y1="144.7" x2="382.7" y2="196.0"/>
+<line x1="382.7" y1="196.0" x2="263.5" y2="247.3"/>
+<line x1="263.5" y1="247.3" x2="485.3" y2="247.3"/>
+<line x1="263.5" y1="247.3" x2="195.0" y2="349.6"/>
+</g><g fill="#009edb">
+<circle cx="195.0" cy="25.3" r="18.5"/>
+<circle cx="297.5" cy="110.6" r="18.5"/>
+<circle cx="126.8" cy="144.7" r="18.5"/>
+<circle cx="382.7" cy="196.0" r="18.5"/>
+<circle cx="160.8" cy="247.1" r="18.5"/>
+<circle cx="41.4" cy="247.2" r="18.5"/>
+<circle cx="263.5" cy="247.3" r="18.5"/>
+<circle cx="485.3" cy="247.3" r="18.5"/>
+<circle cx="195.0" cy="349.6" r="18.5"/>
+<circle cx="365.7" cy="366.7" r="18.5"/>
+</g></svg>

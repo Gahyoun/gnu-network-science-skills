@@ -10,6 +10,8 @@ KRDS(대한민국 정부 디자인 시스템) [디자인 스타일](https://www.
 | [`tokens/tokens.json`](tokens/tokens.json) | 같은 색 값의 JSON (Figma Tokens 등) |
 | [`tokens/figma/`](tokens/figma/) | Figma Variables 가져오기용 JSON(W3C DTCG). 컬렉션 4개: Primitives·Color(Light/High-contrast), Parameter(PC/Mobile), Component |
 | [`scripts/build_figma.py`](scripts/build_figma.py) | CSS 토큰 → `tokens/figma/` 생성, alias 검사. 표준 라이브러리만 사용 |
+| [`assets/network/`](assets/network/) | 연구실 네트워크 마크(노드 GNU Blue, 엣지 검정/흰색) SVG·HTML, 네트워크 모양 QR(→ lshlj82.github.io, H 수준, OpenCV로 디코딩 검사) |
+| [`scripts/build_network_assets.py`](scripts/build_network_assets.py) | 위 에셋 생성·QR 디코딩 검사 (`segno`, `pillow`, `opencv-python-headless`) |
 | [`scripts/build_tokens.py`](scripts/build_tokens.py) | 색 단계 생성·매직넘버 검사·gnu-template과 값 일치 검사. 관리자용(coloraide 필요) |
 | [`examples/index.html`](examples/index.html) | 스타일 견본 페이지(색·글자·버튼·입력·형태·엘리베이션·시스템색·아이콘, 모드 전환) |
 
@@ -65,6 +67,18 @@ CSS 토큰을 고친 뒤 다시 만들기:
 ```bash
 python3 scripts/build_figma.py
 ```
+
+## 네트워크 마크와 QR
+
+`assets/network/motif.svg`(밝은 바탕), `motif-dark.svg`(검은 바탕), `motif.html`(OS 다크 모드를 따르고, 노드에 마우스를 올리면 연결된 엣지가 표시됨). 노드는 GNU Blue `#009EDB`라서 그래픽에만 쓴다.
+
+`qr-network.svg`/`.png`와 `-dark`: QR의 어두운 모듈을 노드로, 상하좌우로 맞닿은 모듈을 엣지로 그린다. 연결이 많은 노드일수록 크고, 세 모서리 찾기 패턴은 고리 네트워크와 파란 허브, 가운데는 연구실 마크다. 오류 정정 H 수준이라 가운데를 비워도 읽힌다. 다른 주소로 다시 만들기:
+
+```bash
+python3 scripts/build_network_assets.py https://example.org/
+```
+
+원본 크기·0.5배·0.35배에서 모두 디코딩되지 않으면 실패로 끝난다. 인쇄할 때는 2.5 cm 이상, 바탕과 대비 4.5:1 이상을 지킨다.
 
 ## 관계
 
