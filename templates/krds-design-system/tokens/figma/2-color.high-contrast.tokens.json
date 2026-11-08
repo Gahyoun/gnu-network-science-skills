@@ -1,0 +1,265 @@
+{
+  "text": {
+    "basic": {
+      "$type": "color",
+      "$value": "{color.gray.5}"
+    },
+    "bolder": {
+      "$type": "color",
+      "$value": "{color.gray.0}"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "{color.gray.20}"
+    },
+    "disabled": {
+      "$type": "color",
+      "$value": "{color.gray.60}"
+    },
+    "primary": {
+      "$type": "color",
+      "$value": "{color.primary.20}"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{color.secondary.20}"
+    },
+    "point": {
+      "$type": "color",
+      "$value": "{color.point.20}"
+    },
+    "danger": {
+      "$type": "color",
+      "$value": "{color.danger.20}"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{color.gray.90}"
+    }
+  },
+  "background": {
+    "white": {
+      "$type": "color",
+      "$value": "{color.gray.100}"
+    },
+    "gray": {
+      "$type": "color",
+      "$value": "{color.gray.90}"
+    },
+    "dim": {
+      "$type": "color",
+      "$value": "{color.alpha.black75}"
+    }
+  },
+  "surface": {
+    "white": {
+      "$type": "color",
+      "$value": "{color.gray.100}"
+    },
+    "white-subtle": {
+      "$type": "color",
+      "$value": "{color.gray.95}"
+    },
+    "white-subtler": {
+      "$type": "color",
+      "$value": "{color.gray.90}"
+    },
+    "gray-subtler": {
+      "$type": "color",
+      "$value": "{color.gray.95}"
+    },
+    "primary-subtler": {
+      "$type": "color",
+      "$value": "{color.primary.95}"
+    },
+    "secondary-subtler": {
+      "$type": "color",
+      "$value": "{color.secondary.95}"
+    },
+    "disabled": {
+      "$type": "color",
+      "$value": "{color.gray.70}"
+    }
+  },
+  "border": {
+    "gray-light": {
+      "$type": "color",
+      "$value": "{color.gray.80}"
+    },
+    "gray": {
+      "$type": "color",
+      "$value": "{color.gray.70}"
+    },
+    "gray-dark": {
+      "$type": "color",
+      "$value": "{color.gray.40}"
+    },
+    "primary": {
+      "$type": "color",
+      "$value": "{color.primary.50}"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{color.secondary.60}"
+    }
+  },
+  "divider": {
+    "gray-light": {
+      "$type": "color",
+      "$value": "{color.gray.80}"
+    }
+  },
+  "icon": {
+    "gray": {
+      "$type": "color",
+      "$value": "{color.gray.5}"
+    },
+    "primary": {
+      "$type": "color",
+      "$value": "{color.primary.20}"
+    },
+    "disabled": {
+      "$type": "color",
+      "$value": "{color.gray.60}"
+    }
+  },
+  "link": {
+    "default": {
+      "$type": "color",
+      "$value": "{color.primary.30}"
+    },
+    "hover": {
+      "$type": "color",
+      "$value": "{color.primary.20}"
+    },
+    "pressed": {
+      "$type": "color",
+      "$value": "{color.primary.10}"
+    },
+    "visited": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.788235,
+          0.65098,
+          0.968627
+        ],
+        "alpha": 1,
+        "hex": "#c9a6f7"
+      }
+    }
+  },
+  "button": {
+    "primary-fill": {
+      "$type": "color",
+      "$value": "{color.primary.50}"
+    },
+    "primary-fill-hover": {
+      "$type": "color",
+      "$value": "{color.primary.60}"
+    },
+    "primary-fill-pressed": {
+      "$type": "color",
+      "$value": "{color.primary.70}"
+    },
+    "secondary-fill": {
+      "$type": "color",
+      "$value": "{color.primary.95}"
+    },
+    "secondary-fill-hover": {
+      "$type": "color",
+      "$value": "{color.primary.90}"
+    },
+    "secondary-fill-pressed": {
+      "$type": "color",
+      "$value": "{color.primary.80}"
+    },
+    "secondary-border": {
+      "$type": "color",
+      "$value": "{color.primary.30}"
+    },
+    "tertiary-border": {
+      "$type": "color",
+      "$value": "{color.gray.40}"
+    }
+  },
+  "action": {
+    "secondary-selected": {
+      "$type": "color",
+      "$value": "{color.secondary.30}"
+    }
+  },
+  "element": {
+    "point": {
+      "$type": "color",
+      "$value": "{color.point.30}"
+    }
+  },
+  "selection": {
+    "fill": {
+      "$type": "color",
+      "$value": "{color.secondary.50}"
+    }
+  },
+  "graphic": {
+    "brand": {
+      "$type": "color",
+      "$value": "{brand.blue}"
+    }
+  },
+  "alpha": {
+    "shadow1": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "alpha": 0.121569,
+        "hex": "#000000"
+      }
+    },
+    "shadow2": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "alpha": 0.2,
+        "hex": "#000000"
+      }
+    },
+    "shadow3": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "alpha": 0.4,
+        "hex": "#000000"
+      }
+    },
+    "shadow4": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "alpha": 0.501961,
+        "hex": "#000000"
+      }
+    }
+  }
+}

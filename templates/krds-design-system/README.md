@@ -8,6 +8,8 @@ KRDS(대한민국 정부 디자인 시스템) [디자인 스타일](https://www.
 | [`tokens/primitives.css`](tokens/primitives.css) | 1층 토큰: GNU Blue·Grey·Gold로 만든 primary·secondary·point 단계(기본·선명 모드), KRDS gray·시스템색·alpha, graphic, `--gnu-brand-*` |
 | [`tokens/semantic.css`](tokens/semantic.css) | 2층 토큰: 글자 스케일, number·간격, 래디어스, 아이콘, 색 역할(두 모드), 화면에서 쓰는 별칭 `--gk-*` |
 | [`tokens/tokens.json`](tokens/tokens.json) | 같은 색 값의 JSON (Figma Tokens 등) |
+| [`tokens/figma/`](tokens/figma/) | Figma Variables 가져오기용 JSON(W3C DTCG). 컬렉션 4개: Primitives·Color(Light/High-contrast), Parameter(PC/Mobile), Component |
+| [`scripts/build_figma.py`](scripts/build_figma.py) | CSS 토큰 → `tokens/figma/` 생성, alias 검사. 표준 라이브러리만 사용 |
 | [`scripts/build_tokens.py`](scripts/build_tokens.py) | 색 단계 생성·매직넘버 검사·gnu-template과 값 일치 검사. 관리자용(coloraide 필요) |
 | [`examples/index.html`](examples/index.html) | 스타일 견본 페이지(색·글자·버튼·입력·형태·엘리베이션·시스템색·아이콘, 모드 전환) |
 
@@ -44,6 +46,25 @@ python3 scripts/build_tokens.py
 ```
 
 매직넘버(40 = 3:1, 50 = 4.5:1, 70 = 7:1, 90 = 15:1)를 못 지키거나 `gnu-template/assets/krds/krds-gnu-tokens.css`와 기본 모드 primary·secondary·point 값이 하나라도 다르면 실패로 끝난다. 두 폴더는 같은 계산(coloraide OKLCH, 기본 sRGB 색역 맞춤)을 쓴다.
+
+## Figma에서 쓰기
+
+Figma 파일에서 Variables 패널을 열고 **Import**를 누른 뒤 `tokens/figma/`의 파일을 번호 순서대로 가져온다. 파일 하나가 컬렉션의 mode 하나가 된다. 뒤 컬렉션이 앞 컬렉션을 이름으로 참조(alias)하므로 순서를 지켜야 한다.
+
+| 순서 | 컬렉션 | mode | 내용 |
+|---|---|---|---|
+| 1 | Primitives | Light / High-contrast | 색 단계(`color/primary/50` …), `brand/*` |
+| 2 | Color | Light / High-contrast | 색 역할(`text/basic`, `button/primary-fill` …) → Primitives |
+| 3 | Parameter | PC / Mobile | 숫자 변수(px): `number/*` 간격 척도, `font-size/*`, `font-weight/*`, `line-height/base`, `gap/*`(h1-h2 등 레이아웃 간격), `padding-card/*`, `grid/*`(열 12/4, gutter, margin, 콘텐츠 1200, 프레임 1280/360, 옆 내비 232/0), `breakpoint/*`, `height/*`, `icon/*`, `radius/*`, `border/*` |
+| 4 | Component | Default | 컴포넌트 parameter: `button/{large,medium,small,xsmall}/{height,padding-x,font-size,radius}`, `input/*`, `card/*`, `box/{info,neutral,secondary}/*`, `badge/*`, `header/*`, `nav/*`, `focus/*` → Parameter·Color |
+
+프레임에 Parameter mode를 PC로 두면 데스크톱, Mobile로 바꾸면 같은 화면이 모바일 크기·간격으로 바뀐다. Color mode도 같은 방식으로 Light와 High-contrast를 바꾼다. 숫자 변수에는 Figma scope(FONT_SIZE, GAP, CORNER_RADIUS, WIDTH_HEIGHT 등)가 붙어 있어서 맞는 속성에만 제안된다.
+
+CSS 토큰을 고친 뒤 다시 만들기:
+
+```bash
+python3 scripts/build_figma.py
+```
 
 ## 관계
 

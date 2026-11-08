@@ -1,0 +1,282 @@
+{
+  "button": {
+    "large": {
+      "height": {
+        "$type": "number",
+        "$value": "{height.large}"
+      },
+      "padding-x": {
+        "$type": "number",
+        "$value": "{number.10}"
+      },
+      "font-size": {
+        "$type": "number",
+        "$value": "{font-size.label.large}"
+      },
+      "radius": {
+        "$type": "number",
+        "$value": "{radius.medium}"
+      }
+    },
+    "medium": {
+      "height": {
+        "$type": "number",
+        "$value": "{height.medium}"
+      },
+      "padding-x": {
+        "$type": "number",
+        "$value": "{number.8}"
+      },
+      "font-size": {
+        "$type": "number",
+        "$value": "{font-size.label.medium}"
+      },
+      "radius": {
+        "$type": "number",
+        "$value": "{radius.medium}"
+      }
+    },
+    "small": {
+      "height": {
+        "$type": "number",
+        "$value": "{height.small}"
+      },
+      "padding-x": {
+        "$type": "number",
+        "$value": "{number.7}"
+      },
+      "font-size": {
+        "$type": "number",
+        "$value": "{font-size.label.small}"
+      },
+      "radius": {
+        "$type": "number",
+        "$value": "{radius.medium}"
+      }
+    },
+    "xsmall": {
+      "height": {
+        "$type": "number",
+        "$value": "{height.xsmall}"
+      },
+      "padding-x": {
+        "$type": "number",
+        "$value": "{number.5}"
+      },
+      "font-size": {
+        "$type": "number",
+        "$value": "{font-size.label.xsmall}"
+      },
+      "radius": {
+        "$type": "number",
+        "$value": "{radius.small}"
+      }
+    },
+    "gap-icon": {
+      "$type": "number",
+      "$value": "{number.4}"
+    },
+    "primary": {
+      "fill": {
+        "$type": "color",
+        "$value": "{button.primary-fill}"
+      },
+      "fill-hover": {
+        "$type": "color",
+        "$value": "{button.primary-fill-hover}"
+      },
+      "fill-pressed": {
+        "$type": "color",
+        "$value": "{button.primary-fill-pressed}"
+      }
+    },
+    "secondary": {
+      "fill": {
+        "$type": "color",
+        "$value": "{button.secondary-fill}"
+      },
+      "fill-hover": {
+        "$type": "color",
+        "$value": "{button.secondary-fill-hover}"
+      },
+      "fill-pressed": {
+        "$type": "color",
+        "$value": "{button.secondary-fill-pressed}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{button.secondary-border}"
+      }
+    },
+    "tertiary": {
+      "border": {
+        "$type": "color",
+        "$value": "{button.tertiary-border}"
+      }
+    }
+  },
+  "input": {
+    "height": {
+      "$type": "number",
+      "$value": "{height.large}"
+    },
+    "padding-x": {
+      "$type": "number",
+      "$value": "{padding.input}"
+    },
+    "radius": {
+      "$type": "number",
+      "$value": "{radius.medium}"
+    },
+    "border-width": {
+      "$type": "number",
+      "$value": "{border.width-input}"
+    },
+    "gap-parts": {
+      "$type": "number",
+      "$value": "{gap.input-parts}"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "{border.gray-dark}"
+    }
+  },
+  "card": {
+    "large": {
+      "padding": {
+        "$type": "number",
+        "$value": "{padding-card.large}"
+      }
+    },
+    "medium": {
+      "padding": {
+        "$type": "number",
+        "$value": "{padding-card.medium}"
+      }
+    },
+    "small": {
+      "padding": {
+        "$type": "number",
+        "$value": "{padding-card.small}"
+      }
+    },
+    "xsmall": {
+      "padding": {
+        "$type": "number",
+        "$value": "{padding-card.xsmall}"
+      }
+    },
+    "radius": {
+      "$type": "number",
+      "$value": "{radius.large}"
+    },
+    "gap-list": {
+      "$type": "number",
+      "$value": "{gap.card-list}"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "{border.gray-light}"
+    },
+    "fill": {
+      "$type": "color",
+      "$value": "{surface.white}"
+    }
+  },
+  "box": {
+    "radius": {
+      "$type": "number",
+      "$value": "{radius.large}"
+    },
+    "padding": {
+      "$type": "number",
+      "$value": "{padding-card.small}"
+    },
+    "border-width": {
+      "$type": "number",
+      "$value": "{number.1}"
+    },
+    "info": {
+      "fill": {
+        "$type": "color",
+        "$value": "{surface.primary-subtler}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{border.primary}"
+      }
+    },
+    "neutral": {
+      "fill": {
+        "$type": "color",
+        "$value": "{surface.gray-subtler}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{border.gray-light}"
+      }
+    },
+    "secondary": {
+      "fill": {
+        "$type": "color",
+        "$value": "{surface.secondary-subtler}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{border.secondary}"
+      }
+    }
+  },
+  "badge": {
+    "radius": {
+      "$type": "number",
+      "$value": "{radius.small}"
+    },
+    "height": {
+      "$type": "number",
+      "$value": "{number.10}"
+    },
+    "padding-x": {
+      "$type": "number",
+      "$value": "{number.5}"
+    },
+    "font-size": {
+      "$type": "number",
+      "$value": "{font-size.label.xsmall}"
+    }
+  },
+  "header": {
+    "height": {
+      "$type": "number",
+      "$value": "{number.20}"
+    },
+    "gap-breadcrumb": {
+      "$type": "number",
+      "$value": "{gap.header-breadcrumb}"
+    }
+  },
+  "nav": {
+    "width": {
+      "$type": "number",
+      "$value": "{grid.side-nav-width}"
+    },
+    "gap-contents": {
+      "$type": "number",
+      "$value": "{gap.contents-right}"
+    },
+    "selected": {
+      "$type": "color",
+      "$value": "{action.secondary-selected}"
+    }
+  },
+  "focus": {
+    "ring": {
+      "$type": "color",
+      "$value": "{border.primary}"
+    },
+    "width": {
+      "$type": "number",
+      "$value": "{border.width-focus}"
+    }
+  }
+}
