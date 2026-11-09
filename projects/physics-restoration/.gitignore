@@ -1,0 +1,4 @@
+node_modules/
+preview/
+_site/
+.DS_Store
